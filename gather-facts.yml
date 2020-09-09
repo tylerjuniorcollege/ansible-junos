@@ -1,10 +1,10 @@
 ---
 - name: Collect default set of facts
   hosts: junos-all
-  connection: local
   gather_facts: no
 
   vars:
+    ansible_connection: netconf
     connection_settings:
       host: "{{ ansible_host }}"
       port: 22
