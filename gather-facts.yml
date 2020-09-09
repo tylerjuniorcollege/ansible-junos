@@ -4,6 +4,9 @@
   connection: local
   gather_facts: no
 
+  vars:
+    ansible_connection: junos_netconf
+
   tasks:
     - name: Collect default set of facts and configuration
       junos_facts:
