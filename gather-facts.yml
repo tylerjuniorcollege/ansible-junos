@@ -10,3 +10,4 @@
   tasks:
     - name: Collect default set of facts and configuration
       junos_facts:
+        gather_subset: config
