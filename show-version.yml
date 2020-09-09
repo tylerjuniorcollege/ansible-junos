@@ -15,3 +15,7 @@
       junos_command:
         commands: show version
       when: ansible_network_os == 'junos'
+
+    - name: Print Version
+      debug:
+        var: result
