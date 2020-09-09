@@ -5,6 +5,7 @@
 
   vars:
     ansible_connection: netconf
+    ansible_command_timeout: 60
     connection_settings:
       host: "{{ ansible_host }}"
       port: 22
@@ -12,7 +13,6 @@
 
   tasks:
     - name: Retrieve Junos OS version
-      timeout: 60
       junos_command:
         commands: show version
       when: ansible_network_os == 'junos'
