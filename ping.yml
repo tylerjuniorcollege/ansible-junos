@@ -1,7 +1,6 @@
 ---
 - name: Examples of juniper_junos_ping
   hosts: junos-all
-  connection: local
   gather_facts: no
 
   vars:
