@@ -5,7 +5,7 @@
   gather_facts: no
 
   vars:
-    ansible_connection: junos_netconf
+    ansible_connection: netconf
 
   tasks:
     - name: Collect default set of facts and configuration
