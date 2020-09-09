@@ -1,9 +1,9 @@
 ---
-- name: Examples of juniper_junos_ping
+- name: Collect default set of facts
   hosts: junos-all
   connection: local
   gather_facts: no
 
   tasks:
-    - name: collect default set of facts and configuration
+    - name: Collect default set of facts and configuration
       junos_facts:
