@@ -18,4 +18,4 @@
 
     - name: Print Version
       debug:
-        var: result[stdout_lines]
+        var: result[0]
