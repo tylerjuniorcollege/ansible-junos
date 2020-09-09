@@ -1,0 +1,17 @@
+---
+- name: Retrieve Junos OS version
+  hosts: junos-all
+  gather_facts: no
+
+  vars:
+    ansible_connection: network_cli
+    connection_settings:
+      host: "{{ ansible_host }}"
+      port: 22
+      timeout: 180
+
+  tasks:
+    - name: Retrieve Junos OS version
+      junos_command:
+        commands: show version
+      when: ansible_network_os == 'junos'
