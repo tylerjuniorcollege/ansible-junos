@@ -6,6 +6,10 @@
 
   vars:
     ansible_connection: netconf
+    connection_settings:
+      host: "{{ ansible_host }}"
+      port: 22
+      timeout: 180
 
   tasks:
     - name: Collect default set of facts and configuration
