@@ -12,6 +12,7 @@
 
   tasks:
     - name: Retrieve Junos OS version
+      timeout: 60
       junos_command:
         commands: show version
       when: ansible_network_os == 'junos'
