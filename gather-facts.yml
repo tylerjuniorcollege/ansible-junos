@@ -5,7 +5,7 @@
   gather_facts: no
 
   vars:
-    ansible_connection: netconf
+    ansible_connection: local
     connection_settings:
       host: "{{ ansible_host }}"
       port: 22
@@ -15,3 +15,7 @@
     - name: Collect default set of facts and configuration
       junos_facts:
         gather_subset: config
+    
+    - name: Print configuration
+      debug:
+        var: result.ansible_facts.junos.config
