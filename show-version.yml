@@ -14,7 +14,7 @@
         commands: show version
       when: ansible_network_os == 'junos'
 
-    - name: Print Version 1
+    - name: Print Version
       debug:
         var: stdout_lines[0]
         
