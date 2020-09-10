@@ -13,4 +13,4 @@
   tasks:
     - name: Ping 10.0.0.1 with default parameters. Fails if any packets lost.
       junos_ping:
-        dest: 10.0.0.2
+        dest: 10.0.0.21
