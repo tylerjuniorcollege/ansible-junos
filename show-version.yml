@@ -12,7 +12,6 @@
     - name: Retrieve Junos OS version
       junos_command:
         commands: show version
-      when: ansible_network_os == 'junos'
 
     - name: Display Device Details
       debug:
