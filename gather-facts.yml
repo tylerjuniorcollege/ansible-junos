@@ -4,6 +4,7 @@
   gather_facts: no
 
   vars:
+    ansible_command_timeout: 60
     ansible_connection: netconf
     connection_settings:
       host: "{{ ansible_host }}"
