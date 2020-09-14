@@ -19,4 +19,4 @@
 
     - name: Display Device Details
       debug:
-        msg: "Name: {{ junos.ansible_facts.ansible_net_hostname }} - Version: {{ junos.ansible_net_version }}"
+        msg: "Name: {{ junos.ansible_facts.ansible_net_hostname }} - Version: {{ junos.ansible_facts.ansible_net_version }}"
