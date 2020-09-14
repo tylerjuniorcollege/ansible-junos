@@ -4,10 +4,10 @@
   gather_facts: no
 
   tasks:
-    - name: Collect default set of facts and configuration
-      junos_facts:
-        gather_subset: config
-       register: junos
+  - name: Collect default set of facts and configuration
+    junos_facts:
+     gather_subset: config
+    register: junos
     
     - name: Print some facts
       debug:
