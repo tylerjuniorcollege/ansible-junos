@@ -17,8 +17,4 @@
     - name: Print Version
       debug:
         var: stdout_lines[0]
-        
-- name: Display all variables/facts known for a host
-  debug:
-    var: hostvars[inventory_hostname]
-    verbosity: 4
+
