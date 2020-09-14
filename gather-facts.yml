@@ -7,7 +7,7 @@
     - name: Collect default set of facts and configuration
       junos_facts:
         gather_subset: config
-       register: junos
+      register: junos
     
     - name: Print some facts
       debug:
