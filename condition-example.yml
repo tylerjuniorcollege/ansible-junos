@@ -1,5 +1,5 @@
 ---
-- name: Retrieve Junos OS version
+- name: Testing Conditions
   hosts: Junos_all
   gather_facts: no
 
@@ -13,7 +13,8 @@
       register: junos
 
     - name: Check ansible_net_version for 18.1R3.1
-      msg: yes
+      debug:
+        msg: "yes"
       when: junos.ansible_net_version == '18.1R3.1'
 
     - name: Display Device Details
