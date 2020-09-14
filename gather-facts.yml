@@ -15,7 +15,8 @@
     - name: Collect default set of facts and configuration
       junos_facts:
         gather_subset: config
+      register: junos
     
     - name: Print configuration
       debug:
-        var: result.ansible_facts.junos.config
+        msg: junos
