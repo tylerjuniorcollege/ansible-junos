@@ -4,7 +4,7 @@
     - Junos_all
 
   roles:
-  #Juniper.junos
+  Juniper.junos
   connection: local
   gather_facts: no
 
@@ -21,9 +21,9 @@
       debug:
         var: device_info
 
-    - #name: Poll Device Details
-      juniper_junos_facts:
-        provider: "{{ connection_settings }}"
+    name: Poll Device Details
+      juniper.junos.facts:
+        #provider: "{{ connection_settings }}"
 
     - name: Display Device Details
       debug:
