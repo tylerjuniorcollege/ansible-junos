@@ -1,6 +1,6 @@
 ---
 - name: Retrieve Junos OS version
-  hosts: junos-all
+  hosts: Junos_all
   gather_facts: no
 
   vars:
