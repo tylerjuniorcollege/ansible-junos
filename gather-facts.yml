@@ -16,6 +16,6 @@
       junos_facts:
         gather_subset: config
     
-    - name: Print configuration
+    - name: Print some facts
       debug:
         msg: "device {{ junos.ansible_facts.ansible_net_hostname }} is a {{ junos.ansible_facts.ansible_net_model }} running junos version {{ junos.ansible_facts.ansible_net_version }}"
