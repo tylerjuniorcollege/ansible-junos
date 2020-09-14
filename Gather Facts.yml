@@ -1,30 +1,15 @@
----
-- name: Gather juniper_junos_facts
-  hosts:
-    - Junos_all
+ ---
+ - name: Get Facts
+   hosts: junos_all
+   connection: local
+   gather_facts: no
+   tasks:
 
-  roles:
-  -Juniper.junos
-  connection: local
-  gather_facts: no
+   - name: Retrieve information from devices running Junos
+     junos_facts:
+      gather_subset: hardware
+     register: junos
 
-  vars:
-    device_info: "{{ sys_hostname }} :: {{ ansible_host }} :: {{ device_roll }}"
-    ansible_user: "ansible"
-    connection_settings:
-      host: "{{ ansible_host }}"
-      port: 22
-      timeout: 180
-
-  tasks:
-    - name: Target Devices
-      debug:
-        var: device_info
-
-    name: Poll Device Details
-      juniper.junos.facts:
-        #provider: "{{ connection_settings }}"
-
-    - name: Display Device Details
-      debug:
-        msg: "Name: {{ junos.hostname }} - Serial Number: {{ junos.serialnumber }} - Model: {{ junos.model }} - Version: {{ junos.version }} - Uptime: {{ junos.RE0.up_time }}"
+   - name: Print some facts
+     debug:
+       msg: "device {{ junos.ansible_facts.ansible_net_hostname }} is a {{ junos.ansible_facts.ansible_net_model }} running junos version {{ junos.ansible_facts.ansible_net_version }}"
