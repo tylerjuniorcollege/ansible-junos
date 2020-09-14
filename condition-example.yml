@@ -18,4 +18,5 @@
       when: junos.ansible_net_version == '18.1R3.1'
 
     - name: Display Device Details
-      msg: "Name: {{ junos.ansible_net_hostname }} - Version: {{ junos.ansible_net_version }}"
+      debug:
+        msg: "Name: {{ junos.ansible_net_hostname }} - Version: {{ junos.ansible_net_version }}"
