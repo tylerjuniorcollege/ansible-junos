@@ -1,0 +1,20 @@
+---
+- name: Retrieve Junos OS version
+  hosts: Junos_all
+  gather_facts: no
+
+  vars:
+    ansible_connection: netconf
+    ansible_command_timeout: 60
+
+  tasks:
+    - name: Collect default set of facts
+      junos_facts:
+      register: junos
+
+    - name: Check ansible_net_version for 18.1R3.1
+      msg: yes
+      when: junos.ansible_net_version == '18.1R3.1'
+
+    - name: Display Device Details
+      msg: "Name: {{ junos.ansible_net_hostname }} - Version: {{ junos.ansible_net_version }}"
