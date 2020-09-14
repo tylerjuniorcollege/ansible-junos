@@ -1,7 +1,7 @@
 ---
 - name: Collect default set of facts
   hosts: Junos_all
-  gather_facts: no
+  gather_facts: yes
 
   vars:
     ansible_command_timeout: 60
@@ -10,13 +10,3 @@
       host: "{{ ansible_host }}"
       port: 22
       timeout: 180
-
-  tasks:
-    - name: Collect default set of facts and configuration
-      junos_facts:
-        gather_subset: config
-      register: junos
-    
-    - name: Print configuration
-      debug:
-        msg: "{{ junos.ansible_facts.ansible_net_config }}"
