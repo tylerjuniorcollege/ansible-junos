@@ -1,6 +1,6 @@
 ---
 - name: Collect default set of facts
-  hosts: junos-all
+  hosts: Junos_all
   gather_facts: yes
 
   vars:
