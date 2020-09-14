@@ -18,4 +18,4 @@
     
     - name: Print configuration
       debug:
-        var: result.ansible_facts.junos.config
+        msg: "device {{ junos.ansible_facts.ansible_net_hostname }} is a {{ junos.ansible_facts.ansible_net_model }} running junos version {{ junos.ansible_facts.ansible_net_version }}"
