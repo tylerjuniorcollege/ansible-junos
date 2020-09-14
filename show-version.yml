@@ -18,6 +18,7 @@
       debug:
         var: stdout_lines[0]
         
-    - name: Display Device Details
-      debug:
-        msg: "Name: {{ junos.hostname }} - Version: {{ junos.version }}"
+- name: Display all variables/facts known for a host
+  debug:
+    var: hostvars[inventory_hostname]
+    verbosity: 4
