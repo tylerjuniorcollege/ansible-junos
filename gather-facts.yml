@@ -1,7 +1,7 @@
 ---
 - name: Collect default set of facts
   hosts: junos-all
-  gather_facts: no
+  gather_facts: yes
 
   vars:
     ansible_command_timeout: 60
