@@ -15,7 +15,7 @@
     - name: Check ansible_net_version for 18.1R3.1
       debug:
         msg: "yes"
-      when: junos.ansible_net_version == '18.1R3.1'
+      when: junos.ansible_facts.ansible_net_version == '18.1R3.1'
 
     - name: Display Device Details
       debug:
