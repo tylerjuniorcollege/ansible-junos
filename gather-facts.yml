@@ -19,4 +19,4 @@
     
     - name: Print configuration
       debug:
-        msg: "{{ junos.ansilble_facts.ansible_net_config }}"
+        msg: "{{ junos.ansible_facts.ansible_net_config }}"
