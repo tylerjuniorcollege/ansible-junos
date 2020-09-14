@@ -1,4 +1,5 @@
-name: Collect default set of facts
+---
+- name: Collect default set of facts
    hosts: Junos_all
    connection: local
    gather_facts: no
