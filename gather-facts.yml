@@ -1,19 +1,6 @@
 ---
 - name: Collect default set of facts
   hosts: Junos_all
-<<<<<<< HEAD
-  gather_facts: no
-
-  tasks:
-  - name: Collect default set of facts and configuration
-    junos_facts:
-     gather_subset: config
-    register: junos
-    
-    - name: Print some facts
-      debug:
-        msg: "device {{ junos.ansible_facts.ansible_net_hostname }} is a {{ junos.ansible_facts.ansible_net_model }} running junos version {{ junos.ansible_facts.ansible_net_version }}"
-=======
   gather_facts: yes
 
   vars:
@@ -23,4 +10,3 @@
       host: "{{ ansible_host }}"
       port: 22
       timeout: 180
->>>>>>> origin/master
