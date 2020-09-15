@@ -11,12 +11,18 @@
     - name: Collect default set of facts
       junos_facts:
       register: junos
+    
+    - name: Display Device Details
+      debug:
+        msg: "Name: {{ junos.ansible_facts.ansible_net_hostname }} - Version: {{ junos.ansible_facts.ansible_net_version }}"
 
     - name: Check ansible_net_version for 18.1R3.1
       debug:
         msg: "yes"
       when: junos.ansible_facts.ansible_net_version == '18.1R3.3'
 
-    - name: Display Device Details
+    - name: Now lets get complicated
       debug:
-        msg: "Name: {{ junos.ansible_facts.ansible_net_hostname }} - Version: {{ junos.ansible_facts.ansible_net_version }}"
+        msg: "yes"
+      when: ( ( junos.ansible_facts.ansible_net_version | regex_search('\d{1,2}[\.]{1}\d{1,2}') | float ) >= targetVersion
+      
