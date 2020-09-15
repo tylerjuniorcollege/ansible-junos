@@ -24,5 +24,5 @@
     - name: Now lets get complicated
       debug:
         msg: "yes"
-      when: ( ( junos.ansible_facts.ansible_net_version | regex_search("\d{1,2}[\.]{1}\d{1,2}") | float ) >= targetVersion
+      when: ( ( junos.ansible_facts.ansible_net_version | regex_search("\d{1,2}[\.]{1}\d{1,2}") ) | float ) >= targetVersion
       
