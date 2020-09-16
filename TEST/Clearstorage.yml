@@ -12,7 +12,3 @@
     - name: Check storage space
       junos_command:
         commands: show system storage all-members
-
-    - name: Display Device Details
-      debug:
-        msg: display_args_to_stdout
