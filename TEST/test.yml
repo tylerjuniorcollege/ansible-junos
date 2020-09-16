@@ -1,19 +1,18 @@
----
--name: Vlan infomation gathering
+ ---
+- name: Vlan Information Gathering
   hosts: Junos_all
   gather_facts: yes
 
- vars:
-  ansible_connection: netconf
-  ansible_command_timeout: 60
+  vars:
+    ansible_connection: netconf
+    ansible_command_timeout: 60
 
- task:
-    -name: gather_network_resources
-        junipernetworks.junos.junos_facts:
+
+  tasks:
+    - name: gather_network_resources
+      junipernetworks.junos.junos_facts:
         gather_subset: vlans
 
-      -name: Display facts 
-       debug:
-       var: display_args_to_stdout
-
-  
+    - name: Display Facts
+      debug:
+        msg: display_args_to_stdout 

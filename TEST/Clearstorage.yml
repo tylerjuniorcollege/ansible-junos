@@ -1,0 +1,18 @@
+---
+- name: Clear storage space
+  hosts: Junos_all
+  gather_facts: no
+
+  vars:
+    ansible_connection: netconf
+    ansible_command_timeout: 60
+
+
+  tasks:
+    - name: Check storage space
+      junos_command:
+        commands: show system storage all-members
+
+    - name: Display Device Details
+      debug:
+        msg: display_args_to_stdout
