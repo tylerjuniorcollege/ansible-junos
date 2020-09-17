@@ -12,3 +12,5 @@
     - name: Check storage space
       junos_command:
         commands: show system storage all-members
+        register: storage
+        when: storage.stdout <= .65
