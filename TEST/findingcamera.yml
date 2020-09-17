@@ -11,4 +11,4 @@
   tasks:
     - name: tacking down device
       junos_command:
-        commands: "show ethernet-switching table match 78:a1:83"
+        commands: show ethernet-switching table match 78:a1:83
