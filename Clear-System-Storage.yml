@@ -11,3 +11,8 @@
     - name: Check storage space
       junos_command:
         commands: show system storage all-members
+        
+  tasks:
+    - name: Check storage space
+      junos_command:
+        commands: show system storage all-members
