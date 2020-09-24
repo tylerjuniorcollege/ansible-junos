@@ -7,15 +7,10 @@
     ansible_command_timeout: 60
 
 
-  tasks:
-    - name: Check storage space
-      junos_command:
-        commands: show system storage all-members
-        
+  tasks: 
     - name: Check storage space
       junos_command:
         commands: request system storage cleanup all-members no-confirm | no-more
-        
     - name: Check storage space
       junos_command:
         commands: show system storage all-members
