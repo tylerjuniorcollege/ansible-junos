@@ -10,4 +10,12 @@
   tasks:
     - name: Check storage space
       junos_command:
+        commands: show system storage all-members
+        
+    - name: Check storage space
+      junos_command:
         commands: request system storage cleanup all-members no-confirm | no-more
+        
+    - name: Check storage space
+      junos_command:
+        commands: show system storage all-members
