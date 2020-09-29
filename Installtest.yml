@@ -14,7 +14,7 @@
     - name: Checking NETCONF connectivity
       wait_for: host={{ inventory_hostname }} port=830 timeout=5
     - name: Install Junos OS package
-      juniper_junos_software:
+      junos_install_os:
         reboot: yes
         version: "{{ OS_version }}"
         package: "{{ pkg_dir }}/{{ OS_package }}"
