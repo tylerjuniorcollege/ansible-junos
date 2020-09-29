@@ -1,15 +1,15 @@
 ---
 - name: Install Junos OS
-  hosts: dc1
+  hosts: Junos_all
   collections:
     - juniper.device
-  connection: local
+  connection: netconf
   gather_facts: no
   vars:
     wait_time: 3600
-    pkg_dir: /var/tmp/junos-install
-    OS_version: 14.1R1.10
-    OS_package: jinstall-14.1R1.10-domestic-signed.tgz
+    pkg_dir: /tftproot
+    OS_version: 20.2R1
+    OS_package: junos-arm-32-20.2R1-S2.1.tgz
     log_dir: /var/log/ansible
 
   tasks:
