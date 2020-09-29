@@ -1,6 +1,6 @@
 ---
 - name: Install Junos OS
-  hosts: Junos_all
+  hosts: Junos_Test
   connection: netconf
   gather_facts: no
   vars:
