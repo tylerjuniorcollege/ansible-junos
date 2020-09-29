@@ -11,7 +11,7 @@
     log_dir: cds ./var/log/ansible
 
   tasks:
-    - name: Checking NETCONF connectivity
+   # - name: Checking NETCONF connectivity
      # wait_for: host={{ inventory_hostname }} port=830 timeout=5
     - name: Install Junos OS package
       junos_package:
