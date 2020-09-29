@@ -1,8 +1,8 @@
 ---
 - name: Install Junos OS
   hosts: Junos_all
-  collections:
-    - juniper.device
+  roles:
+    - Juniper.junos
   connection: local
   gather_facts: no
   vars:
