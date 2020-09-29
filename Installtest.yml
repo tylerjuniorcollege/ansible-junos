@@ -1,7 +1,7 @@
 ---
 - name: Install Junos OS
   hosts: Junos_all
-  ansible_connection: netconf
+  connection: netconf
   gather_facts: no
   vars:
     wait_time: 3600
