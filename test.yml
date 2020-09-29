@@ -1,0 +1,31 @@
+---
+- name: Install Junos OS
+  hosts: Junos_all
+  collections:
+    - juniper.device
+  connection: local
+  gather_facts: no
+  vars:
+    wait_time: 3600
+    pkg_dir: /tftproot
+    OS_version: 20.2R1-S2
+    OS_package: junos-arm-32-20.2R1-S2.1.tgz 
+    log_dir: cds ./var/log/ansible
+
+  tasks:
+    - name: Checking NETCONF connectivity
+      wait_for: host={{ inventory_hostname }} port=830 timeout=5
+    - name: Install Junos OS package
+      juniper_junos_software:
+        reboot: yes
+        version: "{{ OS_version }}"
+        package: "{{ pkg_dir }}/{{ OS_package }}"
+        logfile: "{{ log_dir }}/software.log"
+      register: sw
+      notify:
+        - wait_reboot
+
+  handlers:
+    - name: wait_reboot
+      wait_for: host={{ inventory_hostname }} port=830 timeout={{ wait_time }}
+      when: not sw.check_mode
