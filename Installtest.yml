@@ -1,8 +1,10 @@
 ---
 - name: Examples of juniper_junos_software
-  hosts: Junos_Test
+  hosts: Junos_all
   connection: local
   gather_facts: no
+  roles:
+    - juniper.junos
 
   tasks:
     - name: Execute a basic Junos software upgrade.
@@ -12,5 +14,3 @@
     - name: Print the complete response.
       debug:
         var: response
-
-
