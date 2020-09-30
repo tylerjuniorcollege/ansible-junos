@@ -7,7 +7,7 @@
   gather_facts: no
   vars:
     wait_time: 3600
-    pkg_dir: /tftproot
+    pkg_dir: /tftproot/junos-arm-32-20.2R1-S2.1.tgz
     OS_version: 20.2R1
     OS_package: junos-arm-32-20.2R1-S2.1.tgz
     log_dir: /var/log/ansible
