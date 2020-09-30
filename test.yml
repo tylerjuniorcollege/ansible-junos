@@ -1,0 +1,13 @@
+---
+- name: Upgrade a Junios Device
+  hosts: Junos_all
+
+  tasks:
+    - junos_facts:
+      host: vsrx
+      provider: "{{ netconf }}"
+    - junos_package:
+      src: ~/path/to/file/12.1X47-D10.4-domestic-signed.tgz
+    - reboot: yes
+      version: "{{ package }}"
+      provider: "{{ netconf }}"
