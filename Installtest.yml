@@ -5,9 +5,9 @@
   gather_facts: no
   vars:
     wait_time: 3600
-    scr: /tftproot
+    ssh_config: /tftproot
     OS_version: 20.2R1-S2
-    OS_package: junos-arm-32-20.2R1-S2.1.tgz 
+    scr: junos-arm-32-20.2R1-S2.1.tgz 
     log_dir: cds ./var/log/ansible
 
   tasks:
