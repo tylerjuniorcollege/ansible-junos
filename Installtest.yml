@@ -3,8 +3,6 @@
   hosts: Junos_Test
   connection: local
   gather_facts: no
-  roles:
-    - Juniper.junos
 
   tasks:
     - name: Execute a basic Junos software upgrade.
