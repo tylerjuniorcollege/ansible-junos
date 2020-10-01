@@ -1,12 +1,9 @@
----
-- name: Get device facts
-  hosts: Junos_all
-  roles:
-    - Juniper.junos
+- name: Gather facts from Junos devices
+  hosts: junos-all
   connection: local
   gather_facts: no
-
+  roles:
+    - Juniper.junos
   tasks:
-    - name: Retrieve device facts and save to file
-      juniper_junos_facts:        
-        savedir: "{{ playbook_dir }}"
+    - name: Gather Junos facts with no configuration
+      juniper_junos_facts:
