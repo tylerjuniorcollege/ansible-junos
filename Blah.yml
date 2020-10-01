@@ -1,15 +1,16 @@
 ---
-- name: Examples of juniper_junos_software
+- name: Get Device Facts
   hosts: Junos_all
+  roles:
+    - Juniper.junos
   connection: local
   gather_facts: no
- 
 
   tasks:
-    - name: Execute a basic Junos software upgrade.
-      juniper_junos_software:
-        local_package: "./tftproot/junos-arm-32-20.2R1-S2.1.tgz"
-      register: response
-    - name: Print the complete response.
+    - name: Retrieve facts from device running Junos OS
+      juniper_junos_facts:
+        host: "{{ inventory_hostname }}"
+        savedir: "{{ playbook_dir }}"
+    - name: Print version
       debug:
-        var: response
+        var: junos.version
