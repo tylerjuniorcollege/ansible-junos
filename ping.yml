@@ -1,6 +1,6 @@
 ---
 - name: Examples of juniper_junos_ping
-  hosts: Junos_all
+  hosts: Junos_Test
   gather_facts: no
 
   vars:
