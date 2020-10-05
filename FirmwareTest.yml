@@ -1,6 +1,11 @@
 ---
 - name: Upgrade a Junios Device
   hosts: Junos_Test
+  
+  vars:
+    ansible_connection: netconf
+    ansible_command_timeout: 60
+
 
   tasks:
    - junos_package:
