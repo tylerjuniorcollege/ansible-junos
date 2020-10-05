@@ -1,9 +1,4 @@
 ---
-- name: Upgrade a Junios Device
-  hosts: Junos_Test
-  connection: local
-
-
-- name: install local package on remote device with jumpost
+- name: install local package on remote device
   junipernetworks.junos.junos_package:
-    src: junos-arm-32-20.2R1-S2.1.tgz
+    src: junos-vsrx-12.1X46-D10.2-domestic.tgz
