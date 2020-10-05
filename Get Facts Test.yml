@@ -1,9 +1,16 @@
-- name: Gather facts from Junos devices
-  hosts: Junos_Test
-  connection: local
-  gather_facts: no
-  roles:
-    - Juniper.junos
-  tasks:
-    - name: Gather Junos facts with no configuration
-      junos_facts:
+---
+ - name: Get Facts
+   hosts: Junos_all
+   connection: local
+   gather_facts: no
+   tasks:
+
+   - name: Retrieve information from devices running Junos
+     junos_facts:
+      gather_subset: hardware
+     register: junos
+
+   - name: Print some facts
+     debug:
+       msg: "device {{ junos.ansible_facts.ansible_net_hostname }} is a {{ junos.ansible_facts.ansible_net_model }} running junos version {{ junos.ansible_facts.ansible_net_version }}"
+
