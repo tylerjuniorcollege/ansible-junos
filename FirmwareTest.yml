@@ -1,4 +1,15 @@
----
-- name: install local package on remote device
-  junipernetworks.junos.junos_package:
-    src: junos-arm-32-20.2R1-S2.1.tgz
+- name: Examples of juniper_junos_software
+  hosts: Junos-Test
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+
+  tasks:
+    - name: Execute a basic Junos software upgrade.
+      juniper_junos_software:
+        local_package: "./tftproot/junos-arm-32-20.2R1-S2.1.tgz"
+      register: response
+    - name: Print the complete response.
+      debug:
+        var: response
