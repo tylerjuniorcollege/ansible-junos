@@ -1,3 +1,4 @@
+
 - name: Examples of juniper_junos_software
   hosts: Junos-Test
   connection: local
