@@ -6,4 +6,4 @@
     - Juniper.junos
   tasks:
     - name: Gather Junos facts with no configuration
-      juniper_junos_facts:
+      junos_facts:
