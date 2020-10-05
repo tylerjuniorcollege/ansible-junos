@@ -1,6 +1,6 @@
 ---
 - name: Upgrade a Junios Device
-  hosts: Junos_all
+  hosts: Junos_Test
 
   tasks:
    - junos_package:
