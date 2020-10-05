@@ -1,2 +1,7 @@
-# from Github
-- src: https://github.com/tylerjuniorcollege/ansible-junos.git
+junos-eznc
+jxmlease
+wget
+jsnapy
+requests
+ipaddress
+cryptography
