@@ -1,5 +1,5 @@
 - name: Gather facts from Junos devices
-  hosts: junos_all
+  hosts: Junos_all
   connection: local
   gather_facts: no
   roles:
