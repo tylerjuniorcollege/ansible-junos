@@ -1,10 +1,7 @@
 ---
 - name: Upgrade a Junios Device
   hosts: Junos_Test
-  
-  vars:
-    ansible_connection: netconf
-    ansible_command_timeout: 60
+  connection: local
 
 
 - name: install local package on remote device with jumpost
