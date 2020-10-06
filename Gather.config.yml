@@ -22,7 +22,7 @@
        - set 
 
 - name: Collect configuration from devices
-  hosts: junos_all
+  hosts: Junos_all
   connection: local
   gather_facts: no
   tasks:
