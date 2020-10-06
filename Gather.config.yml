@@ -61,7 +61,7 @@
   - name: copy collected configuration in configuration/json directory
     copy:
       content: "{{ result_json.ansible_facts.ansible_net_config }}"
-      dest: ""/var/lib/awx/projects/configuration/json/{{ inventory_hostname }}.json"
+      dest: "/var/lib/awx/projects/configuration/json/{{ inventory_hostname }}.json"
 
   - name: Collect configuration in xml format from devices
     junos_facts:
