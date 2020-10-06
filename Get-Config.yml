@@ -5,8 +5,6 @@
     - Juniper.junos
    connection: local
    gather_facts: no
-   vars_files:
-    - "/home/.ansible/playboks/vars.yml"
    tasks:
    - name: Retrieve configuration from Junos devices
      junos_get_config:
