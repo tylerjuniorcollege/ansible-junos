@@ -3,13 +3,13 @@
    hosts: Junos_all
    roles:
     - Juniper.junos
-   connection: local
+   #connection: local
    gather_facts: no
    tasks:
    - name: Retrieve configuration from Junos devices
      junos_get_config:
       host: Junos_all
       dest: "/home/.ansible/playboks/configs/"
-      format: text
+      #format: text
       logfile: "/home/.ansible/playboks/configs/junos_get_config.log"
       filter: "System"
