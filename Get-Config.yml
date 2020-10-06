@@ -8,7 +8,7 @@
    tasks:
    - name: Retrieve configuration from Junos devices
      junos_get_config:
-      dest: "/home/.ansible/playboks/configs/{{ inventory_hostname }}.conf"
+      dest: "/home/.ansible/playboks/configs/Hudnall.conf"
       format: text
       logfile: "/home/.ansible/playboks/configs//junos_get_config.log"
       filter: system
