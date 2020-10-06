@@ -9,6 +9,6 @@
    - name: Retrieve configuration from Junos devices
      junos_get_config:
       dest: "/home/.ansible/playboks/configs/Hudnall.conf"
-      format: "text"
+      format: text
       logfile: "/home/.ansible/playboks/configs//junos_get_config.log"
       filter: "System"
