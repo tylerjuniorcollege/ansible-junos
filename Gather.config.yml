@@ -31,7 +31,6 @@
     junos_facts:
       gather_subset: config
       config_format: text
-      provider: "{{ credentials }}"
     register: "result_text"
 
   - name: copy collected configuration in configuration/text directory
@@ -43,7 +42,6 @@
     junos_facts:
       gather_subset: config
       config_format: set
-      provider: "{{ credentials }}"
     register: "result_set"
 
   - name: copy collected configuration in configuration/set directory
@@ -55,7 +53,6 @@
     junos_facts:
       gather_subset: config
       config_format: json
-      provider: "{{ credentials }}"
     register: "result_json"
 
   - name: copy collected configuration in configuration/json directory
@@ -67,7 +64,6 @@
     junos_facts:
       gather_subset: config
       config_format: xml
-      provider: "{{ credentials }}"
     register: "result_xml"
 
   - name: copy collected configuration in configuration/xml directory
