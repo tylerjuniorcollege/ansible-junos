@@ -1,0 +1,15 @@
+- name: Retrieve configuration from Junos devices
+   hosts: Junos_all
+   roles:
+    - Juniper.junos
+   connection: local
+   gather_facts: no
+   vars_files:
+    - "{{playbook_dir}}/vars.yml"
+   tasks:
+   - name: Retrieve configuration from Junos devices
+     junos_get_config:
+      dest: "{{ playbook_dir }}/configs/{{ inventory_hostname }}.conf"
+      format: text
+      logfile: "{{ playbook_dir }}/junos_get_config.log"
+      filter: system
