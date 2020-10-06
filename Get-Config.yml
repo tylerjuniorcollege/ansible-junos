@@ -5,10 +5,12 @@
     - Juniper.junos
    connection: local
    gather_facts: no
+   vars_files:
+    - "/home/.ansible/playboks/vars.yml"
    tasks:
    - name: Retrieve configuration from Junos devices
      junos_get_config:
       dest: "/home/.ansible/playboks/configs/Hudnall.conf"
       format: text
-      logfile: "/home/.ansible/playboks/configs//junos_get_config.log"
+      logfile: "/home/.ansible/playboks/configs/junos_get_config.log"
       filter: system
