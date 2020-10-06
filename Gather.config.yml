@@ -1,7 +1,7 @@
 ---
 - name: create configuration_backup directories
   hosts: Junos_all
-  ansible_connection: netconf
+  connection: netconf
   gather_facts: no
   tasks:
 
