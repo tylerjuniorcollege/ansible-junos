@@ -73,6 +73,6 @@
   - name: copy collected configuration in configuration/xml directory
     copy:
       content: "{{ result_xml.ansible_facts.ansible_net_config }}"
-      dest: ""/var/lib/awx/projects/configuration/xml/{{ inventory_hostname }}.xml"
+      dest: "/var/lib/awx/projects/configuration/xml/{{ inventory_hostname }}.xml"
 
 
