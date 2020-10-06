@@ -1,0 +1,13 @@
+  - name: Retrieve configuration from Junos devices
+   hosts: Junos_all
+   roles:
+    - Juniper.junos
+   connection: local
+   gather_facts: no
+   
+   - name: Collect configuration in text format from devices
+    junos_facts:
+      gather_subset: config
+      config_format: text
+      provider: Junos_all
+    register: "result_text"
