@@ -13,13 +13,14 @@
 
    - name: create configuration subdirectories
      file:
-       path: "/var/lib/awx/projects/configuration/Junos"
+       path: "/var/lib/awx/projects/configuration/{{ item }}"
        state: directory
-     with_items:
+       with_items:
        - text
        - xml
        - json
        - set 
+    
 
 - name: Collect configuration from devices
   hosts: Junos_all
