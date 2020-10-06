@@ -1,6 +1,6 @@
 ---
 - name: create configuration_backup directories
-  hosts: localhost
+  hosts: Junos_all
   gather_facts: no
   tasks:
 
