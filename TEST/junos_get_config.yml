@@ -11,5 +11,5 @@
       host: {{ inventory_hostname }}
       dest: "/home/.ansible/playboks/configs/"
       format: text
-      #logfile: "/home/.ansible/playboks/configs/junos_get_config.log"
+      logfile: "/home/.ansible/playboks/configs/junos_get_config.log"
       filter: "System"
