@@ -10,11 +10,12 @@
     pkg_dir: /tftproot/
     OS_version: 20.2R1
     OS_package: junos-arm-32-20.2R1-S2.1.tgz
+    host: AnsibleTest
     #log_dir: /var/log/ansible
 
   tasks:
     - name: Checking NETCONF connectivity
-      wait_for: host={{ inventory_hostname }} port=830 timeout=5
+      wait_for: host={{ host }} port=830 timeout=5
     - name: Install Junos OS package
       juniper_junos_software:
         reboot: yes
@@ -27,5 +28,5 @@
 
   handlers:
     - name: wait_reboot
-      wait_for: host={{ inventory_hostname }} port=830 timeout={{ wait_time }}
+      wait_for: host={{ host }} port=830 timeout={{ wait_time }}
       when: not sw.check_mode
