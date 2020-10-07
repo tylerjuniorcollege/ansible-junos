@@ -2,7 +2,7 @@
 - name: Firmware
   hosts: Junos_Test
   gather_facts: no
-  connection: local
+  connection: netconf
 
 
   tasks:
