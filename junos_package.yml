@@ -9,3 +9,4 @@
     - name: upgrade firmware
       junos_package:
         src: junos-arm-32-20.2R1-S2.1.tgz
+        version: 20.2R1-S2.1
