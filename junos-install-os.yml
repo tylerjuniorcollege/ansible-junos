@@ -12,6 +12,5 @@
       host=AnsibleTest
       version=20.2R1
       package=/home/tftproot/junos-arm-32-20.2R1-S2.1.tgz
-      reboot=yes
       force_host: True
      
