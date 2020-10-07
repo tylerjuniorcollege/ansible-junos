@@ -1,16 +1,16 @@
 ---
 - name: Install Junos OS
-  hosts: dc1
+  hosts: AnsibleTest
   roles:
     - Juniper.junos
   connection: local
   gather_facts: no
   vars:
     wait_time: 3600
-    pkg_dir: /var/tmp/junos-install
-    OS_version: 14.1R1.10
-    OS_package: jinstall-14.1R1.10-domestic-signed.tgz
-    log_dir: /var/log/ansible
+    pkg_dir: /tftproot/
+    OS_version: 20.2R1
+    OS_package: junos-arm-32-20.2R1-S2.1.tgz
+    #log_dir: /var/log/ansible
 
   tasks:
     - name: Checking NETCONF connectivity
@@ -20,7 +20,7 @@
         reboot: yes
         version: "{{ OS_version }}"
         package: "{{ pkg_dir }}/{{ OS_package }}"
-        logfile: "{{ log_dir }}/software.log"
+        #logfile: "{{ log_dir }}/software.log"
       register: sw
       notify:
         - wait_reboot
