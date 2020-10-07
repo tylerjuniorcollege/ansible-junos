@@ -9,8 +9,8 @@
 
    - name: upgrade
      junos_install_os:
-      host=Junos_Test
-      version=12.3R12.4
+      host={{ inventory_hostname }}
+      version=20.2R1-S2.1
       package=/home/var/lib/awx/projects/playbooks/junos-arm-32-20.2R1-S2.1.tgz
       reboot=yes
-      no_copy=no
+     
