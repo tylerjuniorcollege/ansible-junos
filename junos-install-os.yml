@@ -3,7 +3,7 @@
    hosts: Junos_Test
    roles:       
     - Juniper.junos
-   connection: netconf
+   connection: connection
    gather_facts: no
 
    tasks:
