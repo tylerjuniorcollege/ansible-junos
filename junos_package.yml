@@ -3,7 +3,6 @@
   hosts: Junos_Test
   gather_facts: no
   connection: local
-  ansible_python_interpreter: /usr/bin/python3
 
 
   tasks:
