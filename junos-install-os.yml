@@ -17,6 +17,6 @@
   junos_install_os:
     host=AnsibleTest
       version=20.2R1
-      package=/home/tftproot/junos-arm-32-20.2R1-S2.1.tgz
+      package=/tftproot/junos-arm-32-20.2R1-S2.1.tgz
   force_host: True
      
