@@ -1,7 +1,6 @@
 ---
 - name: upgrade junos
   hosts: AnsibleTest
-  connection: local
   gather_facts: no
 
   vars: 
