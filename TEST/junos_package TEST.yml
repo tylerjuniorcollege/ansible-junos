@@ -5,7 +5,7 @@
 
   vars: 
     ansible_connection: netconf
-    ansible_python_interpreter: "{{'usr/local/lib/python3.6/site-packages/junos_eznc-2.5.3-py3.7-nspkg.pth'}}"
+    ansible_python_interpreter: "{{'usr/bin/python3.6'}}"
     ansible_command_timeout: 60
     
   tasks:
