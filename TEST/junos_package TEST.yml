@@ -5,7 +5,7 @@
 
   vars: 
     ansible_connection: netconf
-    ansible_python_interpreter: "{{usr/bin/python3}}"
+    ansible_python_interpreter: "{{root/usr/bin/python3}}"
     ansible_command_timeout: 60
     
   tasks:
