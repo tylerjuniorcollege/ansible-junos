@@ -3,6 +3,7 @@
 - name: upgrade junos
   hosts: AnsibleTest
   gather_facts: no
+  connection: local
 
   vars: 
     ansible_connection: netconf
