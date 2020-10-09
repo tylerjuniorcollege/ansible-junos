@@ -10,7 +10,6 @@
     OS_version: "20.2R1-S2.1"
     OS_package: "junos-arm-32-20.2R1-S2.1.tgz"
     pkg_dir: "/tftproot"
-    log_dir: "/var/log/ansible"
     netconf_port: 830
     wait_time: 3600
 
@@ -27,7 +26,6 @@
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: true
         validate: true
-        logfile: "{{ log_dir }}/software.log"
       register: sw
       notify:
       - wait_reboot
