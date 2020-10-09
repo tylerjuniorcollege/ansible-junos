@@ -6,7 +6,7 @@
 
   vars: 
     ansible_connection: netconf
-    ansible_python_interpreter: "{{ '/usr/libexec/ python-docker' }}"
+    ansible_python_interpreter: "{{ 'usr/libexec/ python-docker' }}"
     ansible_command_timeout: 60
     
   tasks:
