@@ -13,10 +13,17 @@
  
 
   tasks:
-- name: upgrade
-  junos_install_os:
-    host=AnsibleTest
-      version=20.2R1
-      package=/tftproot/junos-arm-32-20.2R1-S2.1.tgz
-  force_host: True
+
+  - name: upgrade
+    junos_install_os:
+     junos_install_os:
+      host={{ junos_host }}
+      user={{ ADMUSER }}
+      passwd={{ ADMPASS }}
+      version=12.3R12.4
+      package={{playbook_dir}}/jinstall-junos-arm-32-20.2R1-S2.1.tgz
+      logfile=software.log
+      port=830
+      reboot=yes
+      no_copy=no
      
