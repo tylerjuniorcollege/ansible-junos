@@ -10,11 +10,6 @@
     
   tasks:
 
-  - set_fact:
-      ansible_python_interpreter: '{{ ansible_playbook_python }}'
-    delegate_to: localhost    
-    delegate_facts: true
-
   - name: install local package on remote device and reboot the device
     junos_package:
       src: "/var/lib/awx/projects/playbooks/junos-arm-32-20.2R1-S2.1.tgz"
