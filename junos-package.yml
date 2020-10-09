@@ -6,15 +6,9 @@
 
   vars: 
     ansible_connection: netconf
-   # ansible_python_interpreter: "{{ 'usr/libexec/ python-docker' }}"
+   ansible_python_interpreter: /usr/local/lib/python3.6
     ansible_command_timeout: 60
     
-  tasks:
-
- # - set_fact:
-  #    ansible_python_interpreter: 'usr/local/lib/python3.6'
- #   delegate_to: localhost    
-#    delegate_facts: true
 
   - name: install local package on remote device and reboot the device
     junos_package:
