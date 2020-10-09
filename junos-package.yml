@@ -3,15 +3,10 @@
   hosts: AnsibleTest
   connection: local
   gather_facts: no
-
-  vars: 
-    ansible_connection: netconf
-    ansible_python_interpreter: /usr/local/lib/python3.6
-    ansible_command_timeout: 60
     
 
 - name: install local package on remote device and reboot the device
-  junos_package:
+  junipernetworks.junos.junos_package:
       src: "{{playbook_dir}}/jinstall-junos-arm-32-20.2R1-S2.1.tgz"
       reboot: true
       version: 20.2R1-S2.1
