@@ -20,8 +20,7 @@
 
 
   tasks:
-
-    - set_fact:
+  - set_fact:
       ansible_python_interpreter: '{{ ansible_playbook_python }}'
       delegate_to: localhost    
       delegate_facts: true
