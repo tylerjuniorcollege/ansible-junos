@@ -11,7 +11,7 @@
   tasks:
 
   - set_fact:
-      ansible_python_interpreter: '/usr/bin/python3'
+      ansible_python_interpreter: '/var/lib/awx/venv/ansible/bin/python3.6'
     delegate_to: localhost    
     delegate_facts: true
 
