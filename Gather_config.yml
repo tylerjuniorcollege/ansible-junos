@@ -1,6 +1,6 @@
 ---
 - name: create configuration_backup directories
-  hosts: Junos_all
+  hosts: AnsibleTest
   gather_facts: no
   tasks:
 
