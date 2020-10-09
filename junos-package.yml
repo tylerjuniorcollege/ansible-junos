@@ -12,7 +12,7 @@
   tasks:
 
   - set_fact:
-      ansible_python_interpreter: '{{ /user/lib/local/python3.6 }}'
+      ansible_python_interpreter: '{{ user/lib/local/python3.6 }}'
     delegate_to: localhost    
     delegate_facts: true
 
