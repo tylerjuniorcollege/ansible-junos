@@ -8,21 +8,12 @@
 
   vars:
     ansible_connection: netconf
-    ansible_python_interpreter: "{{ '/usr/bin/env python-docker' }}"
-    ansible_command_timeout: 60
     OS_version: "20.2R1-S2.1"
     OS_package: "/tftproot/junos-arm-32-20.2R1-S2.1.tgz"
     pkg_dir: "software"
     log_dir: "/var/log/ansible"
     netconf_port: 830
     wait_time: 3600
-
-
-  tasks:
-  - set_fact:
-      ansible_python_interpreter: '{{ ansible_playbook_python }}'
-    delegate_to: localhost    
-    delegate_facts: true
 
   - name: Checking NETCONF connectivity
     wait_for: 
