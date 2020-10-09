@@ -19,7 +19,7 @@
     - name: Install Junos OS package
       juniper_junos_software:
         reboot: yes
-        version: "{{ 'OS_version' }}"
+        version: {{ 'OS_version' }}
         package: "{{ 'pkg_dir' }}/{{ 'OS_package' }}"
         #logfile: "{{ log_dir }}/software.log"
       register: sw
