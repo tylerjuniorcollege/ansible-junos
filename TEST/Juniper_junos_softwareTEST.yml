@@ -21,12 +21,12 @@
         reboot: yes
         version: {{ 'OS_version' }}
         package: {{ 'pkg_dir' }}/{{ 'OS_package' }}
-        #logfile: "{{ log_dir }}/software.log"
+        #logfile: {{ log_dir }}/software.log
       register: sw
       notify:
         - wait_reboot
 
   handlers:
     - name: wait_reboot
-      wait_for: host={{ host }} port=830 timeout={{ wait_time }}
+      wait_for: host={{ 'host' }} port=830 timeout={{ 'wait_time' }}
       when: not sw.check_mode
