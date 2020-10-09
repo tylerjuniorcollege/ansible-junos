@@ -2,18 +2,8 @@
 - name: upgrade junos
   hosts: AnsibleTest
   gather_facts: no
-
-  vars: 
-    ansible_connection: netconf
-    ansible_python_interpreter: "{{ 'usr/bin/env python-docker' }}"
-    ansible_command_timeout: 60
     
   tasks:
-
-  - set_fact:
-      ansible_python_interpreter: '{{ ansible_playbook_python }}'
-    delegate_to: localhost    
-    delegate_facts: true
 
   - name: install local package on remote device and reboot the device
     junos_package:
