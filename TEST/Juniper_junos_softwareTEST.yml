@@ -15,7 +15,7 @@
 
   tasks:
     - name: Checking NETCONF connectivity
-      wait_for: host={{ host }} port=830 timeout=5
+      wait_for: host= {{ host }} port=830 timeout=5
     - name: Install Junos OS package
       juniper_junos_software:
         reboot: yes
