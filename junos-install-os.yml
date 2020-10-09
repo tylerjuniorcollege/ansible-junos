@@ -4,7 +4,6 @@
   hosts: Junos_Test
   roles: 
     - Juniper.junos
-  connection: local
   gather_facts: no
 
   vars:
