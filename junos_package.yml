@@ -32,7 +32,7 @@
       
         
   - name: Install Junos OS package
-    junos_software:
+    juniper_junos_software:
           version: "{{ OS_version }}"
           local_package: "{{ pkg_dir }}/{{ OS_package }}"
           reboot: true
