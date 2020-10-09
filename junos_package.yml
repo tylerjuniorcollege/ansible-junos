@@ -3,7 +3,7 @@
 - name: Install Junos OS
   hosts: Junos_Test
   roles: 
-    - Junper.junos
+    - Juniper.junos
   connection: local
   gather_facts: no
 
@@ -33,7 +33,7 @@
          timeout: 5
         
     - name: Install Junos OS package
-      junos_software:
+      juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: true
