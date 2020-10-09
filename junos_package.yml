@@ -3,7 +3,7 @@
 - name: Install Junos OS
   hosts: Junos_Test
   roles: 
-    - Juniper.junos
+    - Junper.junos
   connection: local
   gather_facts: no
 
@@ -22,26 +22,23 @@
   tasks:
   - set_fact:
       ansible_python_interpreter: '{{ ansible_playbook_python }}'
-      delegate_to: localhost    
-      delegate_facts: true
+    delegate_to: localhost    
+    delegate_facts: true
 
-    - name: Checking NETCONF connectivity
-      wait_for:
-         host: "{{ inventory_hostname }}"
-         port: "{{ netconf_port }}"
-         timeout: 5
+  - name: Checking NETCONF connectivity
+      
         
-    - name: Install Junos OS package
-      juniper_junos_software:
-        version: "{{ OS_version }}"
-        local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        reboot: true
-        validate: true
-        logfile: "{{ log_dir }}/software.log"
-        register: sw
-        notify:
+  - name: Install Junos OS package
+    juniper_junos_software:
+          version: "{{ OS_version }}"
+          local_package: "{{ pkg_dir }}/{{ OS_package }}"
+          reboot: true
+          validate: true
+          logfile: "{{ log_dir }}/software.log"
+    register: sw
+    notify:
         - wait_reboot
 
-    - name: Print response
-      debug:
-        var: sw
+  - name: Print response
+    debug:
+      var: sw
