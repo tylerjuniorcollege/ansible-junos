@@ -2,7 +2,7 @@
 - name: Install Junos OS
   hosts: Junos_Test
   roles: 
-    - Junper.junos
+    - Juniper.junos
   connection: local
   gather_facts: no
 
