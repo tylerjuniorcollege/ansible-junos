@@ -1,0 +1,13 @@
+  
+---
+- name: Collect default set of facts
+  hosts: Cisco_all
+  gather_facts: yes
+
+  vars:
+    ansible_command_timeout: 60
+    ansible_connection: network_cli
+    connection_settings:
+      host: "{{ ansible_host }}"
+      port: 22
+      timeout: 180
