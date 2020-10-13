@@ -9,7 +9,7 @@
   vars:
     OS_version: "20.2R1-S2.1"
     OS_package: "jinstall-host-ex-4600-20.2R1-S2.1-signed.tgz"
-    pkg_dir: "var/lib/docker/overlay2/16384f8fda67f19cbeee470f962ad2ec7948b42fa4511fd922f60d58c6d0b70c/merged/tftproot"
+    pkg_dir: "/tftproot"
     netconf_port: 830
     wait_time: 3600
 
