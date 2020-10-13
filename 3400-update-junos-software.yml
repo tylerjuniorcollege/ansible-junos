@@ -1,6 +1,6 @@
 ---
-- name: Install Junos OS
-  hosts: AnsibleTest
+- name: Install Junos OS - EX3400
+  hosts: EX3400
   roles:
     - Juniper.junos 
   connection: local
