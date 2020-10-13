@@ -1,32 +1,64 @@
 ---
+
+
+---
+
 - name: Install Junos OS
-  hosts: AnsibleTest
-  roles:
+
+  hosts: Junos_Test
+
+  roles: 
+
     - Juniper.junos
-  connection: local
+
   gather_facts: no
+
+
+
   vars:
-    wait_time: 3600
-    pkg_dir: /tftproot/
-    OS_version: 20.2R1
-    OS_package: junos-arm-32-20.2R1-S2.1.tgz
-    host: AnsibleTest
-    #log_dir: /var/log/ansible
+
+    ansible_connection: netconf
+
+    ansible_python_interpreter: "{{ '/usr/bin/env python-docker' }}"
+
+    ansible_command_timeout: 60
+
+ 
+
+
 
   tasks:
-    - name: Checking NETCONF connectivity
-      wait_for: "host={{ 'host' }} port=830 timeout=5
-    - name: Install Junos OS package
-      juniper_junos_software:
-        reboot: yes
-        version: {{ 'OS_version' }}
-        package: {{ 'pkg_dir' }}/{{ 'OS_package' }}
-        #logfile: {{ log_dir }}/software.log
-      register: sw
-      notify:
-        - wait_reboot
 
-  handlers:
-    - name: wait_reboot
-      wait_for: host={{ 'host' }} port=830 timeout={{ 'wait_time' }}
-      when: not sw.check_mode
+
+
+  - set_fact:
+
+      ansible_python_interpreter: '{{ ansible_playbook_python }}'
+
+    delegate_to: localhost    
+
+    delegate_facts: true
+
+
+
+  - name: upgrade
+
+    junos_install_os:
+
+     junos_install_os:
+
+      host=AnsibleTest
+
+      version=20.2R1-S2.1
+
+      package={{playbook_dir}}/jinstall-junos-arm-32-20.2R1-S2.1.tgz
+
+      logfile=software.log
+
+      port=830
+
+      reboot=yes
+
+      no_copy=no
+
+     
