@@ -21,7 +21,7 @@
        - set 
 
 - name: Collect configuration from devices
-  hosts: Junos_all
+  hosts: AnsibleTest
   connection: local
   gather_facts: no
   tasks:
