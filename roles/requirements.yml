@@ -1,13 +1,13 @@
 ---
 - name: Juniper.junos
-junos-eznc
-jxmlease
-wget
-jsnapy
-requests
-ipaddress
-cryptography
-astroid
-isort
-pylint
+- name: junos-eznc
+- name: jxmlease
+- name: wget
+- name: jsnapy
+- name: requests
+- name: ipaddress
+- name: cryptography
+- name: astroid
+- name: isort
+- name: pylint
 
