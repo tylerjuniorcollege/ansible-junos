@@ -1,6 +1,6 @@
 ---
 - name: Examples of juniper_junos_ping
-  hosts: Junos_Test
+  hosts: Junos_all
   gather_facts: no
 
   vars:
@@ -12,6 +12,6 @@
 
 
   tasks:
-    - name: Ping 10.190.0.2 with default parameters. Fails if any packets lost.
+    - name: Ping 10.0.0.1 with default parameters. Fails if any packets lost.
       junos_ping:
-        dest: 10.190.0.2
+        dest: 10.0.0.1
