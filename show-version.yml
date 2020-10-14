@@ -12,7 +12,3 @@
     - name: Retrieve Junos OS version
       junos_command:
         commands: show version
-
-    - name: Display Device Details
-      debug:
-        msg: "Name: {{ junos.hostname }} - Version: {{ junos.version }}"
