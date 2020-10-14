@@ -1,6 +1,5 @@
 ---
 - name: Juniper.junos
-- name: junos-eznc
 - name: jxmlease
 - name: wget
 - name: jsnapy
