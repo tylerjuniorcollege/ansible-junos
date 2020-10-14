@@ -1,9 +1,3 @@
 ---
 - name: Juniper.junos
-- name: requests
-- name: ipaddress
-- name: cryptography
-- name: astroid
-- name: isort
-- name: pylint
 
