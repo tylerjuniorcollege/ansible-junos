@@ -1,6 +1,5 @@
 ---
 - name: Juniper.junos
-- name: wget
 - name: jsnapy
 - name: requests
 - name: ipaddress
