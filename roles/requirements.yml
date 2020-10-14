@@ -1,6 +1,5 @@
 ---
 - name: Juniper.junos
-- name: jsnapy
 - name: requests
 - name: ipaddress
 - name: cryptography
