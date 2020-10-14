@@ -7,10 +7,10 @@
   gather_facts: no
 
   tasks:
-    - name: "Get configuration in txt format"
+    - name: "Get configuration in text format"
       juniper_junos_config:
         retrieve: "committed"
-        format: "txt"
+        format: "text"
       register: response
     - name: "Print result"
       debug:
