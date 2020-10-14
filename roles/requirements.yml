@@ -1,6 +1,5 @@
 ---
 - name: Juniper.junos
-- name: jxmlease
 - name: wget
 - name: jsnapy
 - name: requests
