@@ -22,7 +22,7 @@
 
 - name: Collect configuration from devices
   hosts: AnsibleTest
-  connection: netconf
+  connection: local
   gather_facts: no
   tasks:
 
