@@ -1,3 +1,2 @@
 ---
 - name: Juniper.junos
-- name: junos-eznc  >= 2.5.0
