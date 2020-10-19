@@ -1,3 +1,10 @@
 ---
 - name: Juniper.junos
+- name: junos-eznc
+- name: jxmlease
+- name: wget
+- name: jsnapy
+- name: requests
+- name: ipaddress
+- name: cryptography
 
