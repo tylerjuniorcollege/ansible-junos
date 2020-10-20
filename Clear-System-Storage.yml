@@ -1,3 +1,4 @@
+  
 - name: Clear storage space
   hosts: Junos_all
   gather_facts: no
@@ -10,4 +11,4 @@
   tasks: 
     - name: System storage cleanup
       junos_command:
-        commands: request system storage cleanup dry-run
+        commands: request system storage cleanup all-members no-confirm | no-more
