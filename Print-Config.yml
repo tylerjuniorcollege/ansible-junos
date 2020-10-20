@@ -9,7 +9,7 @@
   tasks:
     - name: "Get configuration in text format"
       juniper_junos_config:
-        savedir: "{{ playbook_dir }}"
+        savedir: "/var/lib/awx/projects/configuration/Junos"
         retrieve: "committed"
         format: "text"
       register: response
