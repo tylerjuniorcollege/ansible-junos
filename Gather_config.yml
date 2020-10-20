@@ -15,6 +15,6 @@
      file:
        path: "/var/lib/awx/projects/configuration/Junos"
        state: directory
-     with_items:
+       with_items:
        - text
 
