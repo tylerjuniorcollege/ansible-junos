@@ -1,19 +1,18 @@
 ---
-- name: create configuration_backup directories
-  hosts: AnsibleTest
-  gather_facts: no
+- name: Get device facts and configuration
+  hosts: Junos_all
+  roles:
+    - Juniper.junos
   connection: local
+  gather_facts: no
+
   tasks:
+    - name: Retrieve device facts and configuration and save facts to file
+      juniper_junos_facts:        
+        savedir: "/var/lib/awx/projects/configuration/Junos"
+        config_format: "text"
+      register: result
 
-   - name: create configuration directory
-     file:
-       path: "/var/lib/awx/projects/configuration/Junos"
-       state: directory
-
-   - name: create configuration subdirectories
-     file:
-       path: "/var/lib/awx/projects/configuration/Junos"
-       state: directory
-       with_items:
-       - text
-
+    - name: Print configuration
+      debug:
+        var: result.ansible_facts.junos.config
