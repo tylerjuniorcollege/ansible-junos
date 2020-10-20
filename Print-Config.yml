@@ -9,9 +9,12 @@
   tasks:
     - name: "Get configuration in text format"
       juniper_junos_config:
+        savedir: "{{ playbook_dir }}"
         retrieve: "committed"
         format: "text"
       register: response
+      
+      
     - name: "Print result"
       debug:
         var: response
