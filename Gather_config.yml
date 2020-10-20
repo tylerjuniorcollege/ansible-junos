@@ -23,6 +23,7 @@
 - name: Collect configuration from devices
   hosts: AnsibleTest
   gather_facts: no
+  connection: local
   tasks:
   
   - name: Collect configuration in text format from devices
@@ -37,6 +38,7 @@
       dest: "{{ playbook_dir }}/configuration/text/{{ inventory_hostname }}.conf"
  
   - name: Collect configuration in set format from devices
+    connection: netconf
     junos_facts:
       gather_subset: config
       config_format: set
