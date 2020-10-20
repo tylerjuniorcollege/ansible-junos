@@ -1,4 +1,4 @@
-- name: Clear storage space
+- name: Show storage space
   hosts: Junos_all
   gather_facts: no
 
@@ -8,6 +8,6 @@
 
 
   tasks:
-    - name: storage cleanup
+    - name: Show storage
       junos_command:
-        commands: request system storage cleanup
+        commands: show system storage
