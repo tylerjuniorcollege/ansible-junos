@@ -10,7 +10,6 @@
        path: "/var/lib/awx/projects/configuration/Junos"
        state: directory
 
-
    - name: create configuration subdirectories
      file:
        path: "/var/lib/awx/projects/configuration/Junos"
