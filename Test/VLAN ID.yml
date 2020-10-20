@@ -1,6 +1,6 @@
 ---
 - name: configure VLAN ID and name
   junos_vlan:
-    vlan_name: test
+    vlan_name: Media
     vlan_id: 20
-    name: test-vlan
+    name: Media 
