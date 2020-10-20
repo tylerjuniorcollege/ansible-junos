@@ -8,6 +8,6 @@
 
 
   tasks: 
-    - name: Check storage space
+    - name: System storage cleanup
       junos_command:
         commands: request system storage cleanup all-members no-confirm | no-more
