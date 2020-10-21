@@ -1,6 +1,6 @@
 ---
  - name: Rollback configuration on junos devices
-   hosts: test
+   hosts: Junos_test
    roles:       
     - Juniper.junos
    connection: local
