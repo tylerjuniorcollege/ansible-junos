@@ -8,6 +8,7 @@
     - name: remove VLAN configuration
       junos_vlan:
        vlan_id: 20
+       name: DATA_2
        state: absent
     
     - name: configure VLAN ID and name
