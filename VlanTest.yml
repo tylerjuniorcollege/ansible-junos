@@ -5,8 +5,12 @@
    gather_facts: no
    tasks:
 
-     - name: configure VLAN ID and name
-       junos_vlan:
-         name: Media
-         vlan_id: 20
-         name: Media 
+    - name: remove VLAN configuration
+      junos_vlan:
+       vlan_name: test
+       state: absent
+    
+    - name: configure VLAN ID and name
+      junos_vlan:
+       name: Media
+      vlan_id: 20 
