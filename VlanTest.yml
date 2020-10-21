@@ -3,12 +3,11 @@
    hosts: Junos_Test
    connection: local
    gather_facts: no
-   
-   
-   
    tasks:
-- name: configure VLAN ID and name
-  junos_vlan:
+
+ - name: configure VLAN ID and name
+   junos_vlan:
     vlan_name: Media
     vlan_id: 20
     name: Media 
+   
