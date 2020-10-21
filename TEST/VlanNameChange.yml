@@ -1,4 +1,12 @@
 ---
+ - name: Change Vlan Name
+   hosts: Junos_all
+   roles:
+    - Juniper.junos
+   connection: local
+   gather_facts: no
+   
+   
 - name: configure VLAN ID and name
   junos_vlan:
     vlan_name: test
