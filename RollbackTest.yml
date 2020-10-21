@@ -1,0 +1,16 @@
+---
+ - name: Rollback configuration on junos devices
+   hosts: test
+   roles:       
+    - Juniper.junos
+   connection: local
+   gather_facts: no
+
+   tasks:
+
+   - name: Rollback junos config task
+     junos_rollback:
+      host: "{{ junos_host }}"
+      diffs_file: "{{playbook_dir}}/{{ inventory_hostname }}.diff"
+      rollback: "{{ rbid }}" 
+      comment: "configuration rolled back by Ansible using rbid {{ rbid }}"
