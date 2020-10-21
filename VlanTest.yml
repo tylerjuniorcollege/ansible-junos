@@ -8,10 +8,10 @@
     - name: remove VLAN configuration
       junos_vlan:
        vlan_id: 20
-       name: DATA_2
+       name: media
        state: absent
     
     - name: configure VLAN ID and name
       junos_vlan:
-       name: Media
+       name: Glizzy
        vlan_id: 20 
