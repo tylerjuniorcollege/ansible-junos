@@ -13,5 +13,5 @@
     
     - name: configure VLAN ID and name
       junos_vlan:
-       name: Glizzy
+       name: glizzy
        vlan_id: 20 
