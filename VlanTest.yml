@@ -1,5 +1,5 @@
 ---
- - name: Get Facts
+ - name: VLAN
    hosts: Junos_Test
    connection: local
    gather_facts: no
