@@ -1,3 +1,4 @@
+---
 - name: configure VLAN ID and name
   junos_vlan:
     vlan_name: test
