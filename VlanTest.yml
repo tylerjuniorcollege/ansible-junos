@@ -7,10 +7,10 @@
 
     - name: remove VLAN configuration
       junos_vlan:
-       vlan_ID: 20
+       vlan_id: 20
        state: absent
     
     - name: configure VLAN ID and name
       junos_vlan:
        name: Media
-      vlan_id: 20 
+       vlan_id: 20 
