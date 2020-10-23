@@ -5,7 +5,7 @@
   gather_facts: no
 
   tasks: 
-- name: remove a user account
-  junipernetworks.junos.junos_user:
-    name: shane
-    state: absent
+  - name: remove a user account
+    junipernetworks.junos.junos_user:
+      name: shane
+      state: absent
