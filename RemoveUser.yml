@@ -1,25 +1,23 @@
+
 ---
- - name: Remove User
-   hosts: Junos_all
-   roles:       
-    - Juniper.junos
-   timeout: 30
-   connection: local
-   gather_facts: no
+- name: Removing Users
+  hosts: Junos_all
+  connection: local
+  gather_facts: no
 
-   tasks:
+  tasks: 
+  - name: remove a user account
+    junipernetworks.junos.junos_user:
+      name: shane
+      state: absent
 
-    - name: remove a user account
-      junos_user:
-       name: shane
-       state: absent
        
-    - name: remove a user account
-      junos_user:
+  - name: remove a user account
+    junipernetworks.junos.junos_user:
        name: donald
        state: absent
        
-    - name: remove a user account
-      junos_user:
+  - name: remove a user account
+    junipernetworks.junos.junos_user:
        name: dcal
        state: absent
