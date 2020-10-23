@@ -1,4 +1,3 @@
-  
 ---
  - name: Remove User
    hosts: Junos_all
@@ -17,4 +16,9 @@
     - name: remove a user account
       junos_user:
        name: donald
+       state: absent
+       
+    - name: remove a user account
+      junos_user:
+       name: dcal
        state: absent
