@@ -10,12 +10,14 @@
     junipernetworks.junos.junos_user:
       name: shane
       state: absent
+      timeout: 20
 
        
   - name: remove a user account
     junipernetworks.junos.junos_user:
        name: donald
        state: absent
+       timeout: 20
        
   - name: remove a user account
     junipernetworks.junos.junos_user:
