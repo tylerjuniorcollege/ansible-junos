@@ -1,0 +1,4 @@
+- name: remove a user account
+  junipernetworks.junos.junos_user:
+    name: ansible
+    state: absent
