@@ -1,5 +1,5 @@
 ---
- - name: Rollback configuration on junos devices
+ - name: Remove User
    hosts: Junos_all
    roles:       
     - Juniper.junos
