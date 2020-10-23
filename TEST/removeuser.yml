@@ -1,4 +1,11 @@
+---
+- name: Removing Users
+  hosts: Junos_all
+  connection: local
+  gather_facts: no
+
+tasks: 
 - name: remove a user account
   junipernetworks.junos.junos_user:
-    name: ansible
+    name: shane
     state: absent
