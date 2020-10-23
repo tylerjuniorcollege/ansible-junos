@@ -10,5 +10,5 @@
 
     - name: remove a user account
       junos_user:
-       name: {{ ansible }}
+       name: shane
        state: absent
