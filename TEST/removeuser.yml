@@ -1,3 +1,4 @@
+
 ---
 - name: Removing Users
   hosts: Junos_all
@@ -9,3 +10,14 @@
     junipernetworks.junos.junos_user:
       name: shane
       state: absent
+
+       
+  - name: remove a user account
+    junos_user:
+       name: donald
+       state: absent
+       
+  - name: remove a user account
+    junos_user:
+       name: dcal
+       state: absent
