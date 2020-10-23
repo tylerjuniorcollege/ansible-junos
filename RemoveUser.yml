@@ -10,13 +10,4 @@
       name: shane
       state: absent
 
-       
-  - name: remove a user account
-    junipernetworks.junos.junos_user:
-       name: donald
-       state: absent
-       
-  - name: remove a user account
-    junipernetworks.junos.junos_user:
-       name: dcal
-       state: absent
+   
