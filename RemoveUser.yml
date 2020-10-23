@@ -3,6 +3,7 @@
    hosts: Junos_all
    roles:       
     - Juniper.junos
+   timeout: 30
    connection: local
    gather_facts: no
 
