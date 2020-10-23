@@ -4,7 +4,7 @@
   connection: local
   gather_facts: no
 
-tasks: 
+  tasks: 
 - name: remove a user account
   junipernetworks.junos.junos_user:
     name: shane
