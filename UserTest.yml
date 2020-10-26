@@ -1,7 +1,7 @@
 ---
 - name: Removing Users
   hosts: Junos_all
-  connection: local
+  connection: netconf
   gather_facts: no
   tasks:
 
