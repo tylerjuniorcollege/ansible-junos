@@ -3,12 +3,11 @@
   hosts: Junos_all
   connection: local
   gather_facts: no
-
   tasks:
 
     - name: Delete list of users
       junos_user:
-      aggregate:
-      - {name: shane, role: super-user, state: absent}
-      - {name: dcal, role: super-user, state: absent}
-      - {name: donald, role: super-user, state: absent}
+       aggregate:
+       - {name: shane, role: super-user, state: absent}
+       - {name: dcal, role: super-user, state: absent}
+       - {name: donald, role: super-user, state: absent}
