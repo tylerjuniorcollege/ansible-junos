@@ -1,18 +1,18 @@
 ---
-- name: Collect default set of facts
+- name: Retrieve configuration from Junos devices
   hosts: Junos_all
+  connection: local
   gather_facts: no
+
   tasks: 
-  
   - name: Retrieve configuration from Junos devices
-    hosts: Junos_all
     roles:
-     - Juniper.junos
+       - Juniper.junos
     connection: local
     gather_facts: no
-  
-    tasks:
-    - name: Retrieve configuration from Junos devices
-      junos_get_config:
-      dest: "/var/lib/awx/custom-venv/junos/configs"
-      format: text
+
+  - name: Retrieve configuration from Junos devices
+    junos_get_config:
+    dest: "/var/lib/awx/custom-venv/junos/configs"
+    format: text
+
