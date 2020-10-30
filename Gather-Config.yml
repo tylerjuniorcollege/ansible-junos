@@ -1,71 +1,19 @@
 ---
-- name: create configuration_backup directories
-  hosts: AnsibleTest
-  gather_facts: no
-  tasks:
-
-- name: Collect configuration from devices
-- name: Get device facts and configuration
-  hosts: AnsibleTest
-  roles:
+ - name: Retrieve configuration from Junos devices
+   hosts: EX4200
+   roles:
     - Juniper.junos
-  connection: local
-  gather_facts: no
-  tasks:
-
-  - name: Collect configuration in text format from devices
-    junos_facts:
-      gather_subset: config
-      config_format: text
-    register: "result_text"
-
-  - name: copy collected configuration in configuration/text directory
-    copy: 
-      content: "{{ result_text.ansible_facts.ansible_net_config }}" 
-      dest: "/var/lib/awx/custom-venv/junos/configs"
-      
-#  - name: Collect configuration in set format from devices
-    junos_facts:
-      gather_subset: config
-      config_format: set
-      provider: "{{ credentials }}"
-    register: "result_set"
-
-#  - name: copy collected configuration in configuration/set directory
-    copy:
-      content: "{{ result_set.ansible_facts.ansible_net_config }}"
-      dest: "{{ playbook_dir }}/configuration/set/{{ inventory_hostname }}.set"
-
- # - name: Collect configuration in json format from devices
-    junos_facts:
-      gather_subset: config
-      config_format: json
-      provider: "{{ credentials }}"
-    register: "result_json"
-
- # - name: copy collected configuration in configuration/json directory
-    copy:
-      content: "{{ result_json.ansible_facts.ansible_net_config }}"
-      dest: "{{ playbook_dir }}/configuration/json/{{ inventory_hostname }}.json"
-
-#  - name: Collect configuration in xml format from devices
-    junos_facts:
-      gather_subset: config
-      config_format: xml
-      provider: "{{ credentials }}"
-    register: "result_xml"
-
-#  - name: copy collected configuration in configuration/xml directory
-    copy:
-      content: "{{ result_xml.ansible_facts.ansible_net_config }}"
-      dest: "{{ playbook_dir }}/configuration/xml/{{ inventory_hostname }}.xml"
-  tasks:
-    - name: Retrieve device facts and configuration and save facts to file
-      juniper_junos_facts:        
-        savedir: "/var/lib/awx/projects/configuration/Junos"
-        config_format: "text"
-      register: result
-
-    - name: Print configuration
-      debug:
-        var: result.ansible_facts.junos.config
+   connection: local
+   gather_facts: no
+   vars_files:
+    - "{{playbook_dir}}/vars.yml"
+   tasks:
+   - name: Retrieve configuration from Junos devices
+     junos_get_config:
+      host: "{{ junos_host }}"
+      user: "{{ USERNAME }}"
+      passwd: "{{ DEVICE_PASSWORD }}"
+      dest: "{{ playbook_dir }}/configs/{{ inventory_hostname }}.conf"
+      format: text
+      logfile: "{{ playbook_dir }}/junos_get_config.log"
+      filter: system
