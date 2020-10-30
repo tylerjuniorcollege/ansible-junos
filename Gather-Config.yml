@@ -6,7 +6,7 @@
 
 - name: Collect configuration from devices
 - name: Get device facts and configuration
-  hosts: Junos_all
+  hosts: AnsibleTest
   roles:
     - Juniper.junos
   connection: local
