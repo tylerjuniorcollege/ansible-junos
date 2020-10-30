@@ -4,32 +4,32 @@
   gather_facts: no
   tasks:
 
-   - name: Collect configuration from devices
-   - name: Get device facts and configuration
-     hosts: Junos_all
-     roles:
-     - Juniper.junos
-     connection: local
-     gather_facts: no
+  - name: Collect configuration from devices
+  - name: Get device facts and configuration
+    hosts: Junos_all
+    roles:
+    - Juniper.junos
+    connection: local
+    gather_facts: no
   
 
-   - name: Collect configuration in text format from devices
-     junos_facts:
-      gather_subset: config
-      config_format: text
-     register: "result_text"
+  - name: Collect configuration in text format from devices
+    junos_facts:
+    gather_subset: config
+    config_format: text
+    register: "result_text"
 
-   - name: copy collected configuration in configuration/text directory
-     copy: 
-      content: "{{ result_text.ansible_facts.ansible_net_config }}" 
-      dest: "/var/lib/awx/custom-venv/junos/configs"
+  - name: copy collected configuration in configuration/text directory
+    copy: 
+    content: "{{ result_text.ansible_facts.ansible_net_config }}" 
+    dest: "/var/lib/awx/custom-venv/junos/configs"
 
-   - name: Retrieve device facts and configuration and save facts to file
-     juniper_junos_facts:        
-      savedir: "/var/lib/awx/custom-venv/junos/configs"
-      config_format: "text"
-      register: result
+  - name: Retrieve device facts and configuration and save facts to file
+    juniper_junos_facts:        
+    savedir: "/var/lib/awx/custom-venv/junos/configs"
+    config_format: "text"
+    register: result
 
-   - name: Print configuration
-     debug:
-     var: result.ansible_facts.junos.config
+  - name: Print configuration
+    debug:
+    var: result.ansible_facts.junos.config
