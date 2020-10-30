@@ -5,6 +5,7 @@
   gather_facts: no
 
   tasks: 
+  
   - name: Retrieve configuration from Junos devices
     roles:
        - Juniper.junos
