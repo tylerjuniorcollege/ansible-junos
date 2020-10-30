@@ -14,7 +14,7 @@
   
 
   - name: Collect configuration in text format from devices
-    junos_facts:
+    juniper_junos_facts:
     gather_subset: config
     config_format: text
     register: "result_text"
