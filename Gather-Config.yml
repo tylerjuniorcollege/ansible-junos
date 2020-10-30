@@ -9,7 +9,7 @@
   tasks:
     - name: Retrieve device facts and configuration and save facts to file
       juniper_junos_facts:        
-        savedir: "/var/lib/awx/projects/configuration/Junos"
+        savedir: "/var/lib/awx/custom-venv/junos/configs"
         config_format: "text"
       register: result
 
