@@ -11,14 +11,13 @@
     OS_version: "20.2R1-S2.1"
     OS_package: "junos-arm-32-20.2R1-S2.1.tgz"
     pkg_dir: "/var/lib/awx/custom-venv/junos/Firmware"
-    log_dir: "/var/log/ansible"
     netconf_port: 830
     wait_time: 3600
 
   tasks:
     - name: Checking NETCONF connectivity
       wait_for: 
-        host: "{{ inventory_hostname }}" 
+        host: "{{ ansible_host }}" 
         port: "{{ netconf_port }}"
         timeout: 5
 
@@ -28,7 +27,6 @@
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: true
         validate: no
-        logfile: "{{ log_dir }}/software.log"
       register: sw
       notify:
       - wait_reboot
@@ -40,7 +38,7 @@
   handlers:
     - name: wait_reboot
       wait_for: 
-        host: "{{ inventory_hostname }}"
+        host: "{{ ansible_host }}"
         port: "{{ netconf_port }}"
         timeout: "{{ wait_time }}"
       when: not sw.check_mode
