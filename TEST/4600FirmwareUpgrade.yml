@@ -18,7 +18,7 @@
       wait_for: 
         host: "{{ ansible_host }}" 
         port: "{{ netconf_port }}"
-        timeout: 10
+        timeout: 20
 
     - name: Install Junos OS package
       juniper_junos_software:
