@@ -1,6 +1,6 @@
 ---
 - name: Install Junos OS - EX3400
-  hosts: EX3400
+  hosts: Junos_Test
   roles:
     - Juniper.junos 
   connection: local
