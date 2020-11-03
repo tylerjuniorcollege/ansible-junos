@@ -26,7 +26,6 @@
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: true
-        validate: no
       register: sw
       notify:
       - wait_reboot
