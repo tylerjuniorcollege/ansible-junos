@@ -1,6 +1,6 @@
 ---
-- name: Install Junos OS - EX4600
-  hosts: EX4600
+- name: Install Junos OS - EX3400
+  hosts: EX3400
   roles:
     - Juniper.junos 
   connection: local
