@@ -27,7 +27,7 @@
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         force_host: yes
         no_copy: yes
-      reboot: true
+        reboot: true
       register: sw
       notify:
       - wait_reboot
