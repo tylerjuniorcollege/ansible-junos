@@ -2,12 +2,13 @@
 ---
 - name: Update firmware on VC
   hosts: Junos_Test
-  connection: local
+  connection: netconf
   gather_facts: no
   tasks: 
 
   - name: install local package on remote device without rebooting
-    junipernetworks.junos.junos_package:
+    junos_package:
     src: "/var/lib/awx/custom-venv/junos/Firmware/jinstall-host-ex-4600-20.2R1-S2.1-signed.tgz"
+    force_host: yes
     no_copy: yes
- 
+    reboot: yes
