@@ -1,10 +1,12 @@
 ---
-- name: Update firmware on VC
+- name: Install Junos OS - EX3400
   hosts: Junos_Test
+  roles:
+    - Juniper.junos 
   connection: local
   gather_facts: no
+  
   tasks: 
-
   - name: install local package on remote device without rebooting
     junipernetworks.junos.junos_package:
     src: "/tftproot/junos-arm-32-20.2R1-S2.1.tgz"
