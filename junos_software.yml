@@ -23,10 +23,10 @@
 
     - name: Install Junos OS package
       juniper_junos_software:
+        force_host: yes
+        no_copy: yes
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        force_host: yes
-        no_copy: true
         reboot: true
       register: sw
       notify:
