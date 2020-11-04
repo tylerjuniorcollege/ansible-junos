@@ -1,24 +1,13 @@
 
 ---
-- name: upgrade junos
-  hosts: AnsibleTest
-  gather_facts: no
+- name: Update firmware on VC
+  hosts: Junos_Test
   connection: local
+  gather_facts: no
+  tasks: 
 
-  vars: 
-    ansible_connection: netconf
-  #  ansible_python_interpreter: "{{'usr/bin/python3.6'}}"
-    ansible_command_timeout: 60
-    
-  tasks:
-
-  - set_fact:
-      #ansible_python_interpreter: '{{ ansible_playbook_python }}'
-    delegate_to: localhost    
-    delegate_facts: true
-
-  - name: install local package on remote device and reboot the device
-    junos_package:
-      src: "{{playbook_dir}}/jinstall-junos-arm-32-20.2R1-S2.1.tgz"
-      reboot: true
-      version: 20.2R1-S2.1
+  - name: install local package on remote device without rebooting
+    junipernetworks.junos.junos_package:
+    src: "/var/lib/awx/custom-venv/junos/Firmware/jinstall-host-ex-4600-20.2R1-S2.1-signed.tgz"
+    no_copy: yes
+ 
