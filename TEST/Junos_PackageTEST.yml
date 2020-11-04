@@ -1,5 +1,5 @@
 ---
-- name: Install Junos OS - EX3400
+- name: Install Junos OS - EX4600
   hosts: Junos_Test
   connection: local
   gather_facts: no
@@ -7,7 +7,7 @@
   tasks: 
   - name: install local package on remote device without rebooting
     junipernetworks.junos.junos_package:
-    src: "/tftproot/junos-arm-32-20.2R1-S2.1.tgz"
+    src: "var/lib/awx/custom-venv/junos/Firmware/jinstall-host-ex-4600-20.2R1-S2.1-signed.tgz"
     force_host: yes
     no_copy: yes
     reboot: yes
