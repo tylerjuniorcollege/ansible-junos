@@ -13,8 +13,6 @@
     pkg_dir: "/var/lib/awx/custom-venv/junos/Firmware"
     netconf_port: 830
     wait_time: 3600
-    force_host: yes
-    no_copy: yes
 
   tasks:
     - name: Checking NETCONF connectivity
@@ -27,7 +25,9 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        reboot: true
+        force_host: yes
+        no_copy: yes
+      reboot: true
       register: sw
       notify:
       - wait_reboot
