@@ -26,7 +26,6 @@
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         force_host: yes
-        no_copy: yes
         reboot: true
       register: sw
       notify:
