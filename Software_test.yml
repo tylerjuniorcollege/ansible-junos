@@ -9,7 +9,7 @@
   vars:
     OS_version: "20.2R1-S2.1"
     OS_package: "junos-arm-32-20.2R1-S2.1.tgz"
-    pkg_dir: "tftproot/junos-arm-32-20.2R1-S2.1.tgz"
+    pkg_dir: "/tftproot/"
     netconf_port: 830
     wait_time: 3600
 
