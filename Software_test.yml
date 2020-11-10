@@ -5,6 +5,10 @@
   gather_facts: no
   roles:
     - Juniper.junos
+    
+  vars: 
+    force_host: yes
+    no_copy: yes
 
   tasks:
     - name: Execute a basic Junos software upgrade.
