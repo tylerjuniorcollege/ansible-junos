@@ -1,43 +1,16 @@
 ---
-- name: Install Junos OS
+- name: Examples of juniper_junos_software
   hosts: Junos_all
-  roles:
-    - Juniper.junos 
   connection: local
   gather_facts: no
-  
-  vars:
-    OS_version: "20.2R1-S2.1"
-    OS_package: "junos-arm-32-20.2R1-S2.1.tgz"
-    pkg_dir: "tftproot/"
-    netconf_port: 830
-    wait_time: 3600
+  roles:
+    - Juniper.junos
 
   tasks:
-    - name: Checking NETCONF connectivity
-      wait_for: 
-        host: "{{ ansible_host }}" 
-        port: "{{ netconf_port }}"
-        timeout: 5
-
-    - name: Install Junos OS package
+    - name: Execute a basic Junos software upgrade.
       juniper_junos_software:
-        version: "{{ OS_version }}"
-        local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        reboot: true
-        validate: true
-      register: sw
-      notify:
-      - wait_reboot
-
-    - name: Print response
+        local_package: "tftproot/junos-arm-32-20.2R1-S2.1.tgz"
+      register: response
+    - name: Print the complete response.
       debug:
         var: response
-
-  handlers:
-    - name: wait_reboot
-      wait_for: 
-        host: "{{ inventory_hostname }}"
-        port: "{{ netconf_port }}"
-        timeout: "{{ wait_time }}"
-      when: not sw.check_mode
