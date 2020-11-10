@@ -2,7 +2,7 @@
 - name: Install Junos OS
   hosts: Junos_all
   roles:
-    - Juniper.junos 
+    - junipernetworks.junos 
   connection: netconf
   gather_facts: no
 
