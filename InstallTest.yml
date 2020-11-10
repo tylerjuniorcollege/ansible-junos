@@ -11,9 +11,3 @@
     - name: Install
       junos_command:
         commands: request system software add force no-copy /var/tmp/junos-arm-32-20.2R1-S2.1.tgz
-
-
-  tasks:
-    - name: Retrieve Junos OS version
-      junos_command:
-        commands: show version
