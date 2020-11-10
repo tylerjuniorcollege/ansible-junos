@@ -7,8 +7,8 @@
   gather_facts: no
   
   vars:
-      netconf_port: 830
-      wait_time: 3600
+    netconf_port: 830
+    wait_time: 3600
 
   tasks:
    - name: install local package on remote device without rebooting
