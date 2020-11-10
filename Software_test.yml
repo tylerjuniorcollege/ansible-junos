@@ -6,17 +6,13 @@
   roles:
     - Juniper.junos
     
-  vars: 
-    force_host: yes
-    no_copy: yes
-    cleanfs: yes
 
   tasks:
     - name: Execute a basic Junos software upgrade.
       juniper_junos_software:
-        local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
-        force_host: yes
         cleanfs: yes
+        force_host: yes
+        local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
       register: response
     - name: Print the complete response.
       debug:
