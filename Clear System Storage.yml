@@ -9,6 +9,6 @@
 
 
   tasks: 
-    - name: System storage cleanup
+    - name: Delete Snap
       junos_command:
-        commands: request system storage cleanup all-members no-confirm | no-more
+        commands: request system snapshot delete * all-members
