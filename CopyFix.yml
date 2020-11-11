@@ -2,6 +2,7 @@
 - name: Not Enough Space Error
   hosts: Junos_all
   gather_facts: no
+  ansible_connection: local
 
     
   #vars:
@@ -14,5 +15,6 @@
       host: "{{ ansible_host }}"
       src: /var/lib/awx/custom-venv/junos/Firmware/os-package.tgz
       dest: var/tmp/
+      provider: "{{ cli }}"
       
  
