@@ -15,6 +15,6 @@
       host: "{{ ansible_host }}"
       src: /var/lib/awx/custom-venv/junos/Firmware/os-package.tgz
       dest: var/tmp/
-      provider: "{{ cli }}"
+      provider: "netconf"
       
  
