@@ -1,5 +1,5 @@
 ---
-- name: Not Enough Space Error
+- name: Not Enough Space Error - EX3400
   hosts: Junos_all
   connection: local
   gather_facts: no
@@ -7,7 +7,7 @@
     - Juniper.junos
 
   tasks:
-   - name: Not Enough Space Error
+   - name: Install OS package
      juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        reboot: no
@@ -16,7 +16,7 @@
      debug:
        var: response
 
-   - name: Not Enough Space Error - Hooks
+   - name: Install Hooks
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
         reboot: no
@@ -25,7 +25,7 @@
      debug:
        var: response
 
-   - name: Not Enough Space Error - Junos OS
+   - name: Install Junos OS
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
         reboot: yes
