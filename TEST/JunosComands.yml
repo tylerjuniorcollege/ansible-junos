@@ -1,0 +1,20 @@
+---
+- name: adding command
+  hosts: Junos_all
+  gather_facts: yes
+
+  vars:
+    ansible_connection: netconf
+    ansible_command_timeout: 60
+
+
+  tasks:
+    - name: adding os-package
+      junos_command:
+        commands: "request system software add /var/tmp/os-package.tgz"
+        
+  tasks:
+    - name: adding hooks
+      junos_command:
+        commands: "request system software add /var/tmp/package-hooks-ex.tgz"  
+        
