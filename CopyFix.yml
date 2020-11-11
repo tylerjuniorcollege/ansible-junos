@@ -1,14 +1,13 @@
 ---
 - name: Not Enough Space Error
   hosts: Junos_all
-  connection: local
   gather_facts: no
   roles:
     - Juniper.junos
     
   vars:
     ansible_connection: netconf
-    host: ansible_host
+  
 
   tasks: 
    - name: Copy OS Package
