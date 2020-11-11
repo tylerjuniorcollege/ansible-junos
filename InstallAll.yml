@@ -1,0 +1,35 @@
+---
+- name: Not Enough Space Error
+  hosts: Junos_all
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+
+  tasks:
+   - name: Not Enough Space Error
+     juniper_junos_software:
+       local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
+       reboot: no
+     register: response  
+   - name: Print the complete response.
+     debug:
+       var: response
+
+   - name: Not Enough Space Error - Hooks
+     juniper_junos_software:
+        local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
+        reboot: no
+     register: response
+   - name: Print the complete response.
+     debug:
+       var: response
+
+   - name: Not Enough Space Error - Junos OS
+     juniper_junos_software:
+        local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
+        reboot: no
+     register: response
+   - name: Print the complete response.
+     debug:
+       var: response
