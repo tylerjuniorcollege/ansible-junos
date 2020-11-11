@@ -12,6 +12,8 @@
   tasks: 
    - name: Copy OS Package
      junos_scp:
+      host: "{{ ansible_host }}"
       src: /var/lib/awx/custom-venv/junos/Firmware/os-package.tgz
       dest: var/tmp/
+      
  
