@@ -5,8 +5,8 @@
   roles:
     - Juniper.junos
     
-  vars:
-    ansible_connection: netconf
+  #vars:
+   # ansible_connection: netconf
   
 
   tasks: 
