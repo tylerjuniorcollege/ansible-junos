@@ -5,10 +5,13 @@
   gather_facts: no
   roles:
     - Juniper.junos
+    
+  vars:
+    ansible_connection: netconf
+    host: ansible_host
 
   tasks: 
    - name: Copy OS Package
-     host: AnsibleTest_3400
      junos_scp:
       src: /var/lib/awx/custom-venv/junos/Firmware/os-package.tgz
       dest: var/tmp/
