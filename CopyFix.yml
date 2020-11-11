@@ -2,8 +2,7 @@
 - name: Not Enough Space Error
   hosts: Junos_all
   gather_facts: no
-  roles:
-    - Juniper.junos
+
     
   #vars:
    # ansible_connection: netconf
