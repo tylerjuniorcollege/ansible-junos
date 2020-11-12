@@ -25,7 +25,6 @@
         version: "{{ OS_version }}"
         kwargs:
           unlink: true
-        no_copy: true
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: true
         
