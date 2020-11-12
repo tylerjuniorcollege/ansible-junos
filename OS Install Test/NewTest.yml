@@ -31,7 +31,6 @@
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: true
         validate: no
-        force_host: yes
       register: sw
       notify:
       - wait_reboot
