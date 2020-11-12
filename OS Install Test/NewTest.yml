@@ -28,6 +28,7 @@
         kwargs:
           unlink: true
           force_host: yes
+          no_copy: true
         reboot: true
         validate: no
       register: sw
