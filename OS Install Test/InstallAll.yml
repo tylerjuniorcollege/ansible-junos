@@ -12,6 +12,7 @@
      juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        reboot: no
+       no_copy: yes
      register: response  
    - name: Print the complete response.
      debug:
