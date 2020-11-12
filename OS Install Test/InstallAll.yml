@@ -11,6 +11,7 @@
    - name: Install OS package
      juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
+       cleanfs: false
        reboot: no
        no_copy: yes
      register: response  
