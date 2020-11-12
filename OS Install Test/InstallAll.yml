@@ -9,6 +9,8 @@
   tasks:
    - name: Install OS package
      juniper_junos_software:
+       force_host: yes
+       cleanfs: yes
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        reboot: no
      register: response  
