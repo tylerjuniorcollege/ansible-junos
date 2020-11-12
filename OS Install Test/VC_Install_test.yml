@@ -22,6 +22,7 @@
 
     - name: Install OS package
       juniper_junos_software:
+       cleanfs: yes
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        reboot: no
       register: response  
@@ -40,7 +41,6 @@
 
     - name: Install Junos OS package
       juniper_junos_software:
-        cleanfs: yes
         validate: no
         force_host: yes
         version: "{{ OS_version }}"
