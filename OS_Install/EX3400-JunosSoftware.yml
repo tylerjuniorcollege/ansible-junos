@@ -23,8 +23,12 @@
     - name: Install Junos OS package
       juniper_junos_software:
         version: "{{ OS_version }}"
+        kwargs:
+          unlink: true
+        no_copy: true
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: true
+        
         validate: no
         force_host: yes
       register: sw
