@@ -27,7 +27,6 @@
         kwargs:
           unlink: true
           force_host: yes
-          no_copy: true
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: true
         validate: no
