@@ -8,15 +8,15 @@
     
 
   tasks:
-    - name: Execute a basic Junos software upgrade.
+    - name: Install Junos OS
       juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
-        cleanfs: yes
-        force_host: yes
         reboot: yes
-        kwargs:
-          unlink: true
+        kwargs: 
+         unlink: true
+         force_host: yes
+         no_copy: yes
       register: response
-    - name: Print the complete response.
+    - name: Print the response
       debug:
         var: response
