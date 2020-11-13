@@ -9,7 +9,7 @@
   tasks:
    - name: Install Junos OS
      juniper_junos_software:
-       remote_package: "junos-arm-32-20.2R1-S2.1.tgz"
+       remote_package: "/var/tmp/junos-arm-32-20.2R1-S2.1.tgz"
        no_copy: yes
        reboot: yes
        kwargs:
