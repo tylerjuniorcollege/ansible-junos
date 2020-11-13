@@ -5,17 +5,16 @@
   gather_facts: no
   roles:
     - Juniper.junos
-    
-  vars: 
-    install_timeout: 2000
-    checksum_timeout: 420
-    cleanfs_timeout: 600
 
   tasks:
    - name: Install OS package
      juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        remote_package: "/var/tmp/os-package.tgz"
+       install_timeout: 2000
+       checksum_timeout: 420
+       cleanfs_timeout: 600
+       force_host: yes
        all_re: yes
        cleanfs: yes
        reboot: no
@@ -28,6 +27,10 @@
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
         remote_package: "/var/tmp/package-hooks-ex.tgz"
+        install_timeout: 2000
+        checksum_timeout: 420
+        cleanfs_timeout: 600
+        force_host: yes
         all_re: yes
         reboot: no
      register: response
