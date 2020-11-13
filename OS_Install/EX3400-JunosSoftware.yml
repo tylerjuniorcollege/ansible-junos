@@ -24,7 +24,6 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        cleanfs: no
         force_host: yes
         reboot: true
         validate: no
