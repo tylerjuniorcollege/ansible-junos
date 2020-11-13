@@ -24,6 +24,8 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
+        # nssu only for virtual chassis
+        issu: yes
         nssu: yes
         force_host: yes
         reboot: true
