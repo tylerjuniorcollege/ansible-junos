@@ -10,8 +10,9 @@
     - name: Execute a basic Junos software upgrade 
       juniper_junos_software:
         remote_package: "/dev/gpt/junos/junos-arm-32-20.2R1-S2.1.tgz"
-      kwargs: 
-         unlink: true
+        force_host: yes
+        kwargs: 
+         unlink: yes
       register: response
     - name: Print the complete response.
       debug:
