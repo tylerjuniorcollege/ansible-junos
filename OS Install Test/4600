@@ -1,5 +1,3 @@
-
-
 ---
 - name: Install Junos OS - EX4600
   hosts: Junos_Test
