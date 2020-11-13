@@ -13,10 +13,8 @@
        remote_package: "/var/tmp/os-package.tgz"
        install_timeout: 2000
        checksum_timeout: 420
-       cleanfs_timeout: 600
        force_host: yes
        all_re: yes
-       cleanfs: yes
        reboot: no
      register: response  
    - name: Print the complete response.
@@ -29,7 +27,6 @@
         remote_package: "/var/tmp/package-hooks-ex.tgz"
         install_timeout: 2000
         checksum_timeout: 420
-        cleanfs_timeout: 600
         force_host: yes
         all_re: yes
         reboot: no
