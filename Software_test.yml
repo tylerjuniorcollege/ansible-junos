@@ -1,27 +1,16 @@
 ---
 - name: Examples of juniper_junos_software
-  hosts: Junos_all
+  hosts: Junos_Test
   connection: local
   gather_facts: no
   roles:
     - Juniper.junos
-    
 
   tasks:
-    - name: Install Junos OS
+    - name: Execute a basic Junos software upgrade 
       juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
-        remote_package: "/var/tmp/junos-arm-32-20.2R1-S2.1.tgz"
-        cleanfs: true
-        install_timeout: 2000
-        checksum_timeout: 420
-        cleanfs_timeout: 600
-        reboot: yes
-        force_host: yes
-        kwargs: 
-         unlink: true
-         force_host: yes
       register: response
-    - name: Print the response
+    - name: Print the complete response.
       debug:
         var: response
