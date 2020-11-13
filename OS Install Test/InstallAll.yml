@@ -15,7 +15,7 @@
    - name: Install OS package
      juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
-       remote_package: "/var/tmp/junos-arm-32-20.2R1-S2.1.tgz"
+       remote_package: "/var/tmp/os-package.tgz"
        cleanfs: yes
        reboot: no
      register: response  
@@ -26,7 +26,7 @@
    - name: Install Hooks
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
-        remote_package: "/var/tmp/junos-arm-32-20.2R1-S2.1.tgz"
+        remote_package: "/var/tmp/package-hooks-ex.tgz"
         reboot: no
      register: response
    - name: Print the complete response.
