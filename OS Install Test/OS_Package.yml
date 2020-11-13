@@ -9,7 +9,7 @@
   tasks:
    - name: Install Junos OS
      juniper_junos_software:
-       local_package: "/var/tmp/os-package.tgz"
+       local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        all_re: yes
        cleanfs: no
        reboot: yes
