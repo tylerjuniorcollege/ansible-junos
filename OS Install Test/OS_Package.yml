@@ -11,6 +11,7 @@
      juniper_junos_software:
        remote_package: "/var/tmp/os-package.tgz"
        cleansfs: no
+       no_copy: no
        reboot: yes
        kwargs:
           unlink: true
