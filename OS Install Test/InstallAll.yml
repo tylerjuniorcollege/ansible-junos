@@ -5,11 +5,17 @@
   gather_facts: no
   roles:
     - Juniper.junos
+    
+  vars: 
+    install_timeout: 2000
+    checksum_timeout: 420
+    cleanfs_timeout: 600
 
   tasks:
    - name: Install OS package
      juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
+       remote_package: "/var/tmp/junos-arm-32-20.2R1-S2.1.tgz"
        cleanfs: yes
        reboot: no
      register: response  
@@ -20,6 +26,7 @@
    - name: Install Hooks
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
+        remote_package: "/var/tmp/junos-arm-32-20.2R1-S2.1.tgz"
         reboot: no
      register: response
    - name: Print the complete response.
@@ -29,6 +36,7 @@
    - name: Install Junos OS
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
+        remote_package: "/var/tmp/junos-arm-32-20.2R1-S2.1.tgz"
         force_host: true
         kwargs: 
          unlink: true
