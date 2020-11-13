@@ -10,6 +10,7 @@
    - name: Install OS package
      juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
+       force_host: yes
        reboot: no
      register: response  
    - name: Print the complete response.
@@ -19,6 +20,7 @@
    - name: Install Hooks
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
+        force_host: yes
         reboot: no
      register: response
    - name: Print the complete response.
@@ -29,6 +31,7 @@
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
         reboot: yes
+        force_host: yes
         kwargs:
           unlink: true
         register: response
