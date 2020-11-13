@@ -31,7 +31,7 @@
         reboot: yes
         kwargs:
           unlink: true
-      register: response
+        register: response
    - name: Print the complete response.
      debug:
        var: response
