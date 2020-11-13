@@ -12,9 +12,7 @@
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        all_re: yes
        cleanfs: no
-       reboot: yes
-       kwargs:
-          unlink: true
+       reboot: no
      register: response
    - name: Print the complete response.
      debug:
