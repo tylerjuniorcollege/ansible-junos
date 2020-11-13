@@ -10,6 +10,7 @@
    - name: Install Junos OS
      juniper_junos_software:
        remote_package: "/var/tmp/junos-arm-32-20.2R1-S2.1.tgz"
+       force_host: yes
        all_re: yes
        no_copy: yes
        reboot: yes
