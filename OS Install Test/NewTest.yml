@@ -26,6 +26,9 @@
         reboot: true
         validate: no
         force_host: yes
+        kwargs:
+          unlink: yes
+        cleanfs: yes
       register: sw
       notify:
       - wait_reboot
