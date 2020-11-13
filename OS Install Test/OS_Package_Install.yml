@@ -7,10 +7,16 @@
     - Juniper.junos
 
   tasks:
-    - name: OS_Package
-      juniper_junos_software:
-        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
-      register: response
-    - name: Print the complete response.
-      debug:
-        var: response
+   - name: Install OS package
+     juniper_junos_software:
+       local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
+       remote_package: "/var/tmp/os-package.tgz"
+       install_timeout: 2000
+       checksum_timeout: 420
+       force_host: yes
+       all_re: yes
+       reboot: no
+     register: response  
+   - name: Print the complete response.
+     debug:
+       var: response
