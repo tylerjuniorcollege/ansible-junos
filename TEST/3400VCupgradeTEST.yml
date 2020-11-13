@@ -24,7 +24,7 @@
       juniper_junos_software:
         cleanfs: true
         force_host: yes
-        version: "{{ OS_version }}
+        version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         kwargs:
           unlink: true
