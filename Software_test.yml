@@ -10,6 +10,9 @@
     - name: Execute a basic Junos software upgrade 
       juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
+      no_copy: yes
+      reboot: yes
+      nssu: yes
       register: response
     - name: Print the complete response.
       debug:
