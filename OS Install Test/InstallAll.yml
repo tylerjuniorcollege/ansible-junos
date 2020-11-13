@@ -15,6 +15,7 @@
    - name: Install OS package
      juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
+       all_re: yes
        remote_package: "/var/tmp/os-package.tgz"
        cleanfs: yes
        reboot: no
@@ -27,6 +28,7 @@
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
         remote_package: "/var/tmp/package-hooks-ex.tgz"
+        all_re: yes
         reboot: no
      register: response
    - name: Print the complete response.
@@ -37,7 +39,8 @@
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
         remote_package: "/var/tmp/junos-arm-32-20.2R1-S2.1.tgz"
-        force_host: true
+        all_re: yes
+        force_host: yes
         kwargs: 
          unlink: true
         reboot: yes
@@ -45,3 +48,4 @@
    - name: Print the complete response.
      debug:
        var: response
+
