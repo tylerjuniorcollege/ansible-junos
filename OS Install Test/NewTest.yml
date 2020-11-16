@@ -22,7 +22,6 @@
       junipernetworks.junos.junos_package:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        all_re: yes
         force_host: yes
         reboot: true
         validate: no
