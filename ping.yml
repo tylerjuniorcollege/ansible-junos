@@ -2,6 +2,7 @@
 - name: Examples of juniper_junos_ping
   hosts: Junos_all
   gather_facts: no
+  connection: local
 
   vars:
     ansible_command_timeout: 60
