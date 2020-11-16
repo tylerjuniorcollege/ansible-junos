@@ -1,6 +1,8 @@
 ---
 - name: Upgrade a Junios Device
   hosts: Junos_Test
+  gather_facts: no
+  
 
 
   tasks:
