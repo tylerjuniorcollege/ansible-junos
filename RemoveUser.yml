@@ -3,12 +3,14 @@
   hosts: Junos_all
   connection: local
   gather_facts: no
+  roles:
+    - Juniper.junos
    
   tasks:
 
-- name: Delete list of users
-  junos_user:
-    aggregate:
+  - name: Delete list of users
+    junos_user:
+      aggregate:
       - {name: shane, full_name: shane, role: super-user, state: absent}
       - {name: donald, full_name: donald, role: super-user, state: absent}
       - {name: dcal, full_name: donald, role: super-user, state: absent}
