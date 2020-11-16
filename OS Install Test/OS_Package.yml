@@ -9,7 +9,7 @@
   tasks:
    - name: Install Junos OS
      juniper_junos_software:
-       remote_package: /var/lib/awx/custom-venv/junos/Firmware/os-package.tgz
+       local_package: /var/lib/awx/custom-venv/junos/Firmware/os-package.tgz
        force_host: yes
        all_re: yes
        reboot: yes
