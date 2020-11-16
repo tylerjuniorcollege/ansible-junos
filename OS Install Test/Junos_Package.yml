@@ -2,6 +2,7 @@
 - name: Upgrade a Junios Device
   hosts: AnsibleTest_VC
   gather_facts: no
+  ansible_ssh_transfer_method: scp
   
   tasks:
    - junos_package:
