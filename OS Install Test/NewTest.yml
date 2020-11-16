@@ -26,7 +26,7 @@
         force_host: yes
         reboot: true
         validate: no
-        timout: 60
+        timeout: 60
       register: sw
       notify:
       - wait_reboot
