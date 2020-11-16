@@ -20,7 +20,6 @@
 
     - name: Install Junos OS package
       junipernetworks.junos.junos_package
-        version: 20.2R1-S2.1
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         force_host: yes
         reboot: true
