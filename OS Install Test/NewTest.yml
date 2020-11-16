@@ -14,7 +14,7 @@
   tasks:
     - name: Checking NETCONF connectivity
       wait_for: 
-        host: "{{ ansible_host }}" 
+        host: AnsibleTest_VC
         port: "{{ netconf_port }}"
         timeout: 5
         
