@@ -1,8 +1,6 @@
 ---
 - name: Install Junos OS - EX3400
   hosts: Junos_Test
-  roles:
-    - Juniper.junos 
   connection: netconf
   gather_facts: no
   
@@ -21,11 +19,10 @@
         timeout: 5
 
     - name: Install Junos OS package
-      juniper_junos_software:
+      junipernetworks.junos.junos_package
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         force_host: yes
-        cleanfs: no
         reboot: true
         validate: no
       register: sw
