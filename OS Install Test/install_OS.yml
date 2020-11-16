@@ -6,8 +6,8 @@
   connection: netconf
   gather_facts: no
   
-- junos_install_os:
-    host: ansible_host
+- juniper_junos_software:
+    host: {ansible_host }
     version: 20.2R1-S2.1
     package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
     force_host: yes
