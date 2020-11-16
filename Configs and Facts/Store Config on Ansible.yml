@@ -1,5 +1,5 @@
 ---
-- name: create configuration_backup directories
+- name: Gather Configuration
   hosts: Junos_all
   gather_facts: no
   connection: local
