@@ -17,9 +17,10 @@
         host: "{{ ansible_host }}" 
         port: "{{ netconf_port }}"
         timeout: 5
-
+        
     - name: Install Junos OS package
       junipernetworks.junos.junos_package:
+        host: "{{ ansible_host }}"
         version: "{{ OS_version }}"
         src: "{{ pkg_dir }}/{{ OS_package }}"
         force_host: yes
