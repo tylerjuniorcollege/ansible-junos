@@ -24,7 +24,7 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        remote_package: "/var/tmp/os-package.tgz"
+        remote_package: "/var/tmp/junos-arm-32-20.2R1-S2.1.tgz"
         all_re: yes
         force_host: yes
         reboot: true
