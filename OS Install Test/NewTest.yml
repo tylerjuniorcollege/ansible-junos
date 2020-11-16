@@ -16,7 +16,7 @@
       wait_for: 
         host: AnsibleTest_VC
         port: "{{ netconf_port }}"
-        timeout: 5
+        timeout: 10
         
     - name: Install Junos OS package
       junipernetworks.junos.junos_package:
