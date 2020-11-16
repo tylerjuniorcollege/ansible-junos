@@ -21,7 +21,7 @@
     - name: Install Junos OS package
       junipernetworks.junos.junos_package:
         version: "{{ OS_version }}"
-        local_package: "{{ pkg_dir }}/{{ OS_package }}"
+        src: "{{ pkg_dir }}/{{ OS_package }}"
         force_host: yes
         reboot: true
         validate: no
