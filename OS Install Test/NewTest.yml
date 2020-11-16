@@ -10,5 +10,6 @@
       junipernetworks.junos.junos_package:
         src: /var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz
         provider: network_cli
+        connection: local
         force_host: yes
         reboot: yes
