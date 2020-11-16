@@ -1,6 +1,6 @@
 ---
 - name: Install Junos OS - EX3400
-  hosts: Junos_Test
+  hosts: AnsibleTest_Vc
   connection: netconf
   gather_facts: no
   
