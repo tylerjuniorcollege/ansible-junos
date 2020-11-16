@@ -20,7 +20,7 @@
 
     - name: Install Junos OS package
       junipernetworks.junos.junos_package
-        local_package: "{{ pkg_dir }}/{{ OS_package }}"
+        local_package: /var/lib/awx/custom-venv/junos/Firmware
         force_host: yes
         reboot: true
         validate: no
