@@ -4,25 +4,10 @@
   connection: netconf
   gather_facts: no
   
-  vars:
-    OS_version: 20.2R1-S2.1
-    OS_package: junos-arm-32-20.2R1-S2.1.tgz
-    pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
-    host: ansibleTest_VC
   tasks:
 
-    - name: Install Junos OS package
+    - name: install local package on remote device
       junipernetworks.junos.junos_package:
-        version: "{{ OS_version }}"
-        src: "{{ pkg_dir }}/{{ OS_package }}"
+        src: /var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz
         force_host: yes
-        reboot: true
-        validate: no
-      register: sw
-      notify:
-      - wait_reboot
-
-    - name: Print response
-      debug:
-        var: response
-
+        reboot: yes
