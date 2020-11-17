@@ -1,2 +1,7 @@
 ---
-- name: Juniper.junos
+roles: 
+  - name: Juniper.junos
+
+collections: 
+  - name: junipernetworks.junos
+  - name: juniper
