@@ -3,5 +3,5 @@ roles:
   - name: Juniper.junos
 
 collections: 
-  - name: junipernetworks
+  - name: junipernetworks.junos
   - name: juniper
