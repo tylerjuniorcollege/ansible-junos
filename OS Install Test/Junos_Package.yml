@@ -6,9 +6,9 @@
 
   tasks:
   - name: install local package on remote device and reboot the device
-     junos_package:
-      src: /var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz
-      force_host: yes
-      reboot: true
-      provider: netconf
-      version: 20.2R1-S2.1
+    junos_package:
+     src: /var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz
+     force_host: yes
+     reboot: true
+     provider: netconf
+     version: 20.2R1-S2.1
