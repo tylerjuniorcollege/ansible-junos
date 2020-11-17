@@ -28,6 +28,7 @@
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         remote_location: /mfs/junos-arm-32-20.2R1-S2.1.tgz
         all_re: yes
+        no_copy: no
         force_host: yes
         reboot: true
         validate: no
