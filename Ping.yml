@@ -1,8 +1,0 @@
----
-- name: Test reachability to 10.40.40.40 setting count and interface
-  junipernetworks.junos.junos_ping:
-    dest: 10.40.40.40
-    interface: fxp0
-    count: 20
-    size: 512
-Return Va
