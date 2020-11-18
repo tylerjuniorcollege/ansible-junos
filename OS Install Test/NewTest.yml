@@ -1,5 +1,5 @@
 ---
-- name: Install Junos OS - EX3400
+- name: Install Junos OS - EX3400 Virtual Chassis 
   hosts: Junos_Test
   roles:
     - Juniper.junos 
@@ -28,7 +28,7 @@
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         kwargs: 
           unlink: true
-        nssu: yes
+        nssu: yes # you have to set virtual-chassis preprovisioned 
         force_host: yes
         reboot: yes
       register: sw
