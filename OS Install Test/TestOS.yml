@@ -16,7 +16,6 @@
         kwargs:
           unlink: yes
         reboot: yes
-        validate: no
       register: response
     - name: Print the complete response.
       debug:
