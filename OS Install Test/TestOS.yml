@@ -14,7 +14,7 @@
         nssu: yes
         no_copy: yes
         kwargs:
-          unlink: true
+          unlink: yes
         reboot: yes
         validate: no
       register: response
