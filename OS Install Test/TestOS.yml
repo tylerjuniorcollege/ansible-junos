@@ -1,6 +1,6 @@
 ---
 - name: juniper_junos_software
-  hosts: Junos-Test
+  hosts: Junos_Test
   connection: local
   gather_facts: no
   roles:
