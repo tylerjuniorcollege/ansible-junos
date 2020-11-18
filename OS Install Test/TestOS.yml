@@ -1,48 +1,22 @@
 ---
-- name: Install Junos OS - EX3400
-  hosts: Junos_Test
-  roles:
-    - Juniper.junos 
-  connection: netconf
+- name: juniper_junos_software
+  hosts: Junos-Test
+  connection: local
   gather_facts: no
-  
-  vars:
-    OS_version: 20.2R1-S2.1
-    netconf_port: 830
-    wait_time: 3600
-    install_timeout: 2000
-    checksum_timeout: 420
+  roles:
+    - Juniper.junos
 
   tasks:
-    - name: Checking NETCONF connectivity
-      wait_for: 
-        host: "{{ ansible_host }}" 
-        port: "{{ netconf_port }}"
-        timeout: 20
-
-    - name: Install Junos OS package
+    - name: Execute a basic Junos software upgrade.
       juniper_junos_software:
-        version: "{{ OS_version }}"
-        local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz
-        remote_package: /mfs/junos-arm-32-20.2R1-S2.1.tgz
-        kwargs: 
-          unlink: true
-        no_copy: yes
+        local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
         force_host: yes
-        reboot: true
+        no_copy: yes
+        kwargs:
+          unlink: true
+        reboot: yes
         validate: no
-      register: sw
-      notify:
-      - wait_reboot
-
-    - name: Print response
+      register: response
+    - name: Print the complete response.
       debug:
         var: response
-
-  handlers:
-    - name: wait_reboot
-      wait_for: 
-        host: "{{ ansible_host }}"
-        port: "{{ netconf_port }}"
-        timeout: "{{ wait_time }}"
-      when: not sw.check_mode
