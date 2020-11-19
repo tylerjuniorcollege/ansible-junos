@@ -1,6 +1,6 @@
 ---
 - name: Install Junos OS - EX3400 Virtual Chassis 
-  hosts: Junos_Test
+  hosts: Junos_all
   roles:
     - Juniper.junos 
   connection: netconf
