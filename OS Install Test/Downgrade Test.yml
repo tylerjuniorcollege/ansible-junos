@@ -1,33 +1,36 @@
 ---
-- name: Install Junos OS - EX4600
+- name: Install Junos OS - EX3400 Virtual Chassis 
   hosts: Junos_Test
   roles:
     - Juniper.junos 
-  connection: local
+  connection: netconf
   gather_facts: no
   
   vars:
-    OS_version: "20.2R1-S2.1"
-    OS_package: "jinstall-host-ex-4600-20.2R1-S2.1-signed.tgz"
-    pkg_dir: "/var/lib/awx/custom-venv/junos/Firmware"
+    OS_version: 18.1R3-S3.8
+    OS_package: junos-arm-32-18.1R3-S3.8.tgz
+    pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
     netconf_port: 830
     wait_time: 3600
+    install_timeout: 2000
+    checksum_timeout: 420
 
   tasks:
     - name: Checking NETCONF connectivity
       wait_for: 
         host: "{{ ansible_host }}" 
         port: "{{ netconf_port }}"
-        timeout: 5
+        timeout: 65
 
     - name: Install Junos OS package
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        no_copy: yes
+        kwargs: 
+          unlink: true
+        nssu: yes # you have to set virtual-chassis preprovisioned 
         force_host: yes
-        reboot: true
-        validate: no
+        reboot: yes
       register: sw
       notify:
       - wait_reboot
