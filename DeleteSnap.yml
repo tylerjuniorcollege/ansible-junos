@@ -1,4 +1,4 @@
-  
+---
 - name: Delete Snap
   hosts: Junos_all
   gather_facts: no
