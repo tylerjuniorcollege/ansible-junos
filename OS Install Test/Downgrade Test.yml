@@ -28,7 +28,7 @@
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         kwargs: 
           unlink: true
-        nssu: yes # you have to set virtual-chassis preprovisioned 
+        #nssu: yes # you have to set virtual-chassis preprovisioned 
         force_host: yes
         reboot: yes
       register: sw
