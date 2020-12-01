@@ -28,5 +28,5 @@
           unlink: yes
           reboot: yes
         #nssu: yes # you have to set virtual-chassis preprovisioned
-        install_timeout: 2000
+        install_timeout: 3000
         checksum_timeout: 420
