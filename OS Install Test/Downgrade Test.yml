@@ -26,7 +26,7 @@
         force_host: yes
         kwargs:
           unlink: true
-        reboot: true
+          reboot: yes
         #nssu: yes # you have to set virtual-chassis preprovisioned
         install_timeout: 2000
         checksum_timeout: 420
