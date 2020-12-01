@@ -3,7 +3,7 @@
   hosts: Junos_Test
   roles:
     - Juniper.junos 
-  connection: netconf
+  connection: local
   gather_facts: no
   
   vars:
@@ -11,9 +11,6 @@
     OS_package: junos-arm-32-20.2R1-S2.1.tgz
     pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
     netconf_port: 830
-    wait_time: 3600
-    install_timeout: 2000
-    checksum_timeout: 420
 
   tasks:
     - name: Checking NETCONF connectivity
@@ -31,3 +28,5 @@
         kwargs: 
           unlink: true
           reboot: yes
+        install_timeout: 2000
+        checksum_timeout: 420
