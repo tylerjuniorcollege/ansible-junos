@@ -32,5 +32,5 @@
           reboot: yes
         force_host: yes
         reboot: true
-        install_timeout: 2000
+        install_timeout: 3000
         checksum_timeout: 420
