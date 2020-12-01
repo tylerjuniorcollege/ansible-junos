@@ -27,7 +27,7 @@
         force_host: yes
         reboot: yes
         kwargs: 
-          unlink: true
+          unlink: yes
       register: sw
       notify:
       - wait_reboot
