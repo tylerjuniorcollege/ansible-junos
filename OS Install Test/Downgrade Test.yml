@@ -25,7 +25,7 @@
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         force_host: yes
         kwargs:
-          unlink: true
+          unlink: yes
           reboot: yes
         #nssu: yes # you have to set virtual-chassis preprovisioned
         install_timeout: 2000
