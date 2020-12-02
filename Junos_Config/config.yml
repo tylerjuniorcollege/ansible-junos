@@ -3,8 +3,6 @@
   hosts: Junos_all
   connection: local
   gather_facts: no
-  roles:
-    - Juniper.junos
   
   tasks:
   
