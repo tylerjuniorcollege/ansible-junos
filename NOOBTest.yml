@@ -1,0 +1,24 @@
+---
+- name: Get Device Facts
+ hosts: dc1
+ roles:
+ - Juniper.junos
+ connection: local
+ gather_facts: no
+ vars_prompt:
+ - name: "DEVICE_PASSWORD"
+ prompt: "Device password"
+ private: yes
+ vars:
+ provider_info:
+ host: "{{ inventory_hostname }}"
+ password: "{{ DEVICE_PASSWORD }}"
+ mode: "serial"
+ tasks:
+ - name: Retrieve facts from devices running Junos OS
+ juniper_junos_facts:
+ provider: "{{ provider_info }}"
+ savedir: "{{ playbook_dir }}"
+ - name: Print version
+ debug:
+ var: junos.version
