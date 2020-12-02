@@ -1,11 +1,12 @@
 ---
-- name: Not Enough Space Error - EX3400
+- name: Junos Firmware Install 
   hosts: Junos_all
   connection: local
   gather_facts: no
   roles:
     - Juniper.junos
 
+  ##This installs os-package that helps with the lack of storage space in tmp folder on ex3400##
   tasks:
    - name: Install OS package
      juniper_junos_software:
@@ -15,6 +16,7 @@
        force_host: yes
        reboot: no
 
+  ##This installs package-hooks that help with the lack of storage space in tmp folder on ex3400##
    - name: Install Hooks
      juniper_junos_software:
         local_package: /var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz
@@ -23,6 +25,8 @@
         force_host: yes
         reboot: no
 
+   ##This installs the Junos firmware##
+   ##nssu is used with only preprovisioned virtual chassis##
    - name: Install Junos OS package
      juniper_junos_software:
         version: 20.2R1-S2.1
@@ -32,5 +36,17 @@
           reboot: yes
         force_host: yes
         reboot: true
+        #nssu: yes 
         install_timeout: 3000
         checksum_timeout: 420
+        register: sw
+        notify:
+        - wait_reboot
+
+  handlers: 
+   - name: wait_reboot
+     wait_for:
+       host: ansible_host
+       port: 830
+       timeout: 3600
+     when: not sw.check_mode
