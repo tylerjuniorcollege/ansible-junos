@@ -35,7 +35,7 @@
           unlink: yes
           reboot: yes
         force_host: yes
-        reboot: true
+        reboot: yes
         #nssu: yes 
         install_timeout: 3000
         checksum_timeout: 420
