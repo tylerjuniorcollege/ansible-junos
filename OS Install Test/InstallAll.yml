@@ -36,7 +36,7 @@
           reboot: yes
         force_host: yes
         reboot: true
-        nssu: yes
+        #nssu: yes
         install_timeout: 3000
         checksum_timeout: 420
         register: sw
