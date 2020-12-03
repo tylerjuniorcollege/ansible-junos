@@ -1,7 +1,7 @@
 ---
 - name: Junos Firmware Install 
   hosts: Junos_all
-  connection: local
+  connection: netconf
   gather_facts: no
   roles:
     - Juniper.junos
