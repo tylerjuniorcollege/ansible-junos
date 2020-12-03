@@ -1,6 +1,6 @@
 ---
 - name: Install Junos OS - EX4600
-  hosts: Junos_Test
+  hosts: Junos_all
   roles:
     - Juniper.junos 
   connection: local
