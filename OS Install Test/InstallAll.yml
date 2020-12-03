@@ -1,36 +1,36 @@
 ---
 - name: Junos Firmware Install 
   hosts: Junos_all
-  connection: netconf
+  connection: local
   gather_facts: no
   roles:
     - Juniper.junos
+    
+  vars:
+    netconf_port: 830
+    install_timeout: 2000
+    checksum_timeout: 420
 
-  ##This installs os-package that helps with the lack of storage space in tmp folder on ex3400##
   tasks:
    - name: Install OS package
      juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        force_host: yes
        reboot: no
-
-  ##This installs package-hooks that help with the lack of storage space in tmp folder on ex3400##
+       
    - name: Install Hooks
      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
         force_host: yes
         reboot: no
 
-   ##This installs the Junos firmware##
-   ##nssu is used with only preprovisioned virtual chassis##
    - name: Install Junos OS package
      juniper_junos_software:
         version: "20.2R1-S2.1"
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
         kwargs: 
           unlink: yes
-          reboot: yes
+        nssu: yes
         force_host: yes
         reboot: yes
-        nssu: yes
       
