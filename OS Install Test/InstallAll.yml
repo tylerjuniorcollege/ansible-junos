@@ -10,14 +10,14 @@
   tasks:
    - name: Install OS package
      juniper_junos_software:
-       local_package: /var/lib/awx/custom-venv/junos/Firmware/os-package.tgz
+       local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        force_host: yes
        reboot: no
 
   ##This installs package-hooks that help with the lack of storage space in tmp folder on ex3400##
    - name: Install Hooks
      juniper_junos_software:
-        local_package: /var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz
+        local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
         force_host: yes
         reboot: no
 
@@ -25,8 +25,8 @@
    ##nssu is used with only preprovisioned virtual chassis##
    - name: Install Junos OS package
      juniper_junos_software:
-        version: 20.2R1-S2.1
-        local_package:  /var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz
+        version: "20.2R1-S2.1"
+        local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
         kwargs: 
           unlink: yes
           reboot: yes
