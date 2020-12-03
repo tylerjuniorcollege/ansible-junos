@@ -12,3 +12,7 @@
     - name: System storage cleanup
       junos_command:
         commands: request system storage cleanup all-members no-confirm
+        
+    - name: Show storage
+      junos_command:
+        commands: show system storage
