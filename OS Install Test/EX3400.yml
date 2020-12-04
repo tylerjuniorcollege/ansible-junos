@@ -20,9 +20,10 @@
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         force_host: yes
+        reboot: yes
         kwargs:
           unlink: yes
-        reboot: yes
+          reboot: yes
         #nssu: yes
         install_timeout: 2000
         checksum_timeout: 420
