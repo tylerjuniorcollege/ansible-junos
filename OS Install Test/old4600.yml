@@ -1,6 +1,6 @@
 ---
 - name: Install Junos OS - EX4600
-  hosts: Junos_Test
+  hosts: Junos_all
   roles:
     - Juniper.junos 
   connection: local
@@ -12,29 +12,22 @@
     pkg_dir: "/var/lib/awx/custom-venv/junos/Firmware"
     netconf_port: 830
     wait_time: 3600
+    install_timeout: 2000
+    checksum_timeout: 420
 
   tasks:
-    - name: Checking NETCONF connectivity
-      wait_for: 
-        host: "{{ ansible_host }}" 
-        port: "{{ netconf_port }}"
-        timeout: 10
 
     - name: Install Junos OS package
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         kwargs:
-          unlink: true
-        reboot: true
+          unlink: yes
+        reboot: yes
         validate: no
       register: sw
       notify:
       - wait_reboot
-
-    - name: Print response
-      debug:
-        var: response
 
   handlers:
     - name: wait_reboot
