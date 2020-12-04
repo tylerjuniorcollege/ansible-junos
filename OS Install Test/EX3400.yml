@@ -6,18 +6,12 @@
   connection: local
   gather_facts: no
   
-  vars:
-    OS_version: 20.2R1-S2.1
-    OS_package: junos-arm-32-20.2R1-S2.1.tgz
-    pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
-    wait_time: 3600
-
   tasks:
 
     - name: Install Junos OS package
       juniper_junos_software:
-        version: "{{ OS_version }}"
-        local_package: "{{ pkg_dir }}/{{ OS_package }}"
+        version: "20.2R1-S2.1"
+        local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
         force_host: yes
         kwargs:
           unlink: yes
@@ -25,3 +19,4 @@
         #nssu: yes
         install_timeout: 2000
         checksum_timeout: 420
+        wait_time: 3600
