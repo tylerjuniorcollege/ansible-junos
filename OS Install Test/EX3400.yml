@@ -10,7 +10,6 @@
     OS_version: 20.2R1-S2.1
     OS_package: junos-arm-32-20.2R1-S2.1.tgz
     pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
-    netconf_port: 830
     wait_time: 3600
 
   tasks:
@@ -26,14 +25,3 @@
         #nssu: yes
         install_timeout: 2000
         checksum_timeout: 420
-      register: sw
-      notify:
-      - wait_reboot
-
-  handlers:
-    - name: wait_reboot
-      wait_for: 
-        host: "{{ ansible_host }}"
-        port: "{{ netconf_port }}"
-        timeout: "{{ wait_time }}"
-      when: not sw.check_mode
