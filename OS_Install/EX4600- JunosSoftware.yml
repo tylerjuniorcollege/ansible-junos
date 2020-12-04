@@ -11,22 +11,28 @@
     OS_package: "jinstall-host-ex-4600-20.2R1-S2.1-signed.tgz"
     pkg_dir: "/var/lib/awx/custom-venv/junos/Firmware"
     netconf_port: 830
+    wait_time: 3600
+    install_timeout: 2000
+    checksum_timeout: 420
 
   tasks:
-    - name: Checking NETCONF connectivity
-      wait_for: 
-        host: "{{ ansible_host }}" 
-        port: "{{ netconf_port }}"
-        timeout: 65
 
     - name: Install Junos OS package
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        force_host: yes
         kwargs:
           unlink: yes
         reboot: yes
         validate: no
-        install_timeout: 2000
-        checksum_timeout: 420
+      register: sw
+      notify:
+      - wait_reboot
+
+  handlers:
+    - name: wait_reboot
+      wait_for: 
+        host: "{{ ansible_host }}"
+        port: "{{ netconf_port }}"
+        timeout: "{{ wait_time }}"
+      when: not sw.check_mode
