@@ -1,5 +1,5 @@
 ---
-- name: Install Junos OS - Not Enough Storage Space
+- name: Install Junos OS - Not Enough Space error
   hosts: Junos_all
   roles:
     - Juniper.junos 
@@ -14,29 +14,28 @@
 
   tasks:
 
-   - name: Install OS package
-     juniper_junos_software:
+    - name: Install OS package
+      juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        force_host: yes
        reboot: no
-
-   - name: Install Hooks
-     juniper_junos_software:
+      
+    - name: Install Hooks
+      juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
         force_host: yes
         reboot: no
-
-   - name: Install Junos OS package
-     juniper_junos_software:
+       
+    - name: Install Junos OS package
+      juniper_junos_software:
         version: "20.2R1-S2.1"
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
-        force_host: yes
         kwargs:
           unlink: yes
         reboot: yes
-        register: sw
-        notify:
-         - wait_reboot
+      register: sw
+      notify:
+      - wait_reboot
 
   handlers:
     - name: wait_reboot
