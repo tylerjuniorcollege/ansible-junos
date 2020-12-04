@@ -10,8 +10,7 @@
     OS_version: "18.1R3-S3.8"
     OS_package: "junos-arm-32-18.1R3-S3.8.tgz"
     pkg_dir: "/var/lib/awx/custom-venv/junos/Firmware"
-    netconf_port: 830
-    wait_time: 3600
+    ansible_connetion: network_cli
     install_timeout: 2000
     checksum_timeout: 420
 
@@ -24,14 +23,3 @@
         kwargs:
           unlink: yes
         reboot: yes
-      register: sw
-      notify:
-      - wait_reboot
-
-  handlers:
-    - name: wait_reboot
-      wait_for: 
-        host: "{{ ansible_host }}"
-        port: "{{ netconf_port }}"
-        timeout: "{{ wait_time }}"
-      when: not sw.check_mode
