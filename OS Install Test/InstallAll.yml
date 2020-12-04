@@ -1,5 +1,5 @@
 ---
-- name: Install Junos OS - EX4600
+- name: Install Junos OS - Not Enough Storage Space
   hosts: Junos_all
   roles:
     - Juniper.junos 
