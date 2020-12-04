@@ -27,6 +27,6 @@
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         kwargs:
-          unlink: true
-        reboot: true
+          unlink: yes
+        reboot: yes
         validate: no
