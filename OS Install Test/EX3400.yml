@@ -23,7 +23,7 @@
         kwargs:
           unlink: yes
         #nssu: yes
-        wait_time: 3600
+        timeout: 3600
         install_timeout: 2000
         checksum_timeout: 420
       register: sw
