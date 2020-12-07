@@ -11,6 +11,7 @@
     OS_package: junos-arm-32-20.2R1-S2.1.tgz
     pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
     netconf_port: 830
+    wait_time: 3600
 
 
   tasks:
@@ -22,7 +23,6 @@
         kwargs: 
           unlink: true
         force_host: yes
-        wait_time: 3600
         install_timeout: 2000
         checksum_timeout: 420
         reboot: yes
