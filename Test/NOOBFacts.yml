@@ -1,0 +1,11 @@
+---
+- name: Collect default set of facts
+  hosts: Junos_Test
+  gather_facts: yes
+
+  vars:
+    ansible_command_timeout: 60
+    mode: "serial"
+    connection_settings:
+      host: "{{ ansible_host }}"
+      timeout: 180
