@@ -1,6 +1,6 @@
 ---
 - name: Get Device Facts
- hosts: Junos_Test
+ hosts: noob
  roles:
  - Juniper.junos
  connection: local
