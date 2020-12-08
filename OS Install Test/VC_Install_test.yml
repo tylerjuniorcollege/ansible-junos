@@ -25,7 +25,7 @@
         force_host: yes
         install_timeout: 2000
         checksum_timeout: 420
-        reboot: yes
+        reboot: no
       register: sw
       notify:
       - wait_reboot
