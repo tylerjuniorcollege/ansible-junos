@@ -5,7 +5,7 @@
 
   vars:
     ansible_command_timeout: 60
-    mode: "serial"
+    ansible_connection: serial
     connection_settings:
       host: "{{ ansible_host }}"
       timeout: 180
