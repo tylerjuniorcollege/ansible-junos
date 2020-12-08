@@ -1,7 +1,7 @@
 ---
 - name: Install Junos OS - EX3400 Virtual Chassis 
   hosts: Junos_Test
-  roles:
+  collections:
     - Juniper.device 
   connection: local
   gather_facts: no
@@ -20,11 +20,7 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        kwargs: 
-          unlink: true
         force_host: yes
-        install_timeout: 2000
-        checksum_timeout: 420
         reboot: yes
       register: sw
       notify:
