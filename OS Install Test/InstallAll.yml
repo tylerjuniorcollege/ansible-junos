@@ -17,16 +17,12 @@
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        force_host: yes
        reboot: no
-       install_timeout: 2000
-       checksum_timeout: 420
     
     - name: Install Hooks
       juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
         force_host: yes
         reboot: no
-       install_timeout: 2000
-       checksum_timeout: 420
     
     - name: Install Junos OS package
       juniper_junos_software:
