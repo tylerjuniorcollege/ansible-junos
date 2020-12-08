@@ -2,7 +2,7 @@
 - name: Install Junos OS - EX3400 Virtual Chassis 
   hosts: Junos_Test
   roles:
-    - Juniper.junos 
+    - Juniper.device 
   connection: local
   gather_facts: no
   
