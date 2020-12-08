@@ -1,6 +1,6 @@
 ---
 - name: Get Device Facts
-  hosts: noob
+  hosts: Junos_Test
   roles:
   - Juniper.junos
   connection: local
@@ -13,8 +13,6 @@
     private: yes
     vars:
      provider_info:
-     host: "{{ ansible_host }}"
-     password: "{{ DEVICE_PASSWORD }}"
      mode: "serial"
   
   tasks:
