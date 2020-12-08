@@ -1,6 +1,4 @@
 ---
-pyserial==3.4
-
 roles: 
   - name: Juniper.junos
   
