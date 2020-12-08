@@ -1,9 +1,8 @@
 ---
 roles: 
   - name: Juniper.junos
-  - name: juniper.device
-
+  
 collections: 
   - name: junipernetworks.junos
   - name: juniper
-  
+  - name: juniper.device
