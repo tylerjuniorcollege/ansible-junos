@@ -25,7 +25,7 @@
         force_host: yes
         kwargs:
           unlink: yes
-        nssu: yes
+        #nssu: yes
       register: sw
       notify:
       - wait_reboot
