@@ -1,5 +1,5 @@
 - name: Install Junos
-  hosts: junos
+  hosts: Junos_all
   roles:
     - Juniper.junos
   connection: local
