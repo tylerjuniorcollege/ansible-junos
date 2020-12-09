@@ -22,7 +22,7 @@
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: yes
-        force_host: yes
+        #force_host: yes
         kwargs:
           unlink: yes
         #nssu: yes
