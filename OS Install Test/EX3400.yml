@@ -16,8 +16,7 @@
 
     - name: Install Junos OS package
       juniper_junos_software:
-        no_copy: true
-       # nssu: true
+        kwargs: {"no-copy": true,"force": true,"unlink": true}
         version: "{{ OS_version }}"
         remote_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: yes
