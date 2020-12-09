@@ -19,8 +19,8 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        reboot: yes
-        force_host: yes
+        reboot: true
+        force_host: true
         kwargs: {"no-copy": true,"force": true,"unlink": true}
         #nssu: yes
       register: sw
