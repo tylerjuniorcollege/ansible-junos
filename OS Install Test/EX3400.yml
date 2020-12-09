@@ -12,6 +12,8 @@
     pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
     netconf_port: 830
     timeout: 3600
+    install_timeout: 2000
+    checksum_timeout: 420
 
   tasks:
 
