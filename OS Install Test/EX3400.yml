@@ -10,7 +10,7 @@
     OS_version: 20.2R1-S2.1
     OS_package: junos-arm-32-20.2R1-S2.1.tgz
     pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
-    wait_time_after_reboot: 300
+    wait_time: 1200
     netconf_port: 830
 
 
@@ -20,33 +20,17 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        reboot: no
+        reboot: yes
         force_host: true
         kwargs: {"no-copy": true,"force": true,"unlink": true}
-    
-  
-    - name: Reboot all REs on the device
-      juniper_junos_system:
-        action: "reboot"
-        all_re: true
-      register: result
+      register: sw
       notify:
-      - pause_for_reboot
       - wait_reboot
 
-
-    - name: Print response
-      debug:
-        var: result
-
   handlers:
-    - name: pause_for_reboot
-      pause: 
-        seconds: 180
-      when: result.reboot 
     - name: wait_reboot
       wait_for: 
         host: "{{ ansible_host }}"
-        port: "{{ netconf_port  }}"
-        timeout: "{{ wait_time_after_reboot }}"
-      when: result.reboot
+        port: "{{ netconf_port }}"
+        timeout: "{{ wait_time }}"
+      when: not sw.check_mode
