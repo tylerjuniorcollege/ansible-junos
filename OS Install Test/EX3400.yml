@@ -1,36 +1,47 @@
----
-- name: Install Junos OS - EX3400
-  hosts: Junos_all
+- name: Install Junos
+  hosts: junos
   roles:
-    - Juniper.junos 
+    - Juniper.junos
   connection: local
   gather_facts: no
-  
+
   vars:
-    OS_version: 20.2R1-S2.1
-    OS_package: junos-arm-32-20.2R1-S2.1.tgz
-    pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
+    OS_version: "20.2R1-S2.1"
+    OS_package: "junos-arm-32-20.2R1-S2.1.tgz"
+    pkg_dir: "/var/lib/awx/custom-venv/junos/Firmware"
     wait_time: 1200
     netconf_port: 830
-
 
   tasks:
 
     - name: Install Junos OS package
       juniper_junos_software:
+        no_copy: true
+       # nssu: true
         version: "{{ OS_version }}"
-        local_package: "{{ pkg_dir }}/{{ OS_package }}"
+        remote_package: "{{ pkg_dir }}/{{ OS_package }}"
         reboot: yes
-        force_host: true
-        kwargs: {"no-copy": true,"force": true,"unlink": true}
-      register: sw
       notify:
+      - pause_for_reboot
       - wait_reboot
 
+    - name: Reboot alll Routing Engines
+      juniper_junos_system:
+         action: "reboot"
+         all_re: true
+      notify:
+       - pause_for_reboot
+       - wait_reboot
+
   handlers:
+    - name: pause_for_reboot
+      pause:
+        seconds: 300
+      when: sw.reboot
+
     - name: wait_reboot
-      wait_for: 
-        host: "{{ ansible_host }}"
+      wait_for:
+        host: "{{ inventory_hostname }}"
         port: "{{ netconf_port }}"
         timeout: "{{ wait_time }}"
       when: not sw.check_mode
