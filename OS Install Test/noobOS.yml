@@ -21,3 +21,4 @@
         reboot: yes
         kwargs:
           unlink: yes
+        force_host: yes
