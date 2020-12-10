@@ -10,7 +10,6 @@
     OS_version: "18.1R3-S3.8"
     OS_package: "junos-arm-32-18.1R3-S3.8.tgz"
     pkg_dir: "/var/lib/awx/custom-venv/junos/Firmware"
-    ansible_connetion: network_cli
     install_timeout: 2000
     checksum_timeout: 420
 
