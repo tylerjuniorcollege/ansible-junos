@@ -21,9 +21,10 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        all_re: yes
+        all_re: true
         reboot: yes
         force_host: yes
+        kwargs: {"no-copy": true,"force": true,"unlink": true}
       register: sw
       notify:
       - wait_reboot
