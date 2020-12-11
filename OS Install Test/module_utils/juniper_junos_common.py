@@ -1,3 +1,32 @@
+
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@RachelDawnPerry 
+tylerjuniorcollege
+/
+ansible-junos
+1
+0
+1
+Code
+Pull requests
+Actions
+Security
+Insights
+Settings
+ansible-junos/OS Install Test/module_utils/juniper_junos_common.py
+@RachelDawnPerry
+RachelDawnPerry Create juniper_junos_common.py
+Latest commit 25062a9 3 hours ago
+ History
+ 1 contributor
+1825 lines (1723 sloc)  83.1 KB
+  
 # -*- coding: utf-8 -*-
 
 #
@@ -197,9 +226,9 @@ class ModuleDocFragment(object):
             connecting to the console of the device by setting the I(mode)
             option to the value C(telnet). This option is required, but does not
             have to be specified explicitly by the user because it defaults to
-            C({{ inventory_hostname }}).
+            C({{ ansible_host }}).
         required: true
-        default: C({{ inventory_hostname }})
+        default: C({{ ansible_host }})
         type: str
         aliases:
           - hostname
@@ -341,7 +370,7 @@ class ModuleDocFragment(object):
           - The path to a directory, on the Ansible control machine, where
             debugging information for the particular task is logged.
           - If this option is specified, debugging information is logged to a
-            file named C({{ inventory_hostname }}.log) in the directory
+            file named C({{ ansible_host }}.log) in the directory
             specified by the I(logdir) option.
           - The log file must be writeable. If the file already exists, it is
             appended. It is the users responsibility to delete/rotate log files.
@@ -388,7 +417,7 @@ class ModuleDocFragment(object):
             U(forks|http://docs.ansible.com/ansible/latest/intro_configuration.html#forks)
             for details.) This means that the value of this option must be
             unique per target host. This is usually accomplished by including
-            C({{ inventory_hostname }}) in the I(logfile) value. It is the
+            C({{ ansible_host }}) in the I(logfile) value. It is the
             user's responsibility to ensure this value is unique per target
             host.
           - For this reason, this option is deprecated. It is maintained for
