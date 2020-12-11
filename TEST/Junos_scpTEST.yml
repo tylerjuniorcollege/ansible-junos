@@ -1,8 +1,8 @@
 ---
  -name: adding os/hooks
-  hosts: Junos_all
-  connection: local
-  gather_facts: no
+   hosts: Junos_all
+   connection: local
+   gather_facts: no
   
   tasks:
   
