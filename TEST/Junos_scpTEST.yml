@@ -4,13 +4,15 @@
   connection: local
   gather_facts: no
   
-  tasks: 
+  tasks:
+  
   - name: install local package on remote device without rebooting
     junipernetworks.junos.junos_scp:
     src: "var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
     dest: /var/tmp/
      
   tasks: 
+  
   - name: install local package on remote device without rebooting
     junipernetworks.junos.junos_scp:
     src: "var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
