@@ -1,6 +1,8 @@
 ---
-- name: adding hooks/os packages
-  hosts: Junos_Test
+- name: adding os/hooks
+  hosts: Junos_all
+  roles:
+    - Juniper.junos 
   connection: local
   gather_facts: no
   
