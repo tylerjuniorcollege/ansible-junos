@@ -22,6 +22,7 @@
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         all_re: true
+        kwargs: {"no-copy": true,"force": true,"unlink": true}
         reboot: yes
         force_host: yes
       register: sw
