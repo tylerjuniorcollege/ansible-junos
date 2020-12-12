@@ -52,8 +52,8 @@
           all_re: yes
           local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
           reboot: no
-        tags: 
-           - never
+      tags: 
+         - never
            
  #   - name: Install OS package on Master RE
  #     juniper_junos_software:
