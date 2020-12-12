@@ -1,5 +1,5 @@
 ---
-- name: adding os/hooks
+- name: adding test
   hosts: Junos_all
   connection: local
   gather_facts: no
