@@ -1,0 +1,81 @@
+---
+- name: Install Junos OS - Not Enough Space error
+  hosts: Junos_all
+  roles:
+    - Juniper.junos 
+  connection: local
+  gather_facts: no
+  
+  vars:
+    netconf_port: 830
+    wait_time: 3600
+    valid_tags: ['apply_to_backup', 'apply_to_master', 'apply_to_both', 'disable_gres_and_nsr']
+    actions_apply_to_backup: ['Abort for Single RE devices', 'Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to backup RE', 'Reboot']
+    actions_apply_to_master: ['Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to master RE', 'Reboot']
+    actions_apply_to_both: ['Abort for Single RE devices', 'Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to both REs', 'Reboot']
+    
+  tasks:
+  
+    - name: Identify the Backup RE
+      set_fact:
+        bkp_re: "{% if ansible_facts.junos.RE0.mastership_state == 'backup' %}re0{% elif  ansible_facts.junos.RE1.mastership_state == 'backup' %}re1{% else %}{% endif %}"
+      tags:
+        - never
+        - apply_to_backup
+
+    - name: Set variables for Master RE
+      set_fact:
+          jjsc_kwargs_master: "{ {% if ansible_facts.junos.master == 'RE0' %}'re0': true{% elif ansible_facts.junos.master == 'RE1' %}'re1': true{% endif %} }"
+      tags: 
+        - never
+        - apply_to_master
+
+    - name: Set variables for Backup RE
+      set_fact:
+        jjsc_kwargs_bkp: "{ {% if bkp_re == 're0' %}'re0': true{% elif  bkp_re == 're1' %}'re1': true{% endif %} }"  
+      tags:
+        - never
+        - apply_to_backup
+
+    - name: "Delete the old package files on device. All '.tgz' files in /var/tmp/."
+      juniper_junos_command:
+        commands: ['file delete re0:/var/tmp/*tgz', 'file delete re1:/var/tmp/*tgz']
+        provider: "{{ provider_details }}"
+      tags:
+        - never
+        - apply_to_backup
+        - apply_to_master
+        - apply_to_both
+        
+    - name: Install OS package
+      juniper_junos_software:
+       local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
+       force_host: yes
+       reboot: no
+    
+    - name: Install Hooks
+      juniper_junos_software:
+        local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
+        force_host: yes
+        reboot: no
+    
+ #   - name: Install Junos OS package
+ #     juniper_junos_software:
+ #       version: "20.2R1-S2.1"
+ #       local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
+ #       force_host: yes
+ #       kwargs: {"no-copy": true,"force": true,"unlink": true}
+ #       reboot: yes
+ #       install_timeout: 2000
+ #       checksum_timeout: 420
+ #     register: sw
+ #     notify:
+ #     - wait_reboot
+
+#  handlers:
+#    - name: wait_reboot
+#      wait_for: 
+#        host: "{{ ansible_host }}"
+#        port: "{{ netconf_port }}"
+#        timeout: "{{ wait_time }}"
+#      #when: not sw.check_mode
