@@ -1,3 +1,15 @@
+ vars:
+    valid_tags: ['apply_to_backup', 'apply_to_master', 'apply_to_both', 'disable_gres_and_nsr']
+    valid_content_types_for_url: ['application/x-gtar-compressed']
+    actions_apply_to_backup: ['Abort for Single RE devices', 'Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to backup RE', 'Reboot']
+    actions_apply_to_master: ['Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to master RE', 'Reboot']
+    actions_apply_to_both: ['Abort for Single RE devices', 'Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to both REs', 'Reboot']
+    provider_details: {} # Default provider details
+#      username: "{{ device_user_name }}"
+#      password: "{{ device_user_passwd  }}"
+#      host: "{{ inventory_hostname }}"
+
+
 - name: Identify the Backup RE
       set_fact:
         bkp_re: "{% if ansible_facts.junos.RE0.mastership_state == 'backup' %}re0{% elif  ansible_facts.junos.RE1.mastership_state == 'backup' %}re1{% else %}{% endif %}"
