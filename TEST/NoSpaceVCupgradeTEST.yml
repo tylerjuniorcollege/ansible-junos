@@ -37,15 +37,15 @@
         - never
         - apply_to_backup
 
-    - name: "Delete the old package files on device. All '.tgz' files in /var/tmp/."
-      juniper_junos_command:
-        commands: ['file delete re0:/var/tmp/*tgz', 'file delete re1:/var/tmp/*tgz']
-  #      provider: "{{ provider_details }}"
-      tags:
-        - never
-        - apply_to_backup
-        - apply_to_master
-        - apply_to_both
+ #   - name: "Delete the old package files on device. All '.tgz' files in /var/tmp/."
+ #     juniper_junos_command:
+ #       commands: ['file delete re0:/var/tmp/*tgz', 'file delete re1:/var/tmp/*tgz']
+ #       provider: "{{ provider_details }}"
+ #     tags:
+ #       - never
+ #       - apply_to_backup
+ #       - apply_to_master
+ #       - apply_to_both
         
     - name: Install package on Both REs
       juniper_junos_software:
