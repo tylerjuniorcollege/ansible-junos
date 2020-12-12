@@ -28,3 +28,42 @@
         - apply_to_backup
         - apply_to_master
         - apply_to_both
+ - name: Install package on Master RE
+      juniper_junos_software_custom:
+        all_re: no
+        kwargs: "{{ jjsc_kwargs_master }}"
+        local_package: "{{ resp_download_pkg.dest }}"
+        validate: no
+        reboot: yes
+        reboot_pause: 50
+        timeout: 1200
+        provider: "{{ provider_details }}"
+      tags:
+        - never
+        - apply_to_master
+
+    - name: Install package on Backup RE
+      juniper_junos_software_custom:
+        all_re: no
+        kwargs: "{{ jjsc_kwargs_bkp }}"
+        local_package: "{{ resp_download_pkg.dest }}"
+        validate: no
+        reboot: yes
+        reboot_pause: 50
+        timeout: 1200
+        provider: "{{ provider_details }}"
+      tags:
+        - never
+        - apply_to_backup
+
+    - name: Install package on Both REs
+      juniper_junos_software_custom:
+        all_re: yes
+        local_package: "{{ resp_download_pkg.dest }}"
+        validate: no
+        reboot: yes
+        reboot_pause: 50
+        timeout: 1200
+        provider: "{{ provider_details }}"
+      tags:
+        - never
