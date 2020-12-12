@@ -63,8 +63,8 @@
  #      force_host: yes
  #      reboot: no
  #     tags:
-        - never
-        - apply_to_master
+ #       - never
+ #       - apply_to_master
     
  #   - name: Install Hooks on Master RE
  #     juniper_junos_software:
@@ -74,8 +74,8 @@
  #       force_host: yes
  #       reboot: no
  #     tags:
-        - never
-        - apply_to_master
+ #       - never
+ #       - apply_to_master
     
  #   - name: Install Junos OS package
  #     juniper_junos_software:
