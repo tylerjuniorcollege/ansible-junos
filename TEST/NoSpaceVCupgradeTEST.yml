@@ -1,5 +1,5 @@
 ---
-- name: Install Junos OS - Not Enough Space error
+- name: Install Junos OS  Not Enough Space error
   hosts: Junos_all
   roles: Juniper.junos 
   connection: local
