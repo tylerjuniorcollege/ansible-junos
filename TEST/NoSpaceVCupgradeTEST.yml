@@ -40,24 +40,42 @@
     - name: "Delete the old package files on device. All '.tgz' files in /var/tmp/."
       juniper_junos_command:
         commands: ['file delete re0:/var/tmp/*tgz', 'file delete re1:/var/tmp/*tgz']
-        provider: "{{ provider_details }}"
+  #      provider: "{{ provider_details }}"
       tags:
         - never
         - apply_to_backup
         - apply_to_master
         - apply_to_both
         
-    - name: Install OS package
+     - name: Install package on Both REs
       juniper_junos_software:
-       local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
-       force_host: yes
-       reboot: no
+          all_re: yes
+          local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
+          reboot: no
+        tags: 
+           - never
+           
+ #   - name: Install OS package on Master RE
+ #     juniper_junos_software:
+ #      all_re: no
+ #      kwargs: "{{ jjsc_kwargs_master }}"
+ #      local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
+ #      force_host: yes
+ #      reboot: no
+ #     tags:
+        - never
+        - apply_to_master
     
-    - name: Install Hooks
-      juniper_junos_software:
-        local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
-        force_host: yes
-        reboot: no
+ #   - name: Install Hooks on Master RE
+ #     juniper_junos_software:
+ #       all_re: no
+ #       kwargs: "{{ jjsc_kwargs_master }}"
+ #       local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
+ #       force_host: yes
+ #       reboot: no
+ #     tags:
+        - never
+        - apply_to_master
     
  #   - name: Install Junos OS package
  #     juniper_junos_software:
