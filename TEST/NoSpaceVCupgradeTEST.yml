@@ -47,7 +47,7 @@
         - apply_to_master
         - apply_to_both
         
-     - name: Install package on Both REs
+    - name: Install package on Both REs
       juniper_junos_software:
           all_re: yes
           local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
