@@ -1,7 +1,7 @@
 ---
 - name: Install Junos OS - Not Enough Space error
   hosts: Junos_all
-  roles:
+#  roles:
     - Juniper.junos 
   connection: local
   gather_facts: no
