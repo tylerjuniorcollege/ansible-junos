@@ -28,22 +28,6 @@
     actions_apply_to_master: ['Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to master RE', 'Reboot']
     actions_apply_to_both: ['Abort for Single RE devices', 'Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to both REs', 'Reboot']
 
- 
-
-
-  tasks:
-
-    - name: Identify the Backup RE
-
-      set_fact:
-
-        bkp_re: "{% if ansible_facts.junos.RE0.mastership_state == 'backup' %}re0{% elif  ansible_facts.junos.RE1.mastership_state == 'backup' %}re1{% else %}{% endif %}"
-
-      tags:
-
-        - apply_to_backup
-
-
 
     - name: Set variables for Master RE
 
