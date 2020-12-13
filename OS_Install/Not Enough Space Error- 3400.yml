@@ -17,7 +17,6 @@
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        force_host: yes
        reboot: no
-       all_re: yes
     
     - name: Install Hooks
       juniper_junos_software:
