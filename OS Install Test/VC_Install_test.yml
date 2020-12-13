@@ -21,6 +21,8 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
+        timeout: 1200
+        reboot_pause: 50
         all_re: true
         reboot: yes
         force_host: yes
