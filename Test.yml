@@ -1,3 +1,4 @@
+
 ---
 
 - name: Playbook for applying software Master or Backup RE or to Both REs
@@ -14,19 +15,17 @@
 
     - Juniper.junos
 
-
-
-
-
   vars:
 
     OS_version: 20.2R1-S2.1
     OS_package: junos-arm-32-20.2R1-S2.1.tgz
     pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
-    valid_tags: ['apply_to_backup', 'apply_to_master', 'apply_to_both']
-    actions_apply_to_backup: ['Abort for Single RE devices', 'Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to backup RE', 'Reboot']
-    actions_apply_to_master: ['Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to master RE', 'Reboot']
+    valid_tags: ['apply_to_both']
     actions_apply_to_both: ['Abort for Single RE devices', 'Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to both REs', 'Reboot']
+
+ 
+
+  tasks:
 
 
     - name: Set variables for Master RE
@@ -52,19 +51,33 @@
         - apply_to_backup
 
 
+    - name: Install package on Backup RE
 
-    - name: Install package on Both REs
-
-      juniper_junos_software_custom:
+      juniper_junos_software_custom: 
 
         all_re: yes
+        kwargs: "{{ jjsc_kwargs_bkp }}"
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         force_host: yes
         reboot: yes
         reboot_pause: 50
         timeout: 1200
-
       tags:
 
-        - apply_to_both
+        - apply_to_backup
+
+    - name: Install package on Master RE
+
+      juniper_junos_software_custom:
+
+        all_re: yes
+        version: "{{ OS_version }}"
+        kwargs: "{{ jjsc_kwargs_master }}"
+        local_package: "{{ pkg_dir }}/{{ OS_package }}"
+        reboot: yes
+        reboot_pause: 50
+        timeout: 1200
+      tags:
+
+        - apply_to_master
