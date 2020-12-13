@@ -33,7 +33,6 @@
         reboot: yes
         install_timeout: 2000
         checksum_timeout: 420
-      register: sw
       notify:
       - wait_reboot
 
