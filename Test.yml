@@ -29,43 +29,7 @@
     actions_apply_to_master: ['Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to master RE', 'Reboot']
     actions_apply_to_both: ['Abort for Single RE devices', 'Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to both REs', 'Reboot']
 
-  
-
-  
-
-  pre_tasks:
-
-
-
-    - include_tasks: tasks/set_provider_details.yml
-
-      when: run_mode == 'cli'
-
-      tags:
-
-        - always
-
-
-
-
-
-    - block:
-
-        - name: User Confirmation - CLI Mode
-
-          pause:
-
-            prompt: "\e[32m\e[1m\n-------------------\nPlaybook Details: \n-------------------\n\nDevices:\n--------\n\t{{ hostvars.keys() | sort | join('\n\t') }}\n\nMajor Actions:\n--------------\n\t=> {% if hostvars[inventory_hostname]['ansible_run_tags'][0] == 'apply_to_backup' %}{{  actions_apply_to_backup| join('\n\t=> ') }}{% elif hostvars[inventory_hostname]['ansible_run_tags'][0] == 'apply_to_master' %}{{  actions_apply_to_master| join('\n\t=> ') }}{% elif hostvars[inventory_hostname]['ansible_run_tags'][0] == 'apply_to_both' %}{{  actions_apply_to_both| join('\n\t=> ') }}{% endif %}\n\n\n\e[5mDo you want to continue? (YES/NO)"
-
-          register: user_confirmation
-
-          run_once: yes
-
-
-
-
-
-
+ 
 
 
   tasks:
