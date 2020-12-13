@@ -85,12 +85,6 @@ except ImportError:
     HAS_PYEZ_EXCEPTIONS = False
 
 try:
-    import ncclient.operations.errors as ncclient_exception
-    HAS_NCCLIENT_EXCEPTIONS = True
-except ImportError:
-    HAS_NCCLIENT_EXCEPTIONS = False
-
-try:
     import jnpr.jsnapy
     HAS_JSNAPY_VERSION = jnpr.jsnapy.__version__
 except ImportError:
@@ -126,7 +120,7 @@ except NameError:
 
 # Constants
 # Minimum PyEZ version required by shared code.
-MIN_PYEZ_VERSION = "2.5.2"
+MIN_PYEZ_VERSION = "2.2.0"
 # Installation URL for PyEZ.
 PYEZ_INSTALLATION_URL = "https://github.com/Juniper/py-junos-eznc#installation"
 # Minimum lxml version required by shared code.
@@ -134,7 +128,7 @@ MIN_LXML_ETREE_VERSION = "3.2.4"
 # Installation URL for LXML.
 LXML_ETREE_INSTALLATION_URL = "http://lxml.de/installation.html"
 # Minimum JSNAPy version required by shared code.
-MIN_JSNAPY_VERSION = "1.3.4"
+MIN_JSNAPY_VERSION = "1.2.1"
 # Installation URL for JSNAPy.
 JSNAPY_INSTALLATION_URL = "https://github.com/Juniper/jsnapy#installation"
 # Minimum jxmlease version required by shared code.
@@ -145,6 +139,7 @@ JXMLEASE_INSTALLATION_URL = \
 # Minimum yaml version required by shared code.
 MIN_YAML_VERSION = "3.08"
 YAML_INSTALLATION_URL = "http://pyyaml.org/wiki/PyYAMLDocumentation"
+
 
 class ModuleDocFragment(object):
     """Documentation fragment for connection-related parameters.
@@ -331,6 +326,12 @@ class ModuleDocFragment(object):
         type: str
         aliases:
           - console_password
+      huge_tree:
+        description:
+          - Parse XML with very deep trees and long text content.
+        required: false
+        type: bool
+        default: false
 '''
 
     LOGGING_DOCUMENTATION = '''
@@ -444,7 +445,7 @@ class ModuleDocFragment(object):
         suboptions:''' + _SUB_CONNECT_DOCUMENTATION + '''
     requirements:
       - U(junos-eznc|https://github.com/Juniper/py-junos-eznc) >= ''' + MIN_PYEZ_VERSION + '''
-      - Python >= 3.5
+      - Python >= 2.7
     notes:
       - The NETCONF system service must be enabled on the target Junos device.
 '''
@@ -515,6 +516,9 @@ connection_spec = {
     'timeout': dict(type='int',
                     required=False,
                     default=30),
+    'huge_tree': dict(type='bool',
+                      required=False,
+                      default=False),
 }
 
 # Connection arguments which are mutually exclusive.
@@ -567,9 +571,6 @@ internal_spec = {
     '_module_name': dict(type='str',
                          required=True,
                          default=None),
-    '_inventory_hostname': dict(type='str',
-                                required=True,
-                                default=None),
 }
 
 # Known RPC output formats
@@ -581,7 +582,7 @@ CONFIG_FORMAT_CHOICES = ['xml', 'set', 'text', 'json']
 CONFIG_DATABASE_CHOICES = ['candidate', 'committed']
 # Known configuration actions
 CONFIG_ACTION_CHOICES = ['set', 'merge', 'update',
-                         'replace', 'override', 'overwrite', 'patch']
+                         'replace', 'override', 'overwrite']
 # Supported configuration modes
 CONFIG_MODE_CHOICES = ['exclusive', 'private']
 # Supported configuration models
@@ -680,7 +681,6 @@ class JuniperJunosModule(AnsibleModule):
             mutually_exclusive=mutually_exclusive,
             **kwargs)
         self.module_name = self.params.get('_module_name')
-        self.inventory_hostname = self.params.get('_inventory_hostname')
         # Remove any arguments in internal_spec
         for arg_name in internal_spec:
             self.params.pop(arg_name)
@@ -744,7 +744,6 @@ class JuniperJunosModule(AnsibleModule):
         self.pyez_factory_table = jnpr.junos.factory.table
         self.pyez_op_table = jnpr.junos.op
         self.pyez_exception = pyez_exception
-        self.ncclient_exception = ncclient_exception
         # Check LXML Etree.
         self.check_lxml_etree(min_lxml_etree_version)
         self.etree = etree
@@ -1027,9 +1026,6 @@ class JuniperJunosModule(AnsibleModule):
                 self.fail_json(msg='junos-eznc (aka PyEZ) is installed, but '
                                    'the jnpr.junos.exception module could not '
                                    'be imported.')
-            if HAS_NCCLIENT_EXCEPTIONS is False:
-                self.fail_json(msg='ncclient.operations.errors module could not '
-                                   'be imported.')
 
     def check_jsnapy(self, minimum=None):
         """Check jsnapy is available and version is >= minimum.
@@ -1182,14 +1178,13 @@ class JuniperJunosModule(AnsibleModule):
         if ignore_warn_list is None:
             return ignore_warn_list
         if len(ignore_warn_list) == 1:
-            try:
-                bool_val = boolean(ignore_warn_list[0])
-                if bool_val is not None:
-                    return bool_val
-            except TypeError:
-                if isinstance(ignore_warn_list[0], basestring):
-                    return ignore_warn_list[0]
-            self.fail_json(msg="The value of the ignore_warning option "
+            bool_val = boolean(ignore_warn_list[0])
+            if bool_val is not None:
+                return bool_val
+            elif isinstance(ignore_warn_list[0], basestring):
+                return ignore_warn_list[0]
+            else:
+                self.fail_json(msg="The value of the ignore_warning option "
                                    "(%s) is invalid. Unexpected type (%s)." %
                                    (ignore_warn_list[0],
                                     type(ignore_warn_list[0])))
@@ -1518,7 +1513,7 @@ class JuniperJunosModule(AnsibleModule):
             self.fail_json(msg='Failure checking the configuraton: %s' %
                                (str(ex)))
 
-    def diff_configuration(self, ignore_warning=False):
+    def diff_configuration(self):
         """Diff the candidate and committed configurations.
         Diff the candidate and committed configurations.
         Returns:
@@ -1531,7 +1526,7 @@ class JuniperJunosModule(AnsibleModule):
 
         self.logger.debug("Diffing candidate and committed configurations.")
         try:
-            diff = self.config.diff(rb_id=0, ignore_warning=ignore_warning)
+            diff = self.config.diff(rb_id=0)
             self.logger.debug("Configuration diff completed.")
             return diff
         except (self.pyez_exception.RpcError,
@@ -1554,7 +1549,7 @@ class JuniperJunosModule(AnsibleModule):
         Args:
             action - The type of load to perform: 'merge', 'replace', 'set',
                                                   'override', 'overwrite', and
-                                                  'update', 'patch'
+                                                  'update'
             lines - A list of strings containing the configuration.
             src - The file path on the local Ansible control machine to the
                   configuration to be loaded.
@@ -1583,8 +1578,6 @@ class JuniperJunosModule(AnsibleModule):
             load_args['overwrite'] = True
         if action == 'update':
             load_args['update'] = True
-        if action == 'patch':
-            load_args['patch'] = True
         if lines is not None:
             config = '\n'.join(map(lambda line: line.rstrip('\n'), lines))
             self.logger.debug("Loading the supplied configuration.")
@@ -1800,7 +1793,8 @@ class JuniperJunosModule(AnsibleModule):
                 file_path = os.path.normpath(self.params.get('diffs_file'))
             elif self.params.get('dest_dir') is not None:
                 dest_dir = self.params.get('dest_dir')
-                file_name = '%s.diff' % (self.inventory_hostname,)
+                hostname = self.params.get('host')
+                file_name = '%s.diff' % (hostname)
                 file_path = os.path.normpath(os.path.join(dest_dir, file_name))
         else:
             if self.params.get('dest') is not None:
@@ -1811,12 +1805,13 @@ class JuniperJunosModule(AnsibleModule):
                     mode = 'ab'
             elif self.params.get('dest_dir') is not None:
                 dest_dir = self.params.get('dest_dir')
+                hostname = self.params.get('host')
                 # Substitute underscore for spaces.
                 name = name.replace(' ', '_')
                 # Substitute underscore for pipe
                 name = name.replace('|', '_')
                 name = '' if name == 'config' else '_' + name
-                file_name = '%s%s.%s' % (self.inventory_hostname, name, format)
+                file_name = '%s%s.%s' % (hostname, name, format)
                 file_path = os.path.normpath(os.path.join(dest_dir, file_name))
         if file_path is not None:
             try:
