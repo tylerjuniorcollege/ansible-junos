@@ -38,8 +38,8 @@
     - name: Set variables for Master RE
       set_fact:
         jjsc_kwargs_master: "{ {% if ansible_facts.junos.master == 'RE0' %}'re0': true{% elif ansible_facts.junos.master == 'RE1' %}'re1': true{% endif %} }"
-      tags: 
-        - apply_to_master
+        tags: 
+          - apply_to_master
 
 
 
