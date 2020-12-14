@@ -22,7 +22,7 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        kwargs: {"no-copy": true,"force": true,"unlink": true}
+        kwargs: {"no-copy": true,"force": true,"unlink": true, "issu": true}
         timeout: 1200
         reboot_pause: 50
         all_re: true
