@@ -46,7 +46,6 @@ extends_documentation_fragment:
   - juniper_junos_common.connection_documentation
   - juniper_junos_common.logging_documentation
 module: juniper_junos_software
-version_added: "2.0.0" # of Juniper.junos role
 author:
   - Jeremy Schulman
   - "Juniper Networks - Stacy Smith (@stacywsmith)"
@@ -261,6 +260,13 @@ options:
     required: false
     default: C(/var/tmp/) + filename portion of I(local_package)
     type: path
+  pkg_set:
+    description:
+      -  install software on the members in a mixed Virtual Chassis. Currently
+         we are not doing target package check this option is provided.
+    required: false
+    default: false
+    type: list
   validate:
     description:
       - Whether or not to have the target Junos device should validate the
@@ -313,8 +319,8 @@ EXAMPLES = '''
   hosts: junos-all
   connection: local
   gather_facts: no
-  roles:
-    - Juniper.junos
+  collections:
+    - Juniper.junos_collection
   tasks:
     - name: Execute a basic Junos software upgrade.
       juniper_junos_software:
@@ -380,8 +386,7 @@ Reference for the issue: https://groups.google.com/forum/#!topic/ansible-project
 
 # Ansiballz packages module_utils into ansible.module_utils
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils import juniper_junos_common
-
+from ansible_collections.Juniper.junos_collection.plugins.module_utils import juniper_junos_common
 
 def parse_version_from_filename(filename):
     """Attempts to parse a version string from the filename of a Junos package.
@@ -441,6 +446,9 @@ def main():
                             # Default is '/var/tmp/' + filename from the
                             # local_package option, if set.
                             default=None),
+        pkg_set=dict(required=False,
+                     type='list',
+                     default=None),
         version=dict(required=False,
                      aliases=['target_version', 'new_version',
                               'desired_version'],
@@ -509,13 +517,14 @@ def main():
         # Mutually exclusive options.
         mutually_exclusive=[['issu', 'nssu']],
         # One of local_package and remote_package is required.
-        required_one_of=[['local_package', 'remote_package']],
+        required_one_of=[['local_package', 'remote_package', 'pkg_set']],
         supports_check_mode=True
     )
 
     # Straight from params
     local_package = junos_module.params.pop('local_package')
     remote_package = junos_module.params.pop('remote_package')
+    pkg_set = junos_module.params.pop('pkg_set')
     target_version = junos_module.params.pop('version')
     no_copy = junos_module.params.pop('no_copy')
     reboot = junos_module.params.pop('reboot')
@@ -544,14 +553,15 @@ def main():
     if url is not None and local_package is not None:
         junos_module.fail_json(msg='There remote_package (%s) is a URL. '
                                    'The local_package option is not allowed.' %
-                                   (remote_package))
+                                   remote_package)
 
     if url is not None and no_copy is True:
         junos_module.fail_json(msg='There remote_package (%s) is a URL. '
                                    'The no_copy option is not allowed.' %
-                                   (remote_package))
+                                   remote_package)
 
     if url is None:
+        local_filename = None
         if local_package is not None:
             # Expand out the path.
             local_package = os.path.abspath(local_package)
@@ -559,16 +569,23 @@ def main():
             if local_filename == '':
                 junos_module.fail_json(msg='There is no filename component to '
                                            'the local_package (%s).' %
-                                           (local_package))
-        else:
-            # Local package was not specified, so we must assume no_copy.
+                                           local_package)
+        elif remote_package is not None:
+            # remote package was, so we must assume no_copy.
             no_copy = True
-            local_filename = None
 
-        if no_copy is False and not os.path.isfile(local_package):
-            junos_module.fail_json(msg='The local_package (%s) is not a valid '
-                                       'file on the local Ansible control '
-                                       'machine.' % (local_package))
+        if no_copy is False:
+            if local_package is not None and not os.path.isfile(local_package):
+                junos_module.fail_json(msg='The local_package (%s) is not a '
+                                       'valid file on the local Ansible '
+                                       'control machine.' % local_package)
+            elif pkg_set is not None:
+                pkg_set = [os.path.abspath(item) for item in pkg_set]
+                for pkg_set_item in pkg_set:
+                    if not os.path.isfile(pkg_set_item):
+                        junos_module.fail_json(
+                            msg='The pkg (%s) is not a valid file on the local'
+                                ' Ansible control machine.' % pkg_set_item)
 
         if remote_filename == '':
             # Use the same name as local_filename
@@ -585,7 +602,7 @@ def main():
     if no_copy is True:
         cleanfs = False
 
-    if target_version is None:
+    if target_version is None and pkg_set is None:
         target_version = parse_version_from_filename(remote_filename)
     junos_module.logger.debug("New target version is: %s.", target_version)
 
@@ -607,15 +624,23 @@ def main():
                                               current_version, current_re,
                                               target_version)
                     results['changed'] = True
+                else:
+                    results['msg'] += "Current version on %s: %s same as Targeted " \
+                                      "version: %s.\n" % (current_version, current_re,
+                                                          target_version)
         else:
             current_version = junos_module.dev.facts['version']
+            re_name = junos_module.dev.re_name
             if target_version != current_version:
-                re_name = junos_module.dev.re_name
                 junos_module.logger.debug("Current version on %s: %s. "
                                           "Target version: %s.",
                                           current_version, re_name,
                                           target_version)
                 results['changed'] = True
+            else:
+                results['msg'] += "Current version on %s: %s same as Targeted " \
+                                 "version: %s.\n" % (current_version, re_name,
+                                                     target_version)
     else:
         # A non-Junos install. Always attempt to install.
         results['changed'] = True
@@ -630,6 +655,8 @@ def main():
             install_params['package'] = url
         elif local_package is not None:
             install_params['package'] = local_package
+        elif pkg_set is not None:
+            install_params['pkg_set'] = pkg_set
         else:
             install_params['package'] = remote_filename
         if remote_dir is not None:
@@ -647,16 +674,18 @@ def main():
             install_params.update(kwargs)
         try:
             junos_module.logger.debug("Install parameters are: %s",
-                                      str(install_params))
+                                       str(install_params))
             junos_module.add_sw()
-            ok = junos_module.sw.install(**install_params)
+            ok, msg_ret = junos_module.sw.install(**install_params)
             if ok is not True:
-                results['msg'] = 'Unable to install the software'
+                results['msg'] = 'Unable to install the software %s', msg_ret
                 junos_module.fail_json(**results)
-            results['msg'] = 'Package %s successfully installed.' % \
-                             (install_params['package'])
-            junos_module.logger.debug('Package %s successfully installed.',
-                                      install_params['package'])
+            msg = 'Package %s successfully installed. Response from device is: %s' % (
+                        install_params.get('package') or
+                        install_params.get('pkg_set'),
+                        msg_ret)
+            results['msg'] = msg
+            junos_module.logger.debug(msg)
         except (junos_module.pyez_exception.ConnectError,
                 junos_module.pyez_exception.RpcError) as ex:
             results['msg'] = 'Installation failed. Error: %s' % str(ex)
@@ -667,51 +696,31 @@ def main():
                 # </rpc-reply> and therefore might get an RpcTimeout.
                 # (This is a known Junos bug.) Set the timeout low so this
                 # happens relatively quickly.
+                restore_timeout = junos_module.dev.timeout
                 if junos_module.dev.timeout > 5:
                     junos_module.logger.debug("Decreasing device RPC timeout "
                                               "to 5 seconds.")
                     junos_module.dev.timeout = 5
                 junos_module.logger.debug('Initiating reboot.')
-                rpc = junos_module.etree.Element('request-reboot')
-                xpath_list = ['.//request-reboot-status']
-                if all_re is True:
-                    if (junos_module.sw._multi_RE is True and
-                       junos_module.sw._multi_VC is False):
-                        junos_module.etree.SubElement(rpc,
-                                                      'both-routing-engines')
-                        # At least on some platforms stopping/rebooting both
-                        # REs produces <output> messages and
-                        # <request-reboot-status> messages.
-                        xpath_list.append('..//output')
-                    elif (junos_module.sw._multi_RE is True and
-                       junos_module.sw._multi_VC is True):
-                        junos_module.etree.SubElement(rpc,
-                                                      'all-members')
-                        # At least on some platforms stopping/rebooting both
-                        # REs produces <output> messages and
-                        # <request-reboot-status> messages.
-                        xpath_list.append('..//output')
-                    elif junos_module.sw._mixed_VC is True:
-                        junos_module.etree.SubElement(rpc, 'all-members')
-                resp = junos_module.dev.rpc(rpc,
-                                            ignore_warning=True,
-                                            normalize=True)
-                junos_module.logger.debug("Reboot RPC executed cleanly.")
-                if len(xpath_list) > 0:
-                    for xpath in xpath_list:
-                        got = resp.findtext(xpath)
-                        if got is not None:
-                            results['msg'] += ' Reboot successfully initiated.'
-                            break
-                    else:
-                        # This is the else clause of the for loop.
-                        # It only gets executed if the loop finished without
-                        # hitting the break.
-                        results['msg'] += ' Did not find expected response ' \
-                                          'from reboot RPC.'
-                        junos_module.fail_json(**results)
+                try:
+
+                    got = junos_module.sw.reboot(0, None, all_re, None, install_params.get('vmhost'))
+                    junos_module.dev.timeout = restore_timeout
+                except Exception:  # pylint: disable=broad-except
+                    junos_module.dev.timeout = restore_timeout
+                    raise
+                junos_module.logger.debug("Reboot RPC executed.")
+
+                if got is not None:
+                    results['msg'] += ' Reboot successfully initiated. ' \
+                                              'Reboot message: %s' % got
                 else:
-                    results['msg'] += ' Reboot successfully initiated.'
+                    # This is the else clause of the for loop.
+                    # It only gets executed if the loop finished without
+                    # hitting the break.
+                    results['msg'] += ' Did not find expected response ' \
+                                          'from reboot RPC. '
+                    junos_module.fail_json(**results)
             except (junos_module.pyez_exception.RpcTimeoutError) as ex:
                 # This might be OK. It might just indicate the device didn't
                 # send the closing </rpc-reply> (known Junos bug).
@@ -724,13 +733,24 @@ def main():
                                       'initiated.'
                     junos_module.fail_json(**results)
                 except (junos_module.pyez_exception.RpcError,
+                        junos_module.pyez_exception.RpcTimeoutError,
                         junos_module.pyez_exception.ConnectError):
                     # This is expected. The device has already disconnected.
                     results['msg'] += ' Reboot succeeded.'
+                except (junos_module.ncclient_exception.TimeoutExpiredError):
+                    # This is not really expected. Still consider reboot success as
+                    # Looks like rpc was consumed but no response as its rebooting.
+                    results['msg'] += ' Reboot succeeded. Ignoring close error.'
             except (junos_module.pyez_exception.RpcError,
                     junos_module.pyez_exception.ConnectError) as ex:
                 results['msg'] += ' Reboot failed. Error: %s' % (str(ex))
                 junos_module.fail_json(**results)
+            else:
+                try:
+                    junos_module.close()
+                except (junos_module.ncclient_exception.TimeoutExpiredError):
+                    junos_module.logger.debug("Ignoring TimeoutError for close call")
+
             junos_module.logger.debug("Reboot RPC successfully initiated.")
             if reboot_pause > 0:
                 junos_module.logger.debug("Sleeping for %d seconds",
