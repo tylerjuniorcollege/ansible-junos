@@ -59,4 +59,6 @@
         reboot_pause: 50
         timeout: 1200
       tags:
-        - apply_to_both
+         - apply_to_backup
+         - apply_to_master
+         
