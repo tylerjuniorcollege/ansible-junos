@@ -59,7 +59,7 @@
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         kwargs: {"no-copy": true,"force": true,"unlink": true}
         timeout: 1200
-        reboot_pause: 50
+ #       reboot_pause: 50
         all_re: true
         reboot: no
         force_host: yes
