@@ -13,9 +13,9 @@
     netconf_port: 830
     wait_time: 3600
     valid_tags: ['apply_to_backup', 'apply_to_master', 'apply_to_both', 'disable_gres_and_nsr']
-    actions_apply_to_backup: ['Abort for Single RE devices', 'Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to backup RE', 'Reboot']
-    actions_apply_to_master: ['Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to master RE', 'Reboot']
-    actions_apply_to_both: ['Abort for Single RE devices', 'Copy the package to device', 'Delete old package files from both routing engines if any.', 'Perform request system storage cleanup', 'Apply software to both REs', 'Reboot']
+    actions_apply_to_backup: ['Abort for Single RE devices','Copy the package to device','Apply software to backup RE', 'Reboot']
+    actions_apply_to_master: ['Copy the package to device', 'Apply software to master RE', 'Reboot']
+    actions_apply_to_both: ['Abort for Single RE devices', 'Copy the package to device','Apply software to both REs', 'Reboot']
     
   tasks:
   
