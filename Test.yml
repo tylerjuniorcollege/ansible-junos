@@ -1,18 +1,11 @@
 ---
 
 - name: Playbook for applying software Master or Backup RE or to Both REs
-
   hosts: Junos_Test
-
   gather_facts: no
-
   connection: local
-
-
-
   roles:
-
-    - Juniper.junos
+  - Juniper.junos
 
   vars:
 
