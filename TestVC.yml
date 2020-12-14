@@ -50,7 +50,7 @@
           - apply_to_backup
 
     - name: Install package on Backup RE
-      juniper_junos_software_custom:
+      juniper_junos_software:
         all_re: yes
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
@@ -61,7 +61,7 @@
         - apply_to_backup
 
     - name: Install package on Master RE
-      juniper_junos_software_custom:
+      juniper_junos_software:
         all_re: yes
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
