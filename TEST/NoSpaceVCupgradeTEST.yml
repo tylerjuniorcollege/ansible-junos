@@ -47,11 +47,19 @@
  #       - apply_to_master
  #       - apply_to_both
         
+
+  tasks:
+
     - name: Install package on Both REs
       juniper_junos_software:
-          all_re: yes
-          local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
-          reboot: no
+        version: "{{ OS_version }}"
+        local_package: "{{ pkg_dir }}/{{ OS_package }}"
+        kwargs: {"no-copy": true,"force": true,"unlink": true}
+        timeout: 1200
+        reboot_pause: 50
+        all_re: true
+        reboot: no
+        force_host: yes
       tags: 
          - never
            
