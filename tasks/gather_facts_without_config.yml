@@ -1,5 +1,6 @@
----
+
 - name: Gather facts from Junos devices without configuration
 
   juniper_junos_facts:
 
+    provider: "{{ provider | default({}) }}"
