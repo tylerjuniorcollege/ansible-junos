@@ -20,9 +20,9 @@
  
 
     - block:
-       - import_tasks: tasks/juniper/facts/gather_facts_without_config.yml
+       - import_tasks: tasks/gather_facts_without_config.yml
 
-       - import_tasks: tasks/juniper/display/device_facts_info.yml
+       - import_tasks: tasks/device_facts_info.yml
          tags:
            - always
         
