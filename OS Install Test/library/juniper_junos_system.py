@@ -106,7 +106,7 @@ options:
         value of C(zeroize). The I(in_min) option is mutually exclusive with
         the I(at) option.
     required: false
-    default: 0
+    default: none
     type: int
   all_re:
     description:
@@ -265,7 +265,7 @@ def main():
             in_min=dict(type='int',
                         required=False,
                         aliases=['in'],
-                        default=0),
+                        default=None),
             all_re=dict(type='bool',
                         required=False,
                         default=True),
@@ -298,15 +298,18 @@ def main():
     if action == 'off' or action == 'power_off' or action == 'power-off':
         action = 'shutdown'
 
-    if action != 'reboot' and vmhost is True:
+    if action == 'reboot' and vmhost is True:
         junos_module.fail_json(msg='The vmhost option can only be used when '
                                    'the action option has the value "reboot".')
 
-    if action == "zeroize" :
+    #Four actions are expected - reboot, shutdown, halt and zeroize
+    if action not in ['reboot', 'shutdown', 'halt']:
         # at, in_min and other_re option only applies to reboot, shutdown, or halt action.
-        if (at != None) or (in_min != 0) or (other_re == True):
-            junos_module.fail_json(msg='The options at, in_min and other_re can only be used when '
-                                           'the action option has the value "zeroize"')
+        for arg_type,arg_val in {"at":at,"in_min":in_min,"other_re":other_re}:
+            if arg_val is not None:
+                junos_module.fail_json(msg='The %s option can only be used when '
+                                           'the action option has the value "reboot", '
+                                           '"shutdown", or "halt".' % arg_type)
 
     elif media is True:       # media option only applies to zeroize action.
         junos_module.fail_json(msg='The media option can only be used when '
@@ -330,7 +333,8 @@ def main():
             # </rpc-reply> and therefore might get an RpcTimeout.
             # (This is a known Junos bug.) Set the timeout low so this happens
             # relatively quickly.
-            if at == 'now' or (in_min == 0 and at is None):
+            if (at == 'now' or in_min == 0 or
+               (at is None and in_min is None)):
                 if junos_module.dev.timeout > 5:
                     junos_module.logger.debug("Decreasing device RPC timeout "
                                               "to 5 seconds.")
@@ -339,7 +343,7 @@ def main():
         # Execute the RPC.
         try:
             junos_module.logger.debug("Executing RPC")
-            junos_module.add_sw()
+
             if action == 'reboot':
                 got = junos_module.sw.reboot(in_min, at, all_re, None, vmhost, other_re)
             elif action == 'shutdown':
