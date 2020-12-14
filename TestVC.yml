@@ -49,7 +49,7 @@
         tags:
           - apply_to_backup
 
-  - name: Install package on Backup RE
+    - name: Install package on Backup RE
       juniper_junos_software_custom:
         all_re: yes
         version: "{{ OS_version }}"
@@ -60,7 +60,7 @@
       tags:
         - apply_to_backup
 
-   - name: Install package on Master RE
+    - name: Install package on Master RE
       juniper_junos_software_custom:
         all_re: yes
         version: "{{ OS_version }}"
