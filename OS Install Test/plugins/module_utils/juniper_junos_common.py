@@ -32,12 +32,11 @@
 #
 
 from __future__ import absolute_import, division, print_function
-from six import iteritems
 
 # Ansible imports
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.basic import BOOLEANS_TRUE, BOOLEANS_FALSE
-from ansible.plugins.action.normal import ActionModule as ActionNormal
+from ansible.module_utils.basic import boolean
+from ansible.module_utils._text import to_bytes
 
 # Standard library imports
 from argparse import ArgumentParser
@@ -119,10 +118,9 @@ except NameError:
     # Python 3
     basestring = str
 
-
 # Constants
 # Minimum PyEZ version required by shared code.
-MIN_PYEZ_VERSION = "2.1.7"
+MIN_PYEZ_VERSION = "2.2.0"
 # Installation URL for PyEZ.
 PYEZ_INSTALLATION_URL = "https://github.com/Juniper/py-junos-eznc#installation"
 # Minimum lxml version required by shared code.
@@ -141,24 +139,6 @@ JXMLEASE_INSTALLATION_URL = \
 # Minimum yaml version required by shared code.
 MIN_YAML_VERSION = "3.08"
 YAML_INSTALLATION_URL = "http://pyyaml.org/wiki/PyYAMLDocumentation"
-
-def convert_to_bool_func(arg):
-    """Try converting arg to a bool value using Ansible's aliases for bool.
-    Args:
-        arg: The value to convert.
-    Returns:
-        A boolean value if successfully converted, or None if not.
-    """
-    if arg is None or type(arg) == bool:
-        return arg
-    if isinstance(arg, basestring):
-        arg = arg.lower()
-    if arg in BOOLEANS_TRUE:
-        return True
-    elif arg in BOOLEANS_FALSE:
-        return False
-    else:
-        return None
 
 
 class ModuleDocFragment(object):
@@ -273,6 +253,13 @@ class ModuleDocFragment(object):
             is found using the algorithm below, then the SSH private key file
             specified in the user's SSH configuration, or the
             operating-system-specific default is used.
+          - This must be in the RSA PEM format, and not the newer OPENSSH
+            format. To check if the private key is in the correct format, issue
+            the command `head -n1 ~/.ssh/some_private_key` and ensure that
+            it's RSA and not OPENSSH. To create a key in the RSA PEM format,
+            issue the command `ssh-keygen -m PEM -t rsa -b 4096`. To convert
+            an OPENSSH key to an RSA key, issue the command `ssh-keygen -p -m
+            PEM -f ~/.ssh/some_private_key`
         required: false
         default: The first defined value from the following list
                  1) The C(ANSIBLE_NET_SSH_KEYFILE) environment variable.
@@ -321,6 +308,24 @@ class ModuleDocFragment(object):
         type: str
         aliases:
           - username
+      cs_user:
+        description:
+          - The username used to authenticate with the console server over SSH. 
+            This option is only required if you want to connect to a device over console
+             using SSH as transport. Mutually exclusive with the I(console) option.
+        required: false
+        type: str
+        aliases:
+          - console_username
+      cs_passwd:
+        description:
+          - The password used to authenticate with the console server over SSH. 
+            This option is only required if you want to connect to a device over console
+             using SSH as transport. Mutually exclusive with the I(console) option.
+        required: false
+        type: str
+        aliases:
+          - console_password
 '''
 
     LOGGING_DOCUMENTATION = '''
@@ -463,6 +468,15 @@ connection_spec = {
                    # Default behavior coded in JuniperJunosActionModule.run()
                    default=None,
                    no_log=True),
+    'cs_user': dict(type='str',
+                 aliases=['console_username'],
+                 required=False,
+                 default=None),
+    'cs_passwd': dict(type='str',
+                   aliases=['console_password'],
+                   required=False,
+                   default=None,
+                   no_log=True),
     'ssh_private_key_file': dict(type='path',
                                  required=False,
                                  aliases=['ssh_keyfile'],
@@ -497,21 +511,14 @@ connection_spec = {
                     required=False,
                     default=30),
 }
+
 # Connection arguments which are mutually exclusive.
 connection_spec_mutually_exclusive = [['mode', 'console'],
                                       ['port', 'console'],
                                       ['baud', 'console'],
-                                      ['attempts','console']]
-# Keys are connection options. Values are a list of task_vars to use as the
-# default value.
-connection_spec_fallbacks = {
-    'host': ['inventory_hostname', 'ansible_host'],
-    'user': ['ansible_connection_user', 'ansible_ssh_user', 'ansible_user'],
-    'passwd': ['ansible_ssh_pass', 'ansible_pass'],
-    'port': ['ansible_ssh_port', 'ansible_port'],
-    'ssh_private_key_file': ['ansible_ssh_private_key_file',
-                             'ansible_private_key_file']
-}
+                                      ['attempts','console'],
+                                      ['cs_user', 'console'],
+                                      ['cs_passwd', 'console']]
 
 # Specify the provider spec with options matching connection_spec.
 provider_spec = {
@@ -569,25 +576,8 @@ CONFIG_ACTION_CHOICES = ['set', 'merge', 'update',
                          'replace', 'override', 'overwrite']
 # Supported configuration modes
 CONFIG_MODE_CHOICES = ['exclusive', 'private']
-
-
-def convert_to_bool_func(arg):
-    """Try converting arg to a bool value using Ansible's aliases for bool.
-    Args:
-        arg: The value to convert.
-    Returns:
-        A boolean value if successfully converted, or None if not.
-    """
-    if arg is None or type(arg) == bool:
-        return arg
-    if isinstance(arg, basestring):
-        arg = arg.lower()
-    if arg in BOOLEANS_TRUE:
-        return True
-    elif arg in BOOLEANS_FALSE:
-        return False
-    else:
-        return None
+# Supported configuration models
+CONFIG_MODEL_CHOICES = ['openconfig', 'custom', 'ietf', 'True']
 
 
 class JuniperJunosModule(AnsibleModule):
@@ -605,7 +595,6 @@ class JuniperJunosModule(AnsibleModule):
         check_lxml_etree: Verify the lxml Etree library is present and
                           functional.
         check_yaml: Verify the YAML library is present and functional.
-        convert_to_bool: Try converting to bool using aliases for bool.
         parse_arg_to_list_of_dicts: Parses string_val into a list of dicts.
         parse_ignore_warning_option: Parses the ignore_warning option.
         parse_rollback_option: Parses the rollback option.
@@ -998,7 +987,7 @@ class JuniperJunosModule(AnsibleModule):
             - PyEZ not installed (unable to import).
             - PyEZ version < minimum.
             - check_device and PyEZ Device object can't be imported
-            - check_exception and PyEZ excepetions can't be imported
+            - check_exception and PyEZ exceptions can't be imported
         """
         self._check_library('junos-eznc', HAS_PYEZ_VERSION,
                             PYEZ_INSTALLATION_URL, minimum=minimum,
@@ -1076,15 +1065,6 @@ class JuniperJunosModule(AnsibleModule):
         """
         self._check_library('yaml', HAS_YAML_VERSION,
                             YAML_INSTALLATION_URL, minimum=minimum)
-
-    def convert_to_bool(self, arg):
-        """Try converting arg to a bool value using Ansible's aliases for bool.
-        Args:
-            arg: The value to convert.
-        Returns:
-            A boolean value if successfully converted, or None if not.
-        """
-        return convert_to_bool_func(arg)
 
     def parse_arg_to_list_of_dicts(self,
                                    option_name,
@@ -1164,7 +1144,10 @@ class JuniperJunosModule(AnsibleModule):
                 if allow_bool_values is True:
                     # Try to convert it to a boolean value. Will be None if it
                     # can't be converted.
-                    bool_val = self.convert_to_bool(v)
+                    try:
+                        bool_val = boolean(v)
+                    except TypeError:
+                        bool_val = None
                     if bool_val is not None:
                         v = bool_val
                 return_item[k] = v
@@ -1186,16 +1169,17 @@ class JuniperJunosModule(AnsibleModule):
         if ignore_warn_list is None:
             return ignore_warn_list
         if len(ignore_warn_list) == 1:
-            bool_val = self.convert_to_bool(ignore_warn_list[0])
-            if bool_val is not None:
-                return bool_val
-            elif isinstance(ignore_warn_list[0], basestring):
-                return ignore_warn_list[0]
-            else:
-                self.fail_json(msg="The value of the ignore_warning option "
-                                   "(%s) is invalid. Unexpected type (%s)." %
-                                   (ignore_warn_list[0],
-                                    type(ignore_warn_list[0])))
+            try:
+                bool_val = boolean(ignore_warn_list[0])
+                if bool_val is not None:
+                    return bool_val
+            except TypeError:
+                if isinstance(ignore_warn_list[0], basestring):
+                    return ignore_warn_list[0]
+            self.fail_json(msg="The value of the ignore_warning option "
+                               "(%s) is invalid. Unexpected type (%s)." %
+                               (ignore_warn_list[0],
+                                type(ignore_warn_list[0])))
         elif len(ignore_warn_list) > 1:
             for ignore_warn in ignore_warn_list:
                 if not isinstance(ignore_warn, basestring):
@@ -1255,6 +1239,9 @@ class JuniperJunosModule(AnsibleModule):
             self.close()
             log_connect_args = dict(connect_args)
             log_connect_args['passwd'] = 'NOT_LOGGING_PARAMETER'
+            if 'cs_passwd' in log_connect_args: 
+                log_connect_args['cs_passwd'] = 'NOT_LOGGING_PARAMETER'
+                
             self.logger.debug("Creating device parameters: %s",
                               log_connect_args)
             timeout = connect_args.pop('timeout')
@@ -1303,13 +1290,25 @@ class JuniperJunosModule(AnsibleModule):
         """
         self.sw = jnpr.junos.utils.sw.SW(self.dev)
 
-    def open_configuration(self, mode):
+    def open_configuration(self, mode, ignore_warning=None):
         """Open candidate configuration database in exclusive or private mode.
         Failures:
             - ConnectError: When there's a problem with the PyEZ connection.
             - RpcError: When there's a RPC problem including an already locked
                         config or an already opened private config.
         """
+
+        ignore_warn=['uncommitted changes will be discarded on exit']
+        # if ignore_warning is a bool, pass the bool
+        # if ignore_warning is a string add to the list
+        # if ignore_warning is a list, merge them
+        if ignore_warning != None and isinstance(ignore_warning, bool):
+            ignore_warn = ignore_warning
+        elif ignore_warning != None and isinstance(ignore_warning, str):
+            ignore_warn.append(ignore_warning)
+        elif ignore_warning != None and isinstance(ignore_warning, list):
+            ignore_warn = ignore_warn + ignore_warning
+
         # Already have an open configuration?
         if self.config is None:
             if mode not in CONFIG_MODE_CHOICES:
@@ -1323,8 +1322,7 @@ class JuniperJunosModule(AnsibleModule):
                 elif config.mode == 'private':
                     self.dev.rpc.open_configuration(
                         private=True,
-                        ignore_warning='uncommitted changes will be '
-                                       'discarded on exit')
+                        ignore_warning=ignore_warn)
             except (pyez_exception.ConnectError,
                     pyez_exception.RpcError) as ex:
                 self.fail_json(msg='Unable to open the configuration in %s '
@@ -1357,9 +1355,10 @@ class JuniperJunosModule(AnsibleModule):
                                    (str(ex)))
 
     def get_configuration(self, database='committed', format='text',
-                          options={}, filter=None):
+                          options={}, filter=None, model=None,
+                          namespace=None, remove_ns=True):
         """Return the device configuration in the specified format.
-        Return the datbase device configuration datbase in the format format.
+        Return the database device configuration database in the format format.
         Pass the options specified in the options dict and the filter specified
         in the filter argument.
         Args:
@@ -1403,7 +1402,10 @@ class JuniperJunosModule(AnsibleModule):
         config = None
         try:
             config = self.dev.rpc.get_config(options=options,
-                                             filter_xml=filter)
+                                             filter_xml=filter,
+                                             model=model,
+                                             remove_ns=remove_ns,
+                                             namespace=namespace)
             self.logger.debug("Configuration retrieved.")
         except (self.pyez_exception.RpcError,
                 self.pyez_exception.ConnectError) as ex:
@@ -1415,7 +1417,7 @@ class JuniperJunosModule(AnsibleModule):
             if not isinstance(config, self.etree._Element):
                 self.fail_json(msg='Unexpected configuration type returned. '
                                    'Configuration is: %s' % (str(config)))
-            if config.tag != 'configuration-text':
+            if model is None and config.tag != 'configuration-text':
                 self.fail_json(msg='Unexpected XML tag returned. '
                                    'Configuration is: %s' %
                                    (etree.tostring(config, pretty_print=True)))
@@ -1424,7 +1426,7 @@ class JuniperJunosModule(AnsibleModule):
             if not isinstance(config, self.etree._Element):
                 self.fail_json(msg='Unexpected configuration type returned. '
                                    'Configuration is: %s' % (str(config)))
-            if config.tag != 'configuration-set':
+            if model is None and config.tag != 'configuration-set':
                 self.fail_json(msg='Unexpected XML tag returned. '
                                    'Configuration is: %s' %
                                    (etree.tostring(config, pretty_print=True)))
@@ -1433,7 +1435,7 @@ class JuniperJunosModule(AnsibleModule):
             if not isinstance(config, self.etree._Element):
                 self.fail_json(msg='Unexpected configuration type returned. '
                                    'Configuration is: %s' % (str(config)))
-            if config.tag != 'configuration':
+            if model is None and config.tag != 'configuration':
                 self.fail_json(msg='Unexpected XML tag returned. '
                                    'Configuration is: %s' %
                                    (etree.tostring(config, pretty_print=True)))
@@ -1792,7 +1794,7 @@ class JuniperJunosModule(AnsibleModule):
                 if getattr(self, 'destfile', None) is None:
                     self.destfile = self.params.get('dest')
                 else:
-                    mode = 'a'
+                    mode = 'ab'
             elif self.params.get('dest_dir') is not None:
                 dest_dir = self.params.get('dest_dir')
                 hostname = self.params.get('host')
@@ -1805,85 +1807,11 @@ class JuniperJunosModule(AnsibleModule):
                 file_path = os.path.normpath(os.path.join(dest_dir, file_name))
         if file_path is not None:
             try:
+                # Use ansible utility to convert objects to bytes
+                # to achieve Python2/3 compatibility
                 with open(file_path, mode) as save_file:
-                    save_file.write(text.encode(encoding='utf-8'))
+                    save_file.write(to_bytes(text, encoding='utf-8'))
                 self.logger.debug("Output saved to: %s.", file_path)
             except IOError:
                 self.fail_json(msg="Unable to save output. Failed to "
                                    "open the %s file." % (file_path))
-
-
-class JuniperJunosActionModule(ActionNormal):
-    """A subclass of ActionNormal used by all juniper_junos_* modules.
-    All juniper_junos_* modules share common behavior which is implemented in
-    this class. This includes specific option fallback/default behavior and
-    passing the "hidden" _module_utils_path option to the module.
-    Public Methods:
-        convert_to_bool: Try converting to bool using aliases for bool.
-    """
-    def run(self, tmp=None, task_vars=None):
-        # The new connection arguments based on fallback/defaults.
-        new_connection_args = dict()
-
-        # Get the current connection args from either provider or the top-level
-        if 'provider' in self._task.args:
-            connection_args = self._task.args['provider']
-        else:
-            connection_args = self._task.args
-
-        # The environment variables used by Ansible Tower
-        if 'user' not in connection_args:
-            net_user = os.getenv('ANSIBLE_NET_USERNAME')
-            if net_user is not None:
-                new_connection_args['user'] = net_user
-                connection_args['user'] = net_user
-        if 'passwd' not in connection_args:
-            net_passwd = os.getenv('ANSIBLE_NET_PASSWORD')
-            if net_passwd is not None:
-                new_connection_args['passwd'] = net_passwd
-                connection_args['passwd'] = net_passwd
-        if 'ssh_private_key_file' not in connection_args:
-            net_key = os.getenv('ANSIBLE_NET_SSH_KEYFILE')
-            if net_key is not None:
-                new_connection_args['ssh_private_key_file'] = net_key
-                connection_args['ssh_private_key_file'] = net_key
-
-        # The values set by Ansible command line arguments, configuration
-        # settings, or environment variables.
-        for key in connection_spec_fallbacks:
-            if key not in connection_args:
-                for task_var_key in connection_spec_fallbacks[key]:
-                    if task_var_key in task_vars:
-                        new_connection_args[key] = task_vars[task_var_key]
-                        break
-
-        # Backwards compatible behavior to fallback to USER env. variable.
-        if 'user' not in connection_args and 'user' not in new_connection_args:
-            user = os.getenv('USER')
-            if user is not None:
-                new_connection_args['user'] = user
-
-        # Copy the new connection arguments back into either top-level or
-        # the provider dictionary.
-        if 'provider' in self._task.args:
-            self._task.args['provider'].update(new_connection_args)
-        else:
-            self._task.args.update(new_connection_args)
-
-        # Pass the hidden _module_utils_path option
-        module_utils_path = os.path.normpath(os.path.dirname(__file__))
-        self._task.args['_module_utils_path'] = module_utils_path
-        # Pass the hidden _module_name option
-        self._task.args['_module_name'] = self._task.action
-
-        # Call the parent action module.
-        return super(JuniperJunosActionModule, self).run(tmp, task_vars)
-
-    def convert_to_bool(self, arg):
-        """Try converting arg to a bool value using Ansible's aliases for bool.
-        Args:
-            arg: The value to convert.
-        Returns:
-            A boolean value if successfully converted, or None if not.
-        """
-        return convert_to_bool_func(arg)
