@@ -109,8 +109,6 @@ class ActionModule(ActionNormal):
         self._task.args['_module_utils_path'] = module_utils_path
         # Pass the hidden _module_name option
         self._task.args['_module_name'] = self._task.action
-        # Pass the hidden _ansible_host option
-        self._task.args['_ansible_host'] = task_vars['ansible_host']
 
         # Call the parent action module.
         return super(ActionModule, self).run(tmp, task_vars)
