@@ -56,8 +56,6 @@ description:
     This action is generally equivalent to the C(request system software add)
     operational-mode CLI command. It performs the following
     steps in order:
-
-
     #. Compare the currently installed Junos version to the desired version
        specified by the I(version) option.
     
@@ -323,7 +321,6 @@ EXAMPLES = '''
   gather_facts: no
   collections:
     - Juniper.junos_collection
-
   tasks:
     - name: Execute a basic Junos software upgrade.
       juniper_junos_software:
@@ -332,10 +329,9 @@ EXAMPLES = '''
     - name: Print the complete response.
       debug:
         var: response
-
 ###### OLD EXAMPLES ##########
     - junos_install_os:
-        host={{ inventory_hostname }}
+        host={{ ansible_host }}
         version=12.1X46-D10.2
         package=/usr/local/junos/images/junos-vsrx-12.1X46-D10.2-domestic.tgz
         logfile=/usr/local/junos/log/software.log
@@ -394,7 +390,6 @@ from ansible_collections.Juniper.junos_collection.plugins.module_utils import ju
 
 def parse_version_from_filename(filename):
     """Attempts to parse a version string from the filename of a Junos package.
-
     There is wide variety in the naming schemes used by Junos software
     packages. This function attempts to parse the version string from the
     filename, but may not be able to accurately do so. It's also not
@@ -402,10 +397,8 @@ def parse_version_from_filename(filename):
     of software in the file. (A user may have renamed it.)
     If the filename does not appear to be a Junos package (maybe some other
     type of package which can be installed on Junos devices), then return None.
-
     Args:
         filename - The filename from which to parse the version string.
-
     Returns:
         The version string, or None if unable to parse.
     """
@@ -431,7 +424,6 @@ def define_progress_callback(junos_module):
     """
     def myprogress(_, report):
         """A progress function which logs report at level INFO.
-
         Args:
           _: The PyEZ device object. Unused because the logger already knows.
           report: The string to be logged.
