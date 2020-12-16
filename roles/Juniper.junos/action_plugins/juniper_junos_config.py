@@ -114,4 +114,3 @@ class ActionModule(ActionNormal):
 
         # Call the parent action module.
         return super(ActionModule, self).run(tmp, task_vars)
-© 2020 GitHub, Inc.
