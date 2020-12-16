@@ -1,6 +1,6 @@
 ---
 - name: Load and commit configuration 
-  hosts: Junos_all
+  hosts: Junos_Test
   roles:
     - Juniper.junos
   connection: local
