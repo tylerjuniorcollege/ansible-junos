@@ -1,4 +1,4 @@
----
+  ---
 - name: Install Junos OS - EX3400
   hosts: Junos_all
   roles:
@@ -15,14 +15,3 @@
       timeout: 1200
       reboot: yes
       force_host: yes
-      register: sw
-      notify:
-      - wait_reboot
-
-  handlers:
-    - name: wait_reboot
-      wait_for: 
-        host: "{{ ansible_host }}"
-        port: "{{ netconf_port }}"
-        timeout: "{{ wait_time }}"
-      when: not sw.check_mode
