@@ -11,7 +11,7 @@
 
   - name: install local package on remote device
     junipernetworks.junos.junos_package:
-      src: junos-vsrx-12.1X46-D10.2-domestic.tgz
+      src: /var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz
       timeout: 1200
       reboot: yes
       force_host: yes
