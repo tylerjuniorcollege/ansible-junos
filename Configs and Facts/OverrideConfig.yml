@@ -3,14 +3,14 @@
   hosts: Junos_Test
   roles:
     - Juniper.junos
-  connection: local
+  connection: netconf
   gather_facts: no
 
   tasks:
     - name: Load configuration from a local file and commit
       juniper_junos_config:
         load: "override"
-        src: /var/lib/awx/custom-venv/junos/configuration/text/PERFARTSSW03.txt
+        src: /var/lib/awx/custom-venv/junos/configuration/text/PERFARTSSW02.txt
       register: response
     - name: Print the response
       debug:
