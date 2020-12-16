@@ -17,3 +17,5 @@
       provider: 
          transport: netconf
          host: "{{ ansible_host }}"
+         port: 830
+  
