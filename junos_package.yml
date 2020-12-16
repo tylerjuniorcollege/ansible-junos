@@ -16,6 +16,5 @@
       force_host: yes
       provider: 
          transport: netconf
-         host: ansible_host
+         host: "{{ ansible_host }}"
          port: 830
-  
