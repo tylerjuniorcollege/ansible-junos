@@ -13,8 +13,6 @@
     
 
   tasks:
-    - name: Checking NETCONF connectivity
-      wait_for: host={{ inventory_hostname }} port=830 timeout=5
     - name: Install Junos OS package
       software:
         reboot: yes
@@ -26,8 +24,8 @@
 
   handlers:
     - name: wait_reboot
-      wait_for:
-       host: {{ ansible_host }} 
-       port: 830 
-       timeout: {{ wait_time }}
+      wait_for: 
+        host: "{{ ansible_host }}"
+        port: "{{ netconf_port }}"
+        timeout: "{{ wait_time }}"
       when: not sw.check_mode
