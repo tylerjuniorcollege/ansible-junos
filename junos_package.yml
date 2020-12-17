@@ -1,20 +1,13 @@
 ---
-- name: Install Junos OS - EX3400
-  hosts: Junos_all
-  roles:
-    - Juniper.junos 
+- name: upgrade junos
+  hosts: junos_all
   connection: local
   gather_facts: no
-  
 
   tasks:
-
-  - name: install local package on remote device
-    junipernetworks.junos.junos_package:
-      src: /var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz
-      reboot: yes
-      force_host: yes
-      provider: 
-         transport: netconf
-         host: AnsibleTest_VC
-         port: 830
+  - name: install local package on remote device and reboot the device
+    junos_package:
+      src: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
+      reboot: true
+      provider: "{{ credentials }}"
+      version: 20.2R1-S2.1
