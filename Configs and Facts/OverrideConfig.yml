@@ -10,7 +10,7 @@
     - name: Load configuration from a local file and commit
       juniper_junos_config:
         load: "override"
-        src: /var/lib/awx/custom-venv/junos/configuration/text/WELCOME_CENTER_MAIN.txt
+        src: /var/lib/awx/custom-venv/junos/configuration/text/WELCOME_CENTER_OFFICES.txt
       register: response
     - name: Print the response
       debug:
