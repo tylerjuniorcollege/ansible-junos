@@ -1,6 +1,6 @@
 ---
 - name: upgrade junos
-  hosts: junos_all
+  hosts: Junos_all
   connection: local
   gather_facts: no
 
