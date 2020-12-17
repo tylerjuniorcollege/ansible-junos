@@ -19,3 +19,4 @@
          host: "{{ ansible_host }}"
          port: 830
          password: A!!Th1ng$C0n5!d3r3d
+         validate: no
