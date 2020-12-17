@@ -16,6 +16,6 @@
       force_host: yes
       provider: 
          transport: netconf
-         host: AnsibleTest_VC
+         host: "{{ ansible_host }}"
          port: 830
          password: A!!Th1ng$C0n5!d3r3d
