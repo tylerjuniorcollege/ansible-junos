@@ -3,7 +3,7 @@
   hosts: Junos_all
   roles:
     - Juniper.junos 
-  connection: local
+  connection: netconf
   gather_facts: no
   
   vars:
@@ -22,9 +22,6 @@
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         timeout: 1200
-        reboot_pause: 50
-        kwargs: {"force": true,"unlink": true}
-        all_re: true
         reboot: yes
         force_host: yes
       register: sw
