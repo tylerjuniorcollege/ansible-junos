@@ -23,7 +23,6 @@
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
         kwargs:
           unlink: true
-          no_copy: true
           force_host: true
         reboot: yes
         force_host: yes
