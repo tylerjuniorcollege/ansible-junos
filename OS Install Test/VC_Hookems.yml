@@ -19,14 +19,12 @@
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
        force_host: yes
        reboot: no
-       cleanfs: no
     
     - name: Install Hooks
       juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
         force_host: yes
         reboot: no
-	cleanfs: no
     
     - name: Install Junos OS package
       juniper_junos_software:
@@ -35,7 +33,6 @@
         kwargs: {"no-copy": true,"force": true,"unlink": true}
         reboot: yes
         force_host: yes
-	cleanfs: no
       register: sw
       notify:
       - wait_reboot
