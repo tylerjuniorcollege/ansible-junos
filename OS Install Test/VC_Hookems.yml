@@ -17,16 +17,16 @@
     - name: Install OS package
       juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
-       force_host: yes
+       remote_package: "var/tmp/os-package.tgz"
        reboot: no
-       kwargs: {"no-copy": true,"force": true,"unlink": true}
+  
     
     - name: Install Hooks
       juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
-        force_host: yes
+        remote_package: "var/tmp/os-package.tgz"
         reboot: no
-        kwargs: {"no-copy": true,"force": true,"unlink": true}
+        
     
     - name: Install Junos OS package
       juniper_junos_software:
