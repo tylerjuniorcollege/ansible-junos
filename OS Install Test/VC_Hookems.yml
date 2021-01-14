@@ -17,14 +17,14 @@
     - name: Install OS package
       juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
-       remote_package: "var/tmp/os-package.tgz"
+       remote_package: "/var/tmp/os-package.tgz"
        reboot: no
   
     
     - name: Install Hooks
       juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
-        remote_package: "var/tmp/os-package.tgz"
+        remote_package: "/var/tmp/os-package.tgz"
         reboot: no
         
     
