@@ -9,35 +9,31 @@
   vars:
     netconf_port: 830
     wait_time: 3600
-    install_timeout: 2000
-    checksum_timeout: 420
 
   tasks:
 
     - name: Install OS package
       juniper_junos_software:
        local_package: "/var/lib/awx/custom-venv/junos/Firmware/os-package.tgz"
-       remote_package: "/var/tmp/os-package.tgz"
-       cleanfs: no
+       force_host: yes
        reboot: no
-  
     
     - name: Install Hooks
       juniper_junos_software:
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/package-hooks-ex.tgz"
-        remote_package: "/var/tmp/os-package.tgz"
-        cleanfs: no
+        force_host: yes
         reboot: no
-        
     
     - name: Install Junos OS package
       juniper_junos_software:
         version: "20.2R1-S2.1"
         local_package: "/var/lib/awx/custom-venv/junos/Firmware/junos-arm-32-20.2R1-S2.1.tgz"
-        kwargs: {"no-copy": true,"force": true,"unlink": true}
-        cleanfs: no
-        reboot: yes
         force_host: yes
+        kwargs:
+          unlink: yes
+        reboot: yes
+        install_timeout: 2000
+        checksum_timeout: 420
       register: sw
       notify:
       - wait_reboot
