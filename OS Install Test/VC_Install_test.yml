@@ -21,7 +21,6 @@
       juniper_junos_software:
         version: "{{ OS_version }}"
         local_package: "{{ pkg_dir }}/{{ OS_package }}"
-        kwargs: {"force": true,"unlink": true}
         reboot: yes
         force_host: yes
       register: sw
