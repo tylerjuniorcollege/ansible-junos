@@ -7,8 +7,8 @@
   gather_facts: no
   
   vars:
-    OS_version: "18.1R3-S3.8"
-    OS_package: "junos-arm-32-18.1R3-S3.8.tgz"
+    OS_version: "17.3R3-S3.3"
+    OS_package: "jinstall-host-ex-4600-17.3R3-S3.3-signed.tgz"
     pkg_dir: "/var/lib/awx/custom-venv/junos/Firmware"
     install_timeout: 2000
     checksum_timeout: 420
