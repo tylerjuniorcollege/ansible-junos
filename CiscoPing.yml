@@ -1,5 +1,5 @@
 ---
-- name: ping
+- name: Test
   hosts: Cisco_all
   gather_facts: no
   connection: network_cli
@@ -7,6 +7,5 @@
     -cisco.ios
   tasks:
 
-   - name: Test reachability to 10.10.10.10 using default vrf
-     ios_ping:
-       dest: 10.220.200.1
+     - ios_facts:
+         gather_subset: all
