@@ -28,7 +28,6 @@
   - name: Collect configuration in text format from devices
     ios_facts:
       gather_subset: config
-      config_format: text
     register: "result_text"
 
   - name: copy collected configuration in configuration/text directory
