@@ -8,5 +8,5 @@
   tasks:
 
    - name: Test reachability to 10.10.10.10 using default vrf
-     cisco.ios_ping:
+     ios_ping:
        dest: 10.220.200.1
