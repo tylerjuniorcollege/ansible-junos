@@ -1,0 +1,10 @@
+---
+-name: ping
+ hosts: Cisco_all
+ gather_facts: no
+ connection: network_cli
+ task:
+
+  - name: Test reachability to 10.10.10.10 using default vrf
+    cisco.ios.ios_ping:
+    
