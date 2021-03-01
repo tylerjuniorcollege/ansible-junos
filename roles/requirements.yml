@@ -5,4 +5,4 @@ roles:
 collections: 
   - name: junipernetworks.junos
   - name: juniper
-  - name: cisco.ios.ios
+  - name: cisco.ios
