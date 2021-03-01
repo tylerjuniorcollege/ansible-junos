@@ -4,7 +4,7 @@
   gather_facts: no
   connection: network_cli
   roles:
-    -cisco.ios.
+    -cisco.ios
   tasks:
 
    - name: Test reachability to 10.10.10.10 using default vrf
