@@ -3,7 +3,7 @@
   hosts: Junos_all
   roles:
     - Juniper.junos 
-  connection: network_cli
+  connection: netconf
   gather_facts: no
   
 
