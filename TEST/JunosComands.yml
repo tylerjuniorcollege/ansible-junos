@@ -9,12 +9,6 @@
 
 
   tasks:
-    - name: adding os-package
+    - name: show version
       junos_command:
-        commands: "request system software add /var/tmp/os-package.tgz"
-        
-  tasks:
-    - name: adding hooks
-      junos_command:
-        commands: "request system software add /var/tmp/package-hooks-ex.tgz"  
-        
+        commands: "show version"
