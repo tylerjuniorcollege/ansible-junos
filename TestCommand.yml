@@ -1,6 +1,6 @@
 ---
 - name: Test
-  hosts: Junos_Test
+  hosts: Junos_all
   gather_facts: no
 
   vars:
