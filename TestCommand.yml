@@ -11,4 +11,5 @@
   tasks: 
     - name: Test 
       junos_command:
-        commands: set protocols pim rp static address 192.168.8.5
+        commands: 
+          -set protocols pim rp static address 192.168.8.5
