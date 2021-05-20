@@ -26,4 +26,4 @@
         - set system radius-server 10.0.6.45 port 1645
         - set system radius-server 10.0.6.45 secret {{vaultpass}}
         - set system radius-server 10.0.6.45 source-address {{ ansible_host }}
-       commit_check: yes
+       check_commit: yes
