@@ -14,5 +14,5 @@
         - set system authentication-order radius
         - set system radius-server 10.0.6.45 port 1645
         - set system radius-server 10.0.6.45 secret A!!Th1ng$C0n5!d3r3d
-        - set system radius-server 10.0.6.45 source-address {{ansible_host}}
+        - set system radius-server 10.0.6.45 source-address 10.190.0.2
        comment: update config
