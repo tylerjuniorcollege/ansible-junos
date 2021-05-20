@@ -1,5 +1,5 @@
-  ---
-- name: Install Junos OS - EX3400
+---
+- name: Junos Config Changes
   hosts: Junos_all
   roles:
     - Juniper.junos
