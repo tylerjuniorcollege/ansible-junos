@@ -1,0 +1,14 @@
+---
+- name: Delete Snap
+  hosts: Junos_Test
+  gather_facts: no
+
+  vars:
+    ansible_connection: netconf
+    ansible_command_timeout: 60
+
+
+  tasks: 
+    - name: Delete Snap
+      junos_command:
+        commands: request system snapshot delete * all-members

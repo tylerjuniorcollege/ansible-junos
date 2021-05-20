@@ -1,0 +1,15 @@
+---
+- name: Test
+  hosts: Cisco_all
+  gather_facts: no
+  connection: network_cli
+  roles:
+    -cisco.ios
+  vars: 
+    host: "{{ ansible_host }}"
+ 
+  tasks:
+
+     - ios_facts:
+         gather_subset: all
+         

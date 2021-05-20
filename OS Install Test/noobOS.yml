@@ -1,0 +1,24 @@
+---
+- name: Install Junos OS - EX3400
+  hosts: Junos_Test
+  roles:
+    - Juniper.junos 
+  connection: local
+  gather_facts: no
+  
+  vars:
+    OS_version: 20.2R1-S2.1
+    OS_package: junos-arm-32-20.2R1-S2.1.tgz
+    pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
+
+
+  tasks:
+
+    - name: Install Junos OS package
+      juniper_junos_software:
+        version: "{{ OS_version }}"
+        local_package: "{{ pkg_dir }}/{{ OS_package }}"
+        reboot: yes
+        kwargs:
+          unlink: yes
+        force_host: yes

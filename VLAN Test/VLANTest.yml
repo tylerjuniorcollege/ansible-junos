@@ -1,0 +1,17 @@
+---
+ - name: VLAN
+   hosts: Junos_Test
+   connection: local
+   gather_facts: no
+   tasks:
+
+    - name: remove VLAN configuration
+      junos_vlan:
+       vlan_id: 20
+       name: Media
+       state: absent
+    
+    - name: configure VLAN ID and name
+      junos_vlan:
+       name: DATA_2
+       vlan_id: 20 

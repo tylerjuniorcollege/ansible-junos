@@ -1,0 +1,18 @@
+---
+- name: Install Junos OS - EX3400
+  hosts: Junos_all
+  roles:
+    - Juniper.junos 
+  connection: local
+  gather_facts: no
+ 
+  tasks: 
+  
+   - name: load configure lines into device
+     junos_config:
+       lines:
+        - set protocols pim rp static address 192.168.8.5
+        - set protocols pim rp static address 192.168.8.6
+        - set protocols pim interface all mode sparse
+        - set protocols pim interface vme.0 disable
+       comment: update config
