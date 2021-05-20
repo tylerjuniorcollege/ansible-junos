@@ -18,7 +18,6 @@
    - name: load configure lines into device
      junos_config:
        lines:
-        - set system authentication-order password 
         - set system authentication-order radius
         - set system radius-server 10.0.6.45 port 1645
         - set system radius-server 10.0.6.45 secret {{vaultpass}}
