@@ -1,4 +1,3 @@
-  
 ---
 - name: Junos Config
   hosts: Junos_Test
