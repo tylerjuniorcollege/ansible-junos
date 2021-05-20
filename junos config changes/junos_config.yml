@@ -6,6 +6,16 @@
   connection: local
   gather_facts: no
  
+  vars: 
+    password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          39376631383339336564623236623938336264623430663263363165393534326532653264613238
+          3961653937356163663130316137623834363335656366660a383834303461303831633534343130
+          66636132373235633033666562393265393937666564363466653663393464363833626432376162
+          3963383562366330380a303762623434643966626639393231396632666661623232303562383664
+          61326336306663396462633338643162626432636330663564623263313736386230
+    
+
   tasks: 
   
    - name: load configure lines into device
@@ -14,6 +24,6 @@
         - set system authentication-order password 
         - set system authentication-order radius
         - set system radius-server 10.0.6.45 port 1645
-        - set system radius-server 10.0.6.45 secret "$9$fTQ36/Ctp0xNgJGUHk9ApBIceKMXx-cS-wYgJZUjiHqfz36CpBF3Cu"
+        - set system radius-server 10.0.6.45 secret "{{password}}"
         - set system radius-server 10.0.6.45 source-address "{{ ansible_host }}"
        comment: update config
