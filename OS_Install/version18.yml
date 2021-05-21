@@ -7,7 +7,7 @@
   gather_facts: no
   
   vars:
-    OS_version: 20.2R1-S2.1
+    OS_version: 18.1R3-S3.8
     OS_package: junos-arm-32-18.1R3-S3.8.tgz
     pkg_dir: /var/lib/awx/custom-venv/junos/Firmware
     netconf_port: 830
