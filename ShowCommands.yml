@@ -1,5 +1,5 @@
 ---
-- name: show vlans
+- name: show 
   hosts: Junos_all
   gather_facts: no
 
@@ -9,6 +9,6 @@
 
 
   tasks:
-    - name: Show vlans
+    - name: Show lldp neighbors
       junos_command:
-        commands: show vlan
+        commands: show lldp neighbors
