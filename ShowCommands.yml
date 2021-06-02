@@ -9,6 +9,6 @@
 
 
   tasks:
-    - name: Show lldp neighbors
+    - name: Show virtual-chassis
       junos_command:
-        commands: show lldp neighbors
+        commands: show virtual-chassis
