@@ -1,4 +1,4 @@
- ---
+---
 - name: Collect default set of facts
   hosts: Junos_all
   gather_facts: yes
