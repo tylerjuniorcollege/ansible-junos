@@ -7,7 +7,7 @@
   gather_facts: no
  
   # vars: 
-    uplink port: 
+      # uplink port: 
 
   tasks: 
    - name: load configure lines into device
