@@ -18,7 +18,7 @@
         - set snmp trap-group FORTINAC targets 10.0.6.171
         - set snmp trap-group FORTINAC categories routing
         - set forwarding-options dhcp-relay server-group TJC-DHCP-SERVERS 10.0.6.56
-      # - set switch-options mac-notification notification-interval 5
+        - set switch-options mac-notification notification-interval 5
       # - set switch-options {{uplink port}} no-mac-notification  
 
        comment: update config
