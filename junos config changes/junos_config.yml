@@ -1,5 +1,5 @@
 ---
-- name: junos config
+- name: radius
   hosts: Junos_all
   roles:
     - Juniper.junos 
