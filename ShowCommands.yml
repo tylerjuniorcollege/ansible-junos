@@ -11,4 +11,4 @@
   tasks:
     - name: Show virtual-chassis
       junos_command:
-        commands: show virtual-chassis
+        commands: show chassis hardware
