@@ -1,0 +1,38 @@
+---
+- name: Mist
+  hosts: Junos_all
+  roles:
+    - Juniper.junos 
+  connection: local
+  gather_facts: no
+ 
+  vars: 
+    vaultpass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          32633633383833356136376663353033373566383236346435653138386664613736323235343633
+          6561336465323961646264346331396263386364316430390a353464656337363239613061663539
+          65616262373935386164313035336364316666643138623538656536346663663033313831616234
+          6538336364653133350a663337383932623630373462653333626662653764323234303666653438
+          30363664333937623662396265636131383862343261373436386531643866643137363931303338
+          30373662353766373162663338656131326135376536343731386238343034383837333732633762
+          63373530303861626635336534626263343835363365666338646661303864656533653031626334
+          39356530386161323439623663646133396263363136383031636339616332313332356361306231
+          33326364663365636261636332643835396239383434333730326130303061363266653965383834
+          65613032643035363465626138323666626262666134313565303837633030333066613835616130
+          306435343165346431386431623265313036
+
+  tasks: 
+   - name: load configure lines into device
+     junos_config:
+       lines:
+        - set system services ssh protocol-version v2
+        - set system authentication-order password
+        - set system login user mist class super-user
+        - set system login user mist authentication encrypted-password $6$WSy/wQ.1Pta0rfNq$VFteJC6oWh1Lnn/8MiLLk5fN.WCZtoWINOmFCs0mDmmTzhZ5ctBMCjEKApgAgpOmDHRQqCgdAzV0A4BsnmHf9/
+        - set system login user mist authentication ssh-rsa "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDkJTIZOrI6mXY+ZGxFVwr2liuSIr89UzCadYaoXM3oXE1ptIzvkA8eaRNhLJ1BNv0uNANPoYtFLDrI2IQEtoemkt3X7dbBc9HHZYjeYOcjp0xYbRuAvE8s3W6kbMwM1rUI9Ch9I6nv/oS3MRwHujuCohhTiUUqW1phSJSDxBIyPXjwlZFk8YBY6Idb3/M8mWa2gtGp1hvpYPGM5DGg/0waJbUr9xMiFke4VJeEBzSVhrfLYtNnGLjz5fSB30oSIfiV+bnpzxJO5tGDIcDaa5ZuuuBB5I071lyYQVadXm474mWBg3pzFdr3Prq3+XDvkYzsDq/cDr1+sNY5IByrebVr3r4N8M57Rpm5F19bB+kSwWIs29SDuuR9grkNE000JADofUewOy+gqQCU48xnL1AiAbFD5dpnWesmMtnhB5yTgWTsjcQmrJGDJciUzAZIXyzGcmhojbDbhO+vAorHBaSsd7ykxCEK6zD0AasB3W1Lty1IZElakwaYRaKNvXjxM2M= mist@c6ea753e-ef55-4baa-b111-3e4ce402330d"
+        - set system services outbound-ssh client mist device-id c6ea753e-ef55-4baa-b111-3e4ce402330d
+        - system services outbound-ssh client mist secret {{ vaultpass }}
+        - set system services outbound-ssh client mist services netconf keep-alive retry 12 timeout 5
+        - set system services outbound-ssh client mist oc-term.mistsys.net port 2200 timeout 60 retry 100
+   
+       comment: update config
