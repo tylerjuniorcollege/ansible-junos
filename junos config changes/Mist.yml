@@ -32,7 +32,7 @@
         - set system authentication-order password
         - set system login user mist class super-user
         - set system login user mist authentication encrypted-password {{ encryptedpassword }}
-        - set system login user mist authentication ssh-rsa {{ shh }}
+        - set system login user mist authentication ssh-rsa {{ ssh }}
         - set system services outbound-ssh client mist device-id c6ea753e-ef55-4baa-b111-3e4ce402330d
         - set system services outbound-ssh client mist secret {{ vaultpass }}
         - set system services outbound-ssh client mist services netconf keep-alive retry 12 timeout 5
