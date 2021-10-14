@@ -28,7 +28,7 @@
         - set system services ssh protocol-version v2
         - set system authentication-order password
         - set system login user mist class super-user
-        - set system login user mist authentication encrypted-password {{ encrypted-password }}
+        - set system login user mist authentication encrypted-password {{ encryptedpassword }}
         - set system login user mist authentication ssh-rsa {{ ssh }}
         - set system services outbound-ssh client mist device-id c6ea753e-ef55-4baa-b111-3e4ce402330d
         - system services outbound-ssh client mist secret {{ vaultpass }}
