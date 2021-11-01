@@ -10,5 +10,5 @@
   tasks:   
    - name: load configure lines into device
      junos_command:
-       command:
+       commands:
         - show interfaces interface-range XIRRUS-WAP
