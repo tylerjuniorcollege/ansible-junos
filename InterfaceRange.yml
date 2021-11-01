@@ -5,13 +5,10 @@
     - Juniper.junos 
   connection: local
   gather_facts: no
-
-  vars: 
-      range: "{{ XIRRUS-WAP }}" 
       
 
   tasks:   
    - name: run multiple commands on remote nodes
      junipernetworks.junos.junos_command:
         commands:
-         - show interfaces interface-range {{ range }}
+         - show interfaces interface-range XIRRUS-WAP
