@@ -9,6 +9,6 @@
     - name: collecting info
       junipernetworks.junos.junos_config:
         lines:
-          - show interface interface-range "XIRRUS-WAP"
+          - run show interface interface-range "XIRRUS-WAP"
      #   junos_facts:
      #   gather_network_resources: interfaces
