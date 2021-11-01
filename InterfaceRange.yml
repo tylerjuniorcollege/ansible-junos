@@ -1,6 +1,6 @@
 ---
 - name: Test
-  hosts: Junos_all
+  hosts: Junos_test
   roles:
     - Juniper.junos 
   connection: local
