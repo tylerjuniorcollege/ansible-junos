@@ -1,0 +1,13 @@
+---
+- name: Test
+  hosts: Junos_all
+  roles:
+    - Juniper.junos 
+  connection: local
+  gather_facts: no
+
+
+  tasks:   
+   - name: Retrieve Junos OS version
+      junos_command:
+        commands: show interface interface-range XIRRUS-WAP
