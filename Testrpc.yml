@@ -11,5 +11,5 @@
      junos_rpc:
         rpc: get-interface-information
         args:
-          interface-name: ge-0/0/1
+          interface-name: XIRRUS-WAP
           media: true
