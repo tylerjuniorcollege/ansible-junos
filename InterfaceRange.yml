@@ -6,7 +6,9 @@
   connection: local
   gather_facts: no
 
-  vars: range: "{{ XIRRUS-WAP }}"
+  vars: 
+      range: "{{ XIRRUS-WAP }}" 
+      
 
   tasks:   
    - name: run multiple commands on remote nodes
