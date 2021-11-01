@@ -8,6 +8,7 @@
 
 
   tasks:   
-   - name: Retrieve Junos OS version
-     junos_command:
-      commands: show interface interface-range XIRRUS-WAP
+   - name: load configure lines into device
+     junos_config:
+       lines:
+        - show interface interface-range XIRRUS-WAP
