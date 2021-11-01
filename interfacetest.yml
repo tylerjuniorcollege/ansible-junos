@@ -10,7 +10,7 @@
          
   tasks: 
    - name: load configure lines into device
-     junipernetworks.junos.junos_l3_interfaces:
+     junos_l3_interfaces:
        config:
         - name: interface-range XIRRUS-WAP
      state: gathered
