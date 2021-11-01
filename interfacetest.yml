@@ -13,4 +13,4 @@
      junipernetworks.junos.junos_l3_interfaces:
        config:
         - name: interface-range XIRRUS-WAP
-       state: show
+     state: gathered
