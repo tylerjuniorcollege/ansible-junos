@@ -11,4 +11,4 @@
   tasks:
     - name: Show virtual-chassis
       junos_command:
-        commands: show chassis hardware
+        commands: show interface interface-range XIRRUS-WAP
