@@ -8,7 +8,7 @@
   
   
   tasks: 
-   - name: Delete JUNOS L3 logical interface
+   - name: JUNOS L3 logical interface
      junipernetworks.junos.junos_l3_interfaces:
         config:
         - name: interface-range XIRRUS-WAP
