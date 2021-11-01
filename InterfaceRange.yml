@@ -9,7 +9,7 @@
 
   tasks:   
    - name: run multiple commands on remote nodes
-      junos_config:
+     junos_config:
       lines:
         - show interface interface-range XIRRUS-WAP
          
