@@ -4,10 +4,11 @@
   roles:
     - Juniper.junos 
   connection: local
-  gather_facts: no
+  gather_facts: yes
 
 
   tasks:   
-   - name: load configure lines into device
-     junos_command:
-       commands: show interfaces interface-range "XIRRUS-WAP"
+   - name: run multiple commands on remote nodes
+     junipernetworks.junos.junos_command:
+        commands:
+         - show interfaces interface-range XIRRUS-WAP
