@@ -1,1 +1,14 @@
-
+---
+- name: deleting interface range
+  hosts: Junos_all
+  connection: local
+  gather_facts: no
+  
+  tasks:
+  
+    - name: collecting info
+      junipernetworks.junos.junos_config:
+        lines:
+          - show interface interface-range "XIRRUS-WAP"
+     #   junos_facts:
+     #   gather_network_resources: interfaces
