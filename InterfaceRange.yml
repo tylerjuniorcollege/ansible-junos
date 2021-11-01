@@ -9,6 +9,6 @@
 
   tasks:   
    - name: run multiple commands on remote nodes
-     junipernetworks.junos.junos_command:
+     junos_command:
         commands:
          - show interfaces interface-range XIRRUS-WAP
