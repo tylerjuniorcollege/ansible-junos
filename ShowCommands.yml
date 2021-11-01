@@ -3,9 +3,9 @@
   hosts: Junos_all
   gather_facts: no
 
- # vars:
- #   ansible_connection: netconf
- #   ansible_command_timeout: 60
+  vars:
+    ansible_connection: netconf
+    ansible_command_timeout: 60
 
 
   tasks:
