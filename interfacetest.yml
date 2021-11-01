@@ -11,4 +11,4 @@
   tasks: 
    - name: collect default set of facts and configuration
      junos_facts:
-        gather_subset: interface-range XIRRUS-WAP
+        gather_subset: interfaces
