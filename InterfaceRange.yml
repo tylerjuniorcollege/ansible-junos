@@ -9,6 +9,6 @@
 
   tasks:   
    - name: load configure lines into device
-     junos_config:
-       lines:
-        - show interface interface-range XIRRUS-WAP
+     junos_command:
+       command:
+        - show interfaces interface-range XIRRUS-WAP
