@@ -11,4 +11,5 @@
    - name: run multiple commands on remote nodes
      junos_command:
         commands:
-         - show interfaces interface-range XIRRUS-WAP
+         - "show interfaces interface-range XIRRUS-WAP"
+         
