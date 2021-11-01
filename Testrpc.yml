@@ -6,8 +6,7 @@
   connection: local
   gather_facts: no
  
-         
-   tasks: 
+  tasks: 
    - name: collect interface information using rpc
      junos_rpc:
         rpc: get-interface-information
