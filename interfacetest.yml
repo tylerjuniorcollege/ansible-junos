@@ -9,8 +9,6 @@
   vars: 
          
   tasks: 
-   - name: load configure lines into device
-     junos_l3_interfaces:
-       config:
-        - name: interface-range XIRRUS-WAP
-     state: gathered
+   - name: collect default set of facts and configuration
+     junos_facts:
+        gather_subset: interface-range XIRRUS-WAP
