@@ -7,7 +7,7 @@
   tasks:
   
     - name: collecting info
-      junipernetworks.junos.junos_config:
+      junos_config:
         lines:
           - "run show interface interface-range XIRRUS-WAP"
      #   junos_facts:
