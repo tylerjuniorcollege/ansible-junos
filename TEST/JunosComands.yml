@@ -3,12 +3,9 @@
   hosts: Junos_all
   gather_facts: yes
 
-  vars:
-    ansible_connection: netconf
-    ansible_command_timeout: 60
-
+ # vars:
 
   tasks:
-    - name: show version
+    - name: show command
       junos_command:
-        commands: "show version"
+        commands: "show interface interface-range XIRRUS-WAP"
