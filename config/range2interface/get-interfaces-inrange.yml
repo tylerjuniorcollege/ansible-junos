@@ -4,7 +4,8 @@
   gather_facts: no
   tasks:
     - name: Get Interfaces in Interface Ranges from config
-      junos_command: 
+      junos_command:
+        display: set
         commands:
           - "show configuration interfaces interface-range {{ range }} | match \"member ge-*\""
       register: dirtyInterfaces
