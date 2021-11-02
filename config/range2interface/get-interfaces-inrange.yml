@@ -2,6 +2,8 @@
 - name: Get Interfaces in Interface Ranges
   hosts: Junos_Test
   gather_facts: no
+  roles:
+    - Juniper.junos
   tasks:
     - name: Get Interfaces in Interface Ranges from config
       juniper_junos_command:
