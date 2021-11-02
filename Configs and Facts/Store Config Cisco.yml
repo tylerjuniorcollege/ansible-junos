@@ -1,0 +1,36 @@
+---
+- name: Gather Configuration
+  hosts: Cisco_all
+  gather_facts: no
+  connection: local
+  tasks:
+
+   - name: create configuration directory
+     file:
+       path: "/var/lib/awx/custom-venv/junos/configuration"
+       state: directory
+
+
+   - name: create configuration subdirectories
+     file:
+       path: "/var/lib/awx/custom-venv/junos/configuration/{{ item }}"
+       state: directory
+     with_items:
+       - text
+  
+
+- name: Collect configuration from devices
+  hosts: Cisco_all
+  connection: local
+  gather_facts: no
+  tasks:
+
+  - name: Collect configuration in text format from devices
+    ios_facts:
+      gather_subset: config
+    register: "result_text"
+
+  - name: copy collected configuration in configuration/text directory
+    copy: 
+      content: "{{ result_text.ansible_facts.ansible_net_config }}" 
+      dest: "/var/lib/awx/custom-venv/junos/configuration/text/{{ inventory_hostname }}.conf"

@@ -1,11 +1,11 @@
 ---
 - name: Collect default set of facts
-  hosts: Junos_all
+  hosts: Cisco_all
   gather_facts: yes
 
   vars:
     ansible_command_timeout: 60
-    ansible_connection: netconf
+    ansible_connection: network_cli
     connection_settings:
       host: "{{ ansible_host }}"
       port: 22

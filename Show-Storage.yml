@@ -1,0 +1,13 @@
+- name: Show storage space
+  hosts: Junos_all
+  gather_facts: no
+
+  vars:
+    ansible_connection: netconf
+    ansible_command_timeout: 60
+
+
+  tasks:
+    - name: Show storage
+      junos_command:
+        commands: show system storage

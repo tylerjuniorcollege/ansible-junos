@@ -1,0 +1,12 @@
+---
+- name: Collect default set of facts
+  hosts: Junos_all
+  gather_facts: yes
+
+  vars:
+    ansible_command_timeout: 60
+    ansible_connection: netconf
+    connection_settings:
+      host: "{{ ansible_host }}"
+      port: 22
+      timeout: 180
