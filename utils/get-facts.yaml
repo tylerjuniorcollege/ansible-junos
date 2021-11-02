@@ -1,0 +1,15 @@
+---
+- name: Gather Facts
+  hosts: Junos_all
+  gather_facts: no
+  connection: local
+  roles:
+    - Juniper.junos
+  tasks:
+  - name: Collect configuration in text format from devices
+    juniper.device.facts:
+      gather_subset: config
+      config_format: text
+  - name: Print version
+    debug:
+      var: junos
