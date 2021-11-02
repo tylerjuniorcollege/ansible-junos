@@ -6,7 +6,7 @@
   tasks:   
     - name: Get Interfaces in Interface Ranges from config
       junos_command:
-        - "show configuration interfaces interface-range {{ range }} | match \"member ge-*\""
+      - "show configuration interfaces interface-range {{ range }} | match \"member ge-*\""
       register: dirtyInterfaces
 
     - name: Parse through and remove "member"
