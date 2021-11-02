@@ -9,6 +9,6 @@
         - "show configuration interfaces interface-range {{ range }} | match \"member ge-*\""
       register: dirtyInterfaces
 
-  - name: Parse through and remove "member"
-    debug:
-      var: dirtyInterfaces
+    - name: Parse through and remove "member"
+      debug:
+        var: dirtyInterfaces
