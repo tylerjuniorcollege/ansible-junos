@@ -1,14 +1,13 @@
 ---
 - name: Get Interfaces in Interface Ranges
-  hosts: Junos_Test 
-  connection: local
+  hosts: Junos_Test
   gather_facts: no
-  tasks:   
-  - name: Get Interfaces in Interface Ranges from config
-    junos_command:
-    - "show configuration interfaces interface-range {{ range }} | match \"member ge-*\""
-    register: dirtyInterfaces
+  tasks:
+    - name: Get Interfaces in Interface Ranges from config
+      junos_command:
+      - "show configuration interfaces interface-range {{ range }} | match \"member ge-*\""
+      register: dirtyInterfaces
 
-  - name: Parse through and remove "member"
-    debug:
-      var: dirtyInterfaces
+    - name: Parse through and remove "member"
+      debug:
+        var: dirtyInterfaces
