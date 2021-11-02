@@ -11,7 +11,6 @@
     - name: Interface
       junos_command:
         commands: show configuration interfaces interface-range XIRRUS-WAP | match "member ge-*"
-        display: set
         
       register: dirtyinterface
         
