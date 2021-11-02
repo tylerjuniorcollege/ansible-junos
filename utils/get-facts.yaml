@@ -8,8 +8,7 @@
   tasks:
   - name: Collect configuration in text format from devices
     juniper_junos_facts:
-      gather_subset: config
-      config_format: text
+
   - name: Print version
     debug:
       var: junos
