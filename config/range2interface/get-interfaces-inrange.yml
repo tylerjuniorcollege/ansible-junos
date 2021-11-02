@@ -4,10 +4,10 @@
   gather_facts: no
   tasks:
     - name: Get Interfaces in Interface Ranges from config
-      junos_command:
-        - "show configuration interfaces interface-range {{ range }} | match \"member ge-*\""
+      junos_command: 
+        commands:
+          - "show configuration interfaces interface-range {{ range }} | match \"member ge-*\""
       register: dirtyInterfaces
-
-    - name: Parse through and remove "member"
+    - name: Parse through and remove member
       debug:
         var: dirtyInterfaces
