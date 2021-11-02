@@ -9,7 +9,7 @@
       juniper_junos_command:
         formats: set
         commands:
-          - "show configuration interfaces interface-range {{ range }} | match \"member ge-*\""
+          - "show configuration interfaces interface-range {{ range }}"
       register: dirtyInterfaces
     - name: Parse through and remove member
       debug:
