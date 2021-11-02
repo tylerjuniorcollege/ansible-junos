@@ -1,14 +1,13 @@
 ---
-- name: Mist
+- name: Interface-Range
   hosts: Junos_Test
   roles:
     - Juniper.junos 
   connection: local
   gather_facts: no
- 
-  vars: 
+
          
   tasks: 
-   - name: collect default set of facts and configuration
-     junos_facts:
-        gather_subset: interfaces
+    - name: Interface
+      junos_command:
+        commands: show configuration interfaces interface-range XIRRUS-WAP | match "member ge-*"
