@@ -7,7 +7,7 @@
   tasks:
     - name: Get Interfaces in Interface Ranges from config
       juniper_junos_command:
-        formats: set
+        formats: text
         commands:
           - "show configuration interfaces interface-range {{ range }}"
       register: dirtyInterfaces
