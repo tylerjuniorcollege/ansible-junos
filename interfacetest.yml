@@ -10,7 +10,7 @@
   tasks: 
     - name: Interface
       junos_command:
-        commands: show configuration interfaces interface-range XIRRUS-WAP | match "member ge-*"
+          commands: show configuration interfaces interface-range XIRRUS-WAP | match "member ge-*"
         
       register: dirtyinterface
         
