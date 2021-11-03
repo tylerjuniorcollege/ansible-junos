@@ -9,7 +9,7 @@
       juniper_junos_command:
         formats: text
         commands:
-          - "show configuration interfaces interface-range {{ range }}"
+          - "show configuration interfaces interface-range {{ range | mandatory }}"
       register: dirtyInterfaces
     - name: Parse through and remove member
       debug:
