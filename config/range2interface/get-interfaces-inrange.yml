@@ -13,4 +13,4 @@
       register: dirtyInterfaces
     - name: Parse through and remove member
       debug:
-        var: dirtyInterfaces
+        var: dirtyInterfaces.stdout_lines
