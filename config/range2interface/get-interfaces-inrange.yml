@@ -11,9 +11,9 @@
         commands:
           - "show configuration interfaces interface-range {{ range | mandatory }}"
       register: dirtyInterfaces
-    - name: print dirtyInterfaces.stdout[0]
+    - name: print dirtyInterfaces.stdout_lines
       debug:
-        var: dirtyInterfaces.stdout[0]
+        var: dirtyInterfaces.stdout_lines
     
     # example regex_findall('\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b')
     # interface example ge-0/0/1
@@ -23,8 +23,7 @@
         cleanInterfaces: |
           {{
             dirtyInterfaces.stdout_lines | 
-            map('regex_findall', '\bge-[0-9][/][0-9][/][0-9]\b') |
-            list 
+            map('regex_findall', 'ge-[0-9][/][0-9][/][0-9]')
           }}
     - name: print cleanInterfaces.stdout_lines
       debug:
