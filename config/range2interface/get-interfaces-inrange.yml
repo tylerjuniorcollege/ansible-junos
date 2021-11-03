@@ -23,7 +23,7 @@
         cleanInterfaces: |
           {{
             dirtyInterfaces.stdout_lines | 
-            map('regex_findall', 'ge-[0-9][/][0-9][/][0-9]')
+            map('regex_findall', 'ge-(?:[0-9]{1,2}\\/){2}[0-9]')
           }}
     - name: print cleanInterfaces.stdout_lines
       debug:
