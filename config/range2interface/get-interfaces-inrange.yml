@@ -23,7 +23,7 @@
         cleanInterfaces: |
           {{
             dirtyInterfaces.stdout_lines | 
-            map('regex_findall', '\\bge-[0-9]/[0-9]/[0-9]\\b') |
+            map('regex_findall', '\\bge-[0-9][/][0-9][/][0-9]\\b') |
             map('join') |
             list 
           }}
