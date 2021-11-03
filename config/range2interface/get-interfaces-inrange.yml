@@ -24,7 +24,7 @@
           {{
             dirtyInterfaces.stdout_lines | 
             map('regex_findall', '\\bge-[0-9][/][0-9][/][0-9]\\b') |
-            map('join') |
+            {# map('join') | #}
             list 
           }}
     - name: print cleanInterfaces.stdout_lines
