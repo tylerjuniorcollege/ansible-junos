@@ -17,7 +17,7 @@
     - name: Grab interfaces from getInterfaceRangeResults
       set_facts:
         cacheable: false
-        dirtyInterfaces: "{{ dirtyInterfaces.stdout_lines | regex_findall('ge-[0-9]\/[0-9]\/[0-9]', ignorecase=True) }}"
+        dirtyInterfaces: "{{ dirtyInterfaces.stdout_lines | regex_findall('ge-[0-9]\\/[0-9]\\/[0-9]', ignorecase=True) }}"
       register: cleanInterfaces
       
       
