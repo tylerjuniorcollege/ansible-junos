@@ -9,10 +9,9 @@
       juniper_junos_command:
         formats: text
         commands:
-          - "show configuration interfaces interface-range XIRRUS-WAP | match "member ge-*""
+          - "show configuration interfaces interface-range {{ range | mandatory }}"
       register: dirtyInterfaces
     - name: print dirtyInterfaces.stdout_lines
       debug:
         var: dirtyInterfaces.stdout_lines
-        
 
