@@ -17,11 +17,8 @@
 
     - name: Parse through and remove "member"
       debug:
-        var: dirtyinterfaces
+        var: "{{ dirtyinterfaces }}"
 
-    - name: Show interface
-      junos_command:
-        commands: show {{ dirtyinterface }}
         
         
         
