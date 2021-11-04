@@ -1,23 +1,19 @@
 ---
-- name: Interface-Range
+- name: Get Interfaces in Interface Ranges
   hosts: Junos_Test
-  roles:
-    - Juniper.junos 
-  connection: local
   gather_facts: no
-
-         
-  tasks: 
-    - name: Interface
-      junos_command:
-        commands: show configuration interfaces interface-range XIRRUS-WAP | match "member ge-*"
-      
-      register: dirtyinterface
-      tags: [ dirtyinterface ]
-
-    - name: Parse through and remove "member"
+  roles:
+    - Juniper.junos
+  tasks:
+    - name: Get Interfaces in Interface Ranges from config
+      juniper_junos_command:
+        formats: text
+        commands:
+          - "show configuration interfaces interface-range {{ range | mandatory }}"
+      register: dirtyInterfaces
+    - name: print dirtyInterfaces.stdout_lines
       debug:
-        var: "{{ dirtyinterfaces }}"
+        var: dirtyInterfaces.stdout_lines
 
         
         
