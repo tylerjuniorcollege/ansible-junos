@@ -1,0 +1,13 @@
+---
+- name: Change interface to access 
+  hosts: Junos_all
+  connection: local
+  gather_facts: no
+  
+  tasks:
+  
+    - name: Set VLAN access and trunking
+      junipernetworks.junos.junos_config:
+        lines:
+          - set interfaces ge-0/0/6.0 family ethernet-switching interface-mode access
+         
