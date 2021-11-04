@@ -36,4 +36,4 @@
 
     - name: print some stuff
       debug:
-        msg: "{{ ansible_facts.junos.config | to_json }}"
+        msg: "{{ ansible_facts.junos.config | to_json | json_query('configuration.interfaces') }}"
