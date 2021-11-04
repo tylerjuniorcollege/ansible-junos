@@ -36,4 +36,4 @@
 
     - name: print some stuff
       debug:
-        msg: "{{ ansible_facts.junos.config | json_query('configuration.interfaces.\"interface-range\"[?name==`{{ range }}`].member') }}"
+        msg: "{{ ansible_facts.junos.config | json_query('configuration.interfaces.\"interface-range\"[*].member') }}"
