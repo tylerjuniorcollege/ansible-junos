@@ -16,5 +16,5 @@
         
     - name: Parse through and remove "member"
       junos_config:
-      lines:
-        -  delete interfaces interface-range XIRRUS-WAP member {{ dirtyinterface }}
+        lines:
+        - delete interfaces interface-range XIRRUS-WAP member {{ dirtyinterface }}
