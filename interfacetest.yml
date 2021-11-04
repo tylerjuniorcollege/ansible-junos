@@ -19,5 +19,5 @@
     - name: remove
       junos_config:
         lines:
-         - delete interfaces interface-range XIRRUS-WAP member "{{ dirtyinterface }}"
+         - delete interfaces interface-range XIRRUS-WAP member "{{  dirtyInterfaces.stdout_lines }}"
 
