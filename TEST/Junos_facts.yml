@@ -4,9 +4,8 @@
   gather_facts: yes
 
    
-   - name: Collect vlan info
-    junos_facts:
-      gather_network_resources: vlans 
-    #  config_format: text
-    #  provider: Junos_all
-   # register: "result_text"
+
+  tasks:
+    - name: show command
+      junos_facts:
+        gather_network_resources: vlans
