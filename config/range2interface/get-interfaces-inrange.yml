@@ -40,5 +40,5 @@
           "{{
             ansible_facts.junos.config |
             from_json |
-            json_query('configuration.interfaces."interface-range[?name==`{{ range }}`]".member[*].name')
+            json_query('configuration.interfaces."interface-range[?name==`{{ range }}`]"')
           }}"
