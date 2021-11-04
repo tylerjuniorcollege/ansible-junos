@@ -17,4 +17,4 @@
 
     - name: Show interface
       junos_command:
-        commands: show dirtyinterface 
+        commands: show {{ dirtyinterface }}
