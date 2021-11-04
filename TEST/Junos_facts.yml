@@ -1,9 +1,8 @@
-  - name: Retrieve configuration from Junos devices
-   hosts: Junos_all
-   roles:
-    - Juniper.junos
-   connection: local
-   gather_facts: no
+---
+- name: adding command
+  hosts: Junos_all
+  gather_facts: yes
+
    
    - name: Collect vlan info
     junos_facts:
