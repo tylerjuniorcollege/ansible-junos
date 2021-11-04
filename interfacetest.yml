@@ -15,6 +15,10 @@
       register: dirtyinterface
       tags: [ dirtyinterface ]
 
+    - name: Parse through and remove "member"
+      debug:
+        var: dirtyInterfaces
+
     - name: Show interface
       junos_command:
         commands: show {{ dirtyinterface }}
