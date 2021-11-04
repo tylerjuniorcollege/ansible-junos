@@ -1,4 +1,3 @@
-
 ---
 - name: Get Interfaces in Interface Ranges
   hosts: Junos_Test
@@ -10,14 +9,10 @@
       juniper_junos_command:
         formats: text
         commands:
-          - "show configuration interfaces interface-range XIRRUS-WAP"
+          - "show configuration interfaces interface-range XIRRUS-WAP | match member ge-*"
       register: dirtyInterfaces
     - name: print dirtyInterfaces.stdout_lines
       debug:
         var: dirtyInterfaces.stdout_lines
 
-    - name: remove
-      junos_config:
-        lines:
-         - delete interfaces interface-range XIRRUS-WAP member "{{  dirtyInterfaces.stdout_lines }}"
 
