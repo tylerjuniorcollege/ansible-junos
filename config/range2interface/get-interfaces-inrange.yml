@@ -36,4 +36,4 @@
 
     - name: print some stuff
       debug:
-        var: ansible_facts.junos
+        var: ansible_facts.junos.config
