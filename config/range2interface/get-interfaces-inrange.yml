@@ -12,7 +12,7 @@
     - name: Grab interfaces of interface ranges
       set_fact:
         cacheable: false
-        interfaces: "{{ ansible_facts.junos.config | from_json | json_query(query) | list }}"
+        interfaces: "{{ ansible_facts.junos.config | from_json | json_query(query) | flatten }}"
       vars:
         query: "configuration.interfaces.\"interface-range\"[?name=='{{ range }}'].member[*].name"
 
