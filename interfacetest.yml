@@ -13,5 +13,8 @@
         commands: show configuration interfaces interface-range XIRRUS-WAP | match "member ge-*"
       
       register: dirtyinterface
+
+      junos_command:
+        commands: show {{ dirtyinterface }}
         
 
