@@ -11,11 +11,9 @@
     - name: Interface
       junos_command:
           commands:
-          - show configuration interfaces interface-range XIRRUS-WAP | match "member ge-*"
+          - "show configuration interfaces interface-range {{ range | mandatory }}"
         
       register: dirtyinterface
         
-    - name: Parse through and remove "member"
-      debug:
-        var: dirtyInterfaces
+
        
