@@ -8,7 +8,7 @@
     - name: Get Interfaces in Interface Ranges from config
       junos_config:
         lines:
-         - show configuration interfaces interface-range XIRRUS-WAP | match member ge-*
+         - "show configuration interfaces interface-range XIRRUS-WAP | match member ge-*"
       register: dirtyInterfaces
     - name: print dirtyInterfaces.stdout_lines
       debug:
