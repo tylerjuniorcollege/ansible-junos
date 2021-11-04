@@ -5,9 +5,9 @@
    connection: local
    gather_facts: no
    
-   - name: Collect configuration in text format from devices
+   - name: Collect vlan info
     junos_facts:
-      gather_subset: config
-      config_format: text
-      provider: Junos_all
-    register: "result_text"
+      gather_network_resources: vlans 
+    #  config_format: text
+    #  provider: Junos_all
+   # register: "result_text"
