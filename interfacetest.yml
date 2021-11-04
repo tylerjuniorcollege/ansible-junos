@@ -15,6 +15,6 @@
       register: dirtyinterface
       tags: [ dirtyinterface ]
 
-      Name: Show interface
+    - name: Show interface
       junos_command:
         commands: show dirtyinterface 
