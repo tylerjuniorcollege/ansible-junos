@@ -26,6 +26,8 @@
         load: "merge"
         template: "./{{ range | lower }}.j2"
         format: "text"
+        var:
+          interfaces: "{{ interfaces }}"
       register: response
       
     - name: Print Response
