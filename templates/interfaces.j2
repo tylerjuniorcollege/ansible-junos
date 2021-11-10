@@ -1,9 +1,0 @@
-interfaces { 
-    {% for item in interfaces %}
-    {{ item }} {
-        description "{{ description }}";
-        unit 0 {
-            family {{ family }};
-        }      
-    } {% endfor %}    
-}

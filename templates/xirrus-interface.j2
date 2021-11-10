@@ -1,0 +1,16 @@
+interfaces { 
+    {% for item in interfaces %}
+    {{ item }} {
+        description "Xirrus Wireless Access Point";
+        native-vlan-id 516;
+        mtu 9216;
+        unit 0 {
+            family ethernet-switching {
+                interface-mode trunk;
+                vlan {
+                    members [ 530 IN-BAND-MGMT INTERNAL-WIRELESS STUDENT_WIRELESS ];
+                }
+            }
+        }      
+    } {% endfor %}    
+}
