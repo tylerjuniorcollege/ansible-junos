@@ -1,0 +1,25 @@
+interfaces { 
+    {% for item in interfaces %}
+    {{ item }} {
+        description "Standard User Access + Voice VLAN";
+        unit 0 {
+            family ethernet-switching {
+                interface-mode access;
+                vlan {
+                    members DATA;
+                }
+                storm-control default;
+            }
+        }      
+    } {% endfor %}    
+}
+protocols {
+    rstp { 
+        {% for item in interfaces %} 
+        interface {{ item }} {
+            edge;
+            no-root-port;
+        }
+        {% endfor %}    
+    }
+}
