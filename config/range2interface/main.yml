@@ -26,7 +26,7 @@
         load: "merge"
         template: "./{{ range | lower }}.j2"
         format: "text"
-        var:
+        vars:
           interfaces: "{{ interfaces }}"
       register: response
       
