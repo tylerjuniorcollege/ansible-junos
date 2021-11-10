@@ -24,7 +24,7 @@
     - name: Load a configuration from a Jinja2 template and commit
       juniper_junos_config:
         load: "merge"
-        template: "./{{ range | lower }}.j2"
+        template: "config/range2interface/{{ range | lower }}.j2"
         format: "text"
         vars:
           interfaces: "{{ interfaces }}"
