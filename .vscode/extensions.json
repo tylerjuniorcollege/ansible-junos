@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "tomaciazek.ansible",
+        "oderwat.indent-rainbow",
+        "wholroyd.jinja",
+        "2gua.rainbow-brackets",
+        "redhat.vscode-yaml",
+        "yzhang.markdown-all-in-one"
+    ]
+}

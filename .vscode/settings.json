@@ -1,7 +1,29 @@
 {
+    "ansible.ansibleLint.enabled": false,
+    "redhat.telemetry.enabled": false,
     "cSpell.words": [
+        "venv",
         "junos",
         "XIRRUS"
     ],
-    "ansible.ansibleLint.enabled": false
+    "[yml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "keep",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        }
+    },
+    "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "keep",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        }
+    }
 }
