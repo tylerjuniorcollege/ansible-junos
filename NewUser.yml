@@ -7,7 +7,7 @@
   gather_facts: no
    
   vars: 
-    pass: hello
+    password: hello
 
   tasks:
     - name: create new user account
@@ -15,7 +15,7 @@
         name: fortinac
         state: present
         role: super-user
-        encrypted_password: "{{ {{ pass }} | password_hash('sha512') }}"
+        encrypted_password: "{{ {{ password }} | password_hash('sha512') }}"
         state: present
         
   #  - name: set user password
