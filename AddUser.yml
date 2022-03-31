@@ -12,6 +12,6 @@
       junos_user:
         name: {{ user }}
         state: present
-        role: super-user {{ role }}
+        role: {{ role }}
         encrypted_password: "{{ encryptedpassword | password_hash('sha512') }}"
         state: present
