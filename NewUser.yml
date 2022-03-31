@@ -15,7 +15,7 @@
         name: fortinac
         state: present
         role: super-user
-        encrypted_password: "{{ ' {{pass}} ' | password_hash('sha512') }}"
+        encrypted_password: "{{ {{ pass }} | password_hash('sha512') }}"
         state: present
         
   #  - name: set user password
