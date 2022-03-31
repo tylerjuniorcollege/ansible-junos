@@ -10,8 +10,8 @@
   tasks:
     - name: create new user account
       junos_user:
-        name: {{ user }}
+        name: fortinac
         state: present
-        role: {{ role }}
+        role: super-user
         encrypted_password: "{{ encryptedpassword | password_hash('sha512') }}"
         state: present
