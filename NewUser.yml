@@ -20,5 +20,5 @@
       junos_user:
         name: fortinac
         role: super-user
-        sshkey: "{{ vaultpass }}"
+        sshkey: {{ vaultpass }}
         state: present
