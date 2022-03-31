@@ -16,5 +16,6 @@
     - name: set user password
       junos_user:
         name: fortinac
+        role: super-user
         encrypted_password: "{{ password }}"
         state: present
