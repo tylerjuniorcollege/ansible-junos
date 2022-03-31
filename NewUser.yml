@@ -12,3 +12,9 @@
       junos_user:
         name: fortinac
         state: present
+        
+    - name: set user password
+      junos_user:
+        name: fortinac
+        encrypted_password: "{{ password }}"
+        state: present
