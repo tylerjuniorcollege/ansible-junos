@@ -1,0 +1,17 @@
+---
+- name: Create User
+  hosts: Junos_all
+  roles:       
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+   
+
+  tasks:
+    - name: create new user account
+      junos_user:
+        name: {{ user }}
+        state: present
+        role: super-user {{ role }}
+        encrypted_password: "{{ encryptedpassword | password_hash('sha512') }}"
+        state: present
