@@ -7,7 +7,7 @@
   gather_facts: no
    
   vars: 
-        pass: hello
+     pass: hello
 
   tasks:
     - name: create new user account
