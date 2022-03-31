@@ -1,12 +1,16 @@
 ---
- - name: Rollback configuration on junos devices
-   hosts: test
+ - name: Remove User
+   hosts: Junos_all
    roles:       
     - Juniper.junos
    connection: local
    gather_facts: no
-   
-   - name: create new user account
-  junos_user:
-    name: {{ Enter Name }}
-    state: present
+
+   tasks:
+    
+    - name: create new user account
+       junos_user:
+        name: ansible
+        role: super-user
+        sshkey: "{{ lookup('file', '~/.ssh/ansible.pub') }}"
+        state: present
