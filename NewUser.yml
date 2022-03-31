@@ -9,6 +9,6 @@
 
   tasks:
     - name: create new user account
-      junipernetworks.junos.junos_user:
+      junos_user:
         name: fortinac
         state: present
