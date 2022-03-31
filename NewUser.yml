@@ -16,7 +16,6 @@
           33373562396335333337623039663434383865383531643036383166653865656336
 
   tasks:
-    
     - name: create new user account
       junos_user:
         name: fortinac
