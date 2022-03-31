@@ -25,7 +25,7 @@
       junos_config:
        lines:
         - set system login user fortinac class super-user
-        - set system login user fortinac authentication plain-text-password {{ password }}
+
     
    
        comment: update config
