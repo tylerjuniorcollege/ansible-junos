@@ -15,13 +15,6 @@
         name: fortinac
         state: present
         role: super-user
-        encrypted_password: "{{ '"{{ password }}"' | password_hash('sha512') }}"
+        encrypted_password: "{{ '["password"]' | password_hash('sha512') }}"
         state: present
-        
-  #  - name: set user password
-   #   junos_user:
-   #     name: fortinac
-    #    role: super-user
-    #    encrypted_password: "{{ '{{ password }}' | password_hash('sha512') }}"
-     #   state: present
-        
+
