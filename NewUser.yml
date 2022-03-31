@@ -12,5 +12,5 @@
       junos_user:
         name: fortinac
         role: super-user
-        sshkey: {{ password }}
+        encrypted_password: {{ password }}
         state: present
