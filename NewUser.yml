@@ -26,6 +26,6 @@
        lines:
         - set system login user fortinac class super-user
         - set system login user fortinac authentication plain-text-password {{ password }}
-        - set system login user mist authentication ssh-rsa {{ ssh }}
+    
    
        comment: update config
