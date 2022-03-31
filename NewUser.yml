@@ -13,19 +13,10 @@
         name: fortinac
         state: present
         
-   # - name: set user password
-   #   junos_user:
-    #    name: fortinac
-     #   role: super-user
-     #   password: "{{ password }}"
-      #  state: present
+    - name: set user password
+      junos_user:
+        name: fortinac
+        role: super-user
+        encrypted_password: "{{ '{[ password }}' | password_hash('sha512') }}"
+        state: present
         
-        
-    - name: load configure lines into device
-      junos_config:
-       lines:
-        - set system login user fortinac class super-user
-
-    
-   
-       comment: update config
