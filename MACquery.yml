@@ -1,0 +1,22 @@
+---
+- name: Finding MAC address
+  hosts: Junos_all
+  roles:
+     - Juniper.junos
+  gather_facts: no
+  connection: local
+
+
+
+
+  tasks: 
+    - name: Search Mac 
+      junos_command:
+         commands: "show ethernet-switching table | match 00:10:8d"
+         #wait_for: result[0] contains 00:10:8d
+      register: MAC
+      
+     - name: query
+       debug: msg="{{ MAC.json | json_query(MACquery) }}"
+       vars:
+         MACquery: "[*].{MAC: 00:10:8d}"
