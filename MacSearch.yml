@@ -10,13 +10,13 @@
 
 
   tasks: 
-      - name: Retrieve mac-address
+   - name: Retrieve mac-address
       juniper_junos_table:
         file: "mactable.yml"
         table: "mactable"
         kwargs:
           match: "00:10:8d"
       register: response
-    - name: Print response
+  - name: Print response
       debug:
         var: response
