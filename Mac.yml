@@ -13,5 +13,5 @@
     - name: Search Mac 
       junos_command:
          commands: show ethernet-switching table 
-         wait_for: result[0] contains 00.10.8d
+         wait_for: result[0] contains 00:10:8d
          display: text
