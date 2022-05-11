@@ -10,12 +10,13 @@
 
 
   tasks: 
-    - name: Search Mac 
-      junos_command:
-         commands: "show ethernet-switching table | match 00:10:8d"
-         #wait_for: result[0] contains 00:10:8d
-      register: interfaces
-
-    - name: view
+      - name: Retrieve mac-address
+      juniper_junos_table:
+        file: "mactable.yml"
+        table: "mactable"
+        kwargs:
+          match: "00:10:8d"
+      register: response
+    - name: Print response
       debug:
-        var: interfaces
+        var: response
