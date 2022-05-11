@@ -9,7 +9,7 @@
 
   tasks: 
     - name: Retrieve mac-address
-      junos_table:
+      juniper_junos_table:
         file: "mactable.yml"
         table: "mactable"
         kwargs:
