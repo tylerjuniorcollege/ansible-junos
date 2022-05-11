@@ -13,8 +13,8 @@
     - name: Search Mac 
       junos_command:
          commands: "show ethernet-switching table | match 00:10:8d"
-         display: json
-      register: MAC
+         display: text
+   #   register: MAC
       
     - name: query
       debug: 
