@@ -17,5 +17,5 @@
       register: MAC
       
     - name: query
-      debug: #msg="{{ MAC.json | json_query(jmesquery) }}"
+      debug: 
       vars: output
