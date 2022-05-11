@@ -18,5 +18,5 @@
       
     - name: query
       debug: "{{ MAC.json | json_query(MACquery) }}"
-        vars:
+         vars:
           MACquery: "[*].{MAC: 00:10:8d}"
