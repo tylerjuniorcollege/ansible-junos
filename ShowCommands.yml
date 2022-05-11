@@ -11,4 +11,4 @@
   tasks:
     - name: Show virtual-chassis
       junos_command:
-        commands: "show interface interface-range XIRRUS-WAP"
+        commands: "show ethernet-switching table | match 00.10.8D"
