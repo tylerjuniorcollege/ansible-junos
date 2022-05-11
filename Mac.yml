@@ -1,14 +1,16 @@
-  ---
-  - name: Clear storage space
-    hosts: Junos_all
-    gather_facts: no
+---
+- name: Clear storage space
+  hosts: Junos_all
+  roles:
+     - Juniper.junos
+  gather_facts: no
+  connection: local
 
-    vars:
-    ansible_connection: netconf
-    ansible_command_timeout: 60
 
 
-    tasks: 
-     - name: Search Mac 
-       junos_command:
-        commands: show ethernet-switching table | match 00.10.8d
+
+  tasks: 
+    - name: Search Mac 
+      junos_command:
+         commands: show ethernet-switching table | match 00.10.8d
+         display: json
