@@ -17,6 +17,6 @@
       register: MAC
       
     - name: query
-       debug: msg="{{ MAC.json | json_query(MACquery) }}"
+       debug: msg= "{{ MAC.json | json_query(MACquery) }}"
        vars:
          MACquery: "[*].{MAC: 00:10:8d}"
