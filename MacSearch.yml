@@ -1,22 +1,21 @@
 ---
-- name: Clear storage space
+- name: junos config
   hosts: Junos_all
   roles:
-     - Juniper.junos
-  gather_facts: no
+    - Juniper.junos 
   connection: local
+  gather_facts: no
+  
 
-
-
-
- tasks: 
-   - name: Retrieve mac-address
-     junos_table:
+  tasks: 
+    - name: Retrieve mac-address
+      junos_table:
         file: "mactable.yml"
         table: "mactable"
         kwargs:
           match: "00:10:8d"
-     register: response
-   - name: Print response
+      register: response
+
+    - name: Print response
       debug:
         var: response
