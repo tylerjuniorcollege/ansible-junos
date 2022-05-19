@@ -11,8 +11,8 @@
    - name: Mac
      junos_command:
       commands:
-        - show version
-        - show interfaces
+        - show ethernet-switching table brief
+        
       wait_for:
-        - result[0] contains Juniper
-        - result[1] contains Loopback0
+        - result[0] contains "00:10:8d"
+      
