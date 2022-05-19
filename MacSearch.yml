@@ -11,4 +11,4 @@
    - name: Mac
      junos_command:
       commands:
-        - "sh -c "cli show ethernet-switching table \| match 00:10:8d""
+        - 'sh -c "cli show ethernet-switching table \| match 00:10:8d"'
