@@ -8,8 +8,8 @@
   
   
   tasks: 
-    - name: run multiple commands and evaluate the output
-      junos_command:
+   - name: Mac
+     junos_command:
       commands:
         - show version
         - show interfaces
