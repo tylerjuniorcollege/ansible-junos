@@ -6,12 +6,26 @@
   connection: local
   gather_facts: no
   
-  tasks:
-    - name: Get Arp info
-      juniper_junos_table:        
-        file: "arp.yml"
-      register: result
+ # tasks:
+ #   - name: Get Arp info
+ #     juniper_junos_table:        
+ #       file: "arp.yml"
+ #     register: result
       
-    - name: Print response
-      debug:
-        var: result
+ #   - name: Print response
+ #     debug:
+ #       var: result
+        
+ArpTable:
+  rpc: get-arp-table-information
+  args:
+     no-resolve: True
+  item: arp-table-entry
+  key: mac-address
+  view: ArpView
+
+ArpView:
+  fields:
+    mac_address: mac-address
+    ip_address: ip-address
+    interface_name: interface-name
