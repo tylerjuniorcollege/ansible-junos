@@ -8,7 +8,7 @@
   
   tasks:
     - name: Get Arp info
-      junos_table:        
+      juniper_junos_table:        
         file: "arp.yaml"
       register: result
       
