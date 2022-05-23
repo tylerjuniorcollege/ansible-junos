@@ -12,9 +12,9 @@
         file: "arp.yml"
       register: result
       
- #   - name: Print response
- #     debug:
- #       var: result
+    - name: Print response
+      debug:
+        var: result
         
 ArpTable:
   rpc: get-arp-table-information
