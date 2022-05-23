@@ -10,7 +10,8 @@
     - name: Get Arp info
       juniper_junos_table:        
         file: "arp.yml"
-      resource: "Mac address"
+        kwargs: 
+          interface_name: "ge-1/0/0"
       register: result
       
     - name: Print response
