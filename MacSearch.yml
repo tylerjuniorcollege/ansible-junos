@@ -10,7 +10,7 @@
     - name: Get Arp info
       juniper_junos_table:        
         file: "arp.yml"
-      remote_type: "Mac address"
+      resource: "Mac address"
       register: result
       
     - name: Print response
