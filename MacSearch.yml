@@ -21,5 +21,5 @@
       debug:
         msg: "{{ result | json_query(query) }}"
       vars:
-        query: "resource[?mac_address=='{{ macAddress }}']"
+        query: "resource[?mac_address=='{{ 00:10:8D }}']"
 
