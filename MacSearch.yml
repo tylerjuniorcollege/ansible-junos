@@ -9,7 +9,7 @@
   tasks:
     - name: Get Arp info
       juniper_junos_table:        
-        file: "arp.yaml"
+        file: "arp.yml"
       register: result
       
     - name: Print response
