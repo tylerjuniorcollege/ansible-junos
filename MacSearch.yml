@@ -10,8 +10,6 @@
     - name: Get Arp info
       juniper_junos_table:        
         file: "ethernetswitchingtable.yml"
-        kwargs: 
-            mac_address: 00-10-8D-01-83-96
       register: result
       
     - name: Print response
