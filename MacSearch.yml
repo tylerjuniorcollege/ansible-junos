@@ -10,11 +10,16 @@
     - name: Get Arp info
       juniper_junos_table:        
         file: "arp.yml"
-        kwargs: 
-          interface_name: "ge-1/0/0"
       register: result
       
     - name: Print response
       debug:
         var: result
         
+        
+    - name: Print Response
+      debug:
+        msg: "{{ result | json_query(query) }}"
+      vars:
+        query: "resource[?mac_address=='{{ macAddress }}']"
+
