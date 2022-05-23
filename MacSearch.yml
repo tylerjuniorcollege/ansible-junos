@@ -11,7 +11,7 @@
       juniper_junos_table:        
         file: "arp.yml"
         kwargs: 
-           remote_type: Mac address
+           remote_type: "Mac address"
       register: result
       
     - name: Print response
