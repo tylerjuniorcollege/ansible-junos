@@ -6,11 +6,11 @@
   connection: local
   gather_facts: no
   
- # tasks:
- #   - name: Get Arp info
- #     juniper_junos_table:        
- #       file: "arp.yml"
- #     register: result
+  tasks:
+    - name: Get Arp info
+      juniper_junos_table:        
+        file: "arp.yml"
+      register: result
       
  #   - name: Print response
  #     debug:
