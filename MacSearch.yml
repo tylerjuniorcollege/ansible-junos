@@ -10,8 +10,7 @@
     - name: Get Arp info
       juniper_junos_table:        
         file: "arp.yml"
-        kwargs:
-          mac-address: "00:01:8d"
+        kwargs: "00:01:8d"
       register: result
       
     - name: Print response
