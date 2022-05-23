@@ -8,7 +8,7 @@
   
   tasks:
     - name: Get Arp info
-      juniper.device.table:        
+      junos_table:        
         file: "arp.yaml"
       register: result
       
