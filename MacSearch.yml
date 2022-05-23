@@ -9,17 +9,13 @@
   tasks:
     - name: Get Arp info
       juniper_junos_table:        
-        file: "arp.yml"
+        file: "ethernetswitchingtable.yml"
+        kwargs: 
+            mac_address: 00-10-8D-01-83-96
       register: result
       
     - name: Print response
       debug:
         var: result
         
-        
-    - name: Print Response
-      debug:
-        msg: "{{ result | json_query(query) }}"
-      vars:
-        query: "resource[?mac_address=='{{ 00-10-8D-01-83-96 }}']"
 
