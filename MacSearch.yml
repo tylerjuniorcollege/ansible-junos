@@ -1,14 +1,17 @@
 ---
-ArpTable:
-  rpc: get-arp-table-information
-  args:
-     no-resolve: True
-  item: arp-table-entry
-  key: mac-address
-  view: ArpView
-
-ArpView:
-  fields:
-    mac_address: mac-address
-    ip_address: ip-address
-    interface_name: interface-name
+- name: Test
+  hosts: Junos_all
+  roles:
+    - Juniper.junos 
+  connection: local
+  gather_facts: no
+  
+  tasks:
+    - name: Get Arp info
+      juniper.device.table:        
+        file: "arp.yaml"
+      register: result
+      
+    - name: Print response
+      debug:
+        var: result
