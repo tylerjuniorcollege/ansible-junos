@@ -1,15 +1,20 @@
 ---
-- name: Clear storage space
+- name: Test
   hosts: Junos_all
   roles:
-     - Juniper.junos
-  gather_facts: no
+    - Juniper.junos 
   connection: local
-
-
-
-
-  tasks: 
-    - name: Search Mac 
-      junos_command:
-         commands: sh -c "cli show ethernet-switching table \| match 00:10:8d"
+  gather_facts: no
+  
+  tasks:
+    - name: Get Arp info
+      juniper_junos_table:        
+        file: "ethport.yml"
+        kwargs: "00-10-8D-01-83-96"
+       #   macaddr: "00-10-8D-01-83-96"
+      register: result
+      
+    - name: Print response
+      debug:
+        var: result
+        
