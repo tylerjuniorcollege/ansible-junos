@@ -12,4 +12,4 @@
       junos_command:
         commands: "show ethernet-switching table"
     #    Match wait_for: result[0] contains "00:10:8d"
-        Match display: "00:10:8d"
+        Match: "00:10:8d"
