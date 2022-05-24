@@ -22,7 +22,7 @@
           - "show mac address-table | match {{ mac }}"
       register: printout
 
-    - set_fact:
+   # - set_fact:
 
         intf: |
 
