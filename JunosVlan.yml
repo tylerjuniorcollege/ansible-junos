@@ -1,12 +1,15 @@
 ---
- - name: VLAN
-   hosts: Junos_all
-   connection: local
-   gather_facts: no
+- name: JunosVlan
+  hosts: Junos_all
+  roles:
+    - Juniper.junos 
+  connection: local
+  gather_facts: no
    
    tasks: 
         
     - name: configure VLAN ID and name
-      junipernetworks.junos.junos_vlan:
-        name: metasys
+      junos_vlan:
+        vlan_name: metasys
         vlan_id: 140
+        
