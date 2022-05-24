@@ -6,16 +6,10 @@
   connection: local
   gather_facts: no
   
+
   tasks:
-    - name: Get Arp info
-      juniper_junos_table:        
-        file: "ethport.yml"
-        kwargs: "00-10-8D-01-83-96"
-       #   macaddr: "00-10-8D-01-83-96"
-      register: result
-      
-    - name: Print response
-      debug:
-        var: result
+   - name: junos cli
+     junos_cli:
+       cli: "show ethernet-switching table | match 00:10:8D"
         
 
