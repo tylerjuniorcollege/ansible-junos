@@ -1,28 +1,44 @@
 ---
-- name: Test
+
+- name: Find mac address
+
   hosts: Junos_all
-  roles:
-    - Juniper.junos 
+
+  gather_facts: false
+
   connection: local
-  gather_facts: no
-  
-  vars:
-    mac: 00:10:8d
-  
+
+  vars_prompt:
+
+     - name: mac
+
+       prompt: What is the mac address?
+
+       private: no
 
   tasks:
 
-    - name: debugging
-      ansible.builtin.debug:
-         msg: 'Searching for {{ mac }}'
+    -
 
-    - name: search
+      name: debugging
+
+      ansible.builtin.debug:
+
+        msg: 'Searching for {{ mac }}'
+
+    -
+
+      name: search
+
       junos_command:
+
         commands:
+
           - "show mac address-table | match {{ mac }}"
+
       register: printout
 
-   # - set_fact:
+    - set_fact:
 
         intf: |
 
@@ -32,13 +48,20 @@
 
             list }}
 
-    - name: show int desc
+    -
+
+      name: show int desc
+
       junos_command:
+
         commands:
-          - "sh interfaces description | inc {{ intf[0].strip() }}"
+
+          - "show interfaces description | match {{ intf[0].strip() }}"
+
       register: printout2
 
     - name: View output
-      debug:
-        var: printout2
 
+      debug:
+
+        var: printout2
