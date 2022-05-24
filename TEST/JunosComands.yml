@@ -1,6 +1,8 @@
 ---
 - name: adding command
   hosts: Junos_all
+  roles:       
+    - Juniper.junos
   gather_facts: no
 
  # vars:
