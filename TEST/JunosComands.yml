@@ -10,6 +10,7 @@
   tasks:
     - name: show command
       junos_command:
+        Match: "00:10:8d"
         commands: "show ethernet-switching table"
     #    Match wait_for: result[0] contains "00:10:8d"
-        Match: "00:10:8d"
+    #    Match: "00:10:8d"
