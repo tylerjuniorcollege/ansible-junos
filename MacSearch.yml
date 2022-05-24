@@ -8,22 +8,10 @@
   
 
   tasks:
-  #- name: Collect only facts
-   # setup:
-    #  filter: ansible_mac_address
-    #register: response
-  - #name: "Print result"
-    #debug:
-        #var: response
-        
-        
+
   - name: Find NICs MAC
     ansible.builtin.debug:
-      msg: " interface {{ ansible_host }}'s MAC is {{ ansible_facts[item]['macaddress']|default(None) }}"
-   # with_items:
-    #- "{{ ansible_interfaces }}"
-        
-        
-
-{{ hostvars[inventory_hostname]['somevar_' ~ other_var] }}
+      msg: " interface {{ item }}'s MAC is {{ ansible_facts[item]['macaddress']|default(None) }}"
+    with_items:
+    - "{{ ansible_interfaces }}"
 
