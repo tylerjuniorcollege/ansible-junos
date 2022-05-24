@@ -1,5 +1,5 @@
 ---
-- name: Show command
+- name: cli command
   hosts: Junos_all
   gather_facts: no
 
