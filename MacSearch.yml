@@ -11,7 +11,7 @@
 
   - name: Find NICs MAC
     ansible.builtin.debug:
-      msg: " interface {{ item }}'s MAC is {{ ansible_facts[item]['macaddress']|default(None) }}"
+      msg: " interface {{ ansible_interfaces }}'s MAC is {{ ansible_facts[item]['00:10:8D:']|default(None) }}"
     with_items:
     - "{{ ansible_interfaces }}"
 
