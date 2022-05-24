@@ -5,8 +5,8 @@
    gather_facts: no
    
    tasks: 
-  
-    - name: Add vlan to switch 
-      junos_vlans:
-         name: metasys
-         vlan_id: 140
+        
+    - name: configure VLAN ID and name
+      junipernetworks.junos.junos_vlan:
+        name: metasys
+        vlan_id: 140
