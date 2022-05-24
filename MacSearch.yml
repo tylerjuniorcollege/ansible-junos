@@ -12,8 +12,8 @@
     setup:
       filter: ansible_mac_address
     register: response
-    - name: "Print result"
-      debug:
+  - name: "Print result"
+    debug:
         var: response
         
 
