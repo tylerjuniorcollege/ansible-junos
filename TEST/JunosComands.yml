@@ -5,7 +5,8 @@
 #    - Juniper.junos
   gather_facts: no
 
-  vars: ansible_connection: network_cli
+  vars: 
+    ansible_connection: network_cli
 
   tasks:
     - name: show command
