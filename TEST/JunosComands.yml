@@ -1,16 +1,16 @@
 ---
 - name: adding command
   hosts: Junos_all
-  roles:       
-    - Juniper.junos
+#  roles:       
+#    - Juniper.junos
   gather_facts: no
 
  # vars:
 
   tasks:
     - name: show command
-      junos_command:
+      cli_command:
     #    Match: match 00:10:8d
-        commands: "show ethernet-switching table | match 00:10:8d"
+        command: "show ethernet-switching table | match 00:10:8d"
     #    wait_for: Match "00:10:8d"
     #    Match: "00:10:8d"
