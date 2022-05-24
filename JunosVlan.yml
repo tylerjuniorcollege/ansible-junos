@@ -1,0 +1,13 @@
+---
+ - name: VLAN
+   hosts: Junos_Test
+   connection: local
+   gather_facts: no
+   
+  tasks: 
+  
+  - name: Add vlan to switch 
+    junos_vlans:
+    config:
+    - name: metasys
+      vlan_id: 140
