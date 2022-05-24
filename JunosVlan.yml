@@ -1,6 +1,6 @@
 ---
  - name: VLAN
-   hosts: Junos_Test
+   hosts: Junos_all
    connection: local
    gather_facts: no
    
