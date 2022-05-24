@@ -4,10 +4,10 @@
    connection: local
    gather_facts: no
    
-  tasks: 
+   tasks: 
   
-  - name: Add vlan to switch 
-    junos_vlans:
-    config:
-    - name: metasys
-      vlan_id: 140
+    - name: Add vlan to switch 
+      junos_vlans:
+      config:
+       - name: metasys
+         vlan_id: 140
