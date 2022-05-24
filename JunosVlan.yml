@@ -8,6 +8,5 @@
   
     - name: Add vlan to switch 
       junos_vlans:
-      config:
-       - name: metasys
+         name: metasys
          vlan_id: 140
