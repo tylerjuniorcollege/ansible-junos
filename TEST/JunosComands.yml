@@ -8,5 +8,5 @@
   tasks:
     - name: show command
       junos_command:
-        commands: show ethernet-switching table
+        commands: "show ethernet-switching table"
         wait_for: results[0] contains 00:10:8d
