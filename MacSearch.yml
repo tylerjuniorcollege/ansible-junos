@@ -6,12 +6,39 @@
   connection: local
   gather_facts: no
   
+  vars:
+    mac: 00:10:8d
+  
 
   tasks:
 
-  - name: Find NICs MAC
-    ansible.builtin.debug:
-      msg: " interface {{ ansible_interfaces }}'s MAC is {{ ansible_facts[item]['00:10:8D:']|default(None) }}"
-    with_items:
-    - "{{ ansible_interfaces }}"
+    - name: debugging
+      ansible.builtin.debug:
+         msg: 'Searching for {{ mac }}'
+
+    - name: search
+      junos_command:
+        commands:
+          - "show mac address-table | match {{ mac }}"
+      register: printout
+
+    - set_fact:
+
+        intf: |
+
+          {{printout.stdout_lines[0] |
+
+            map('regex_replace','^(?:[^ ]*\ ){12}([^ ]*)') |
+
+            list }}
+
+    - name: show int desc
+      junos_command:
+        commands:
+          - "sh interfaces description | inc {{ intf[0].strip() }}"
+      register: printout2
+
+    - name: View output
+      debug:
+        var: printout2
 
