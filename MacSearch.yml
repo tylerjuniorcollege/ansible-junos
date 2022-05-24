@@ -23,4 +23,7 @@
    # with_items:
     #- "{{ ansible_interfaces }}"
         
+        
+
+{{ hostvars[inventory_hostname]['somevar_' ~ other_var] }}
 
