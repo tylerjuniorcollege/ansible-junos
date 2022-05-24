@@ -10,6 +10,6 @@
         
     - name: configure VLAN ID and name
       junos_vlan:
-        vlan_name: metasys
+        name: metasys
         vlan_id: 140
         
