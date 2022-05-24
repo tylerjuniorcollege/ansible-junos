@@ -8,8 +8,8 @@
   
 
   tasks:
-   - name: junos cli
-     junos_cli:
-       cli: "show ethernet-switching table | match 00:10:8D"
+  - name: Collect only facts
+    setup:
+      filter: ansible_mac_address
         
 
