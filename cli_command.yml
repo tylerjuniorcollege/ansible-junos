@@ -9,4 +9,4 @@
   tasks:
     - name: show command
       cli_command:
-        command: "show lldp neighbor"
+        command: "show ethernet-switching"
