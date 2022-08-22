@@ -9,4 +9,4 @@
   tasks:
     - name: show command
       cli_command:
-        command: "show ethernet-switching"
+        command: "show ethernet-switching | match {{MAC}}"
