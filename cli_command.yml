@@ -9,4 +9,6 @@
   tasks:
     - name: show command
       cli_command:
-        command: "show ethernet-switching table | match {{MAC}}"
+        command: "show lldp neighbors"
+
+#show ethernet-switching table | match {{MAC}}
