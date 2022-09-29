@@ -10,6 +10,13 @@
     - name: show command
       cli_command:
         command: "show lldp neighbors"
-        "show chassis hardware"
 
-#show ethernet-switching table | match {{MAC}}
+    - name: show command
+      cli_command:
+        command: "show chassis hardware"
+
+
+
+
+
+# show ethernet-switching table | match {{MAC}}
