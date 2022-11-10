@@ -8,9 +8,9 @@
     
   tasks:
   - name: Set interface into LAG
-      junipernetworks.junos.junos_config:
-        lines:
-        - set interfaces ae1 unit 0 family ethernet-switching interface mode trunk
+    junipernetworks.junos.junos_config:
+      lines:
+       - set interfaces ae1 unit 0 family ethernet-switching interface mode trunk
 #         - set interfaces ae1 unit 0 family ethernet-switching vlan member all
 #         - set interfaces ae1 unit 0 family ethernet-switching storm-control default
 #         - set interfaces ae1 mtu 9100   
