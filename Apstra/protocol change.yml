@@ -17,6 +17,6 @@
         command: "set protocols vstp interface ae1 disable"
 
   tasks:
-    - name: disable port
+    - name: mtu
       cli_command:
         command: "set protocols ospf area 0.0.0.0 interface irb mtu 1500"
