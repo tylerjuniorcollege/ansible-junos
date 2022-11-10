@@ -1,0 +1,12 @@
+---
+- name: Change interface LAG
+  hosts: Junos_all
+  connection: local
+  gather_facts: no
+  
+  tasks:
+  
+    - name: Set interface ether-options
+      junipernetworks.junos.junos_config:
+        lines:
+          - set interfaces et-0/0/24 ether-options 802.3ad ae1
