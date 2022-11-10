@@ -1,1 +1,13 @@
+---
+- name: creating LAG
+  hosts: Junos_all
+  gather_facts: no
+
+  vars: 
+    ansible_connection: network_cli
+
+  tasks:
+    - name: creating ae1
+      cli_command:
+        command: "set interface ae1 mtu 9100"
 
