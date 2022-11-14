@@ -9,12 +9,8 @@
   tasks:
     - name: show command
       cli_command:
-        command: "set interfaces ae1 unit 0 family ethernet-switching"
+        command: "show interface terse"
 
-    - name: show command
-      cli_command:
-        command: 
-        - "show chassis hardware"
 
 
 
