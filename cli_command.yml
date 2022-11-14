@@ -9,7 +9,7 @@
   tasks:
     - name: show command
       cli_command:
-        command: "set interfaces et-0/0/24 ether-options 802.3ad ae1"
+        command: "set interfaces ae1 unit 0 family ethernet-switching"
 
     - name: show command
       cli_command:
