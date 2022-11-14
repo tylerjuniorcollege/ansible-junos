@@ -9,12 +9,12 @@
   tasks:
     - name: show command
       cli_command:
-        command: "show lldp neighbors"
+        command: "set interfaces et-0/0/24 ether-options 802.3ad ae1"
 
     - name: show command
       cli_command:
         command: 
-        - "show chassis hardware"; "show vlans"
+        - "show chassis hardware"
 
 
 
