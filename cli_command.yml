@@ -13,8 +13,9 @@
 
     - name: show command
       cli_command:
-        command: "show chassis hardware"
-
+        command: 
+        - "show chassis hardware"
+        - "show vlans"
 
 
 
