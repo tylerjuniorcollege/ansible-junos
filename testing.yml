@@ -8,7 +8,7 @@
 
   tasks:
     - name: show command
-      cli_command:
+      junos_command:
         command: "show configuration protocols ospf"
         register: item
     - name: print
