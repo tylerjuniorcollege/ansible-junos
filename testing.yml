@@ -12,6 +12,7 @@
       junos_command:
         commands: "show configuration protocols ospf"
         display: text
+        register: text
     - name: print
       vars:
         irb: "ansible_{{ text }}"
