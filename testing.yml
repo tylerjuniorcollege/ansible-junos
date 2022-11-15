@@ -13,7 +13,7 @@
         command: "show configuration protocols ospf"
       register: ospf
         
-   tasks:
+  tasks:
         with_items: ospf
           - "{{ ansible_facts.interface irb.}}": "irb"
           - results: "irb"
