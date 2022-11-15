@@ -3,13 +3,17 @@
   hosts: Junos_all
   gather_facts: yes
 
-  vars: 
+  vars:
+    ospf: "{{ ansible_facts.interface irb.}}  
     ansible_connection: network_cli
 
   tasks:
     - name: show command
       cli_command:
         command: "show configuration protocols ospf"
-        with_items:
+        register: "ospf"
+        
+   tasks:
+        with_items: ospf
           - "{{ ansible_facts.interface irb.}}": "irb"
-      #    - results: "irb"
+          - results: "irb"
