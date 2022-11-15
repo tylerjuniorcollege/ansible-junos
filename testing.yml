@@ -10,7 +10,7 @@
   tasks:
     - name: show command
       cli_command:
-        command: "show configuration protocols ospf"
+        command: "run show configuration protocols ospf"
         register: ospf
         
    tasks:
