@@ -15,5 +15,5 @@
         
   tasks:
         with_items: ospf
-          - "{{ ansible_facts.interface irb.}}": "irb"
+          - "{{ ansible_facts.interface irb.}}"
           - results: "irb"
