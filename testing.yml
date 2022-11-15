@@ -1,1 +1,12 @@
+---
+- name: cli command
+  hosts: Junos_all
+  gather_facts: no
 
+  vars: 
+    ansible_connection: network_cli
+
+  tasks:
+    - name: show command
+      cli_command:
+        command: "show configuration protocols ospf"
