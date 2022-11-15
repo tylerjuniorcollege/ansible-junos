@@ -10,7 +10,7 @@
     - name: show command
       cli_command:
         command: "show configuration protocols ospf"
-        results: item
+        prompt: item
     - name: print
       vars:
         irb: "ansible_{{ item }}"
