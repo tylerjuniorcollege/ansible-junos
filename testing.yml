@@ -13,4 +13,4 @@
         results: "irb"
         with_items:
           - "{{ ansible_facts.interface irb.}}"
-          - print: results
+          - end of print statement: results
