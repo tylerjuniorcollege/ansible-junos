@@ -10,4 +10,5 @@
     - name: show command
       cli_command:
         command: "show configuration protocols ospf"
+        with_items:
        - "{{ ansible_facts.irb }}"
