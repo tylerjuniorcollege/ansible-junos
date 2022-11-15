@@ -4,7 +4,7 @@
   gather_facts: yes
 
   vars:
-    ospf
+    ospf:
     ansible_connection: network_cli
 
   tasks:
