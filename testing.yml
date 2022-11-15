@@ -12,5 +12,5 @@
         command: "show configuration protocols ospf"
         results: "irb"
         with_items:
-          - "{{ ansible_facts.interface irb.}}"
-          - end of print statement: results
+          - "{{ ansible_facts.interface irb}}"
+          - print: results
