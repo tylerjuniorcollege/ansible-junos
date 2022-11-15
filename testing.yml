@@ -10,7 +10,7 @@
     - name: show command
       junos_command:
         commands: "show configuration protocols ospf"
-        match: "irb"
+        match: any "irb"
         display: text
     - name: print
       vars:
