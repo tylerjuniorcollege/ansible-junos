@@ -9,7 +9,7 @@
   tasks:
     - name: show command
       junos_command:
-        command: "show configuration protocols ospf"
+        commands: "show configuration protocols ospf"
         display: item
     - name: print
       vars:
