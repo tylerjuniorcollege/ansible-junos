@@ -10,8 +10,8 @@
   tasks:
     - name: show command
       cli_command:
-      - command: "show configuration protocols ospf"
-        register: ospf
+      command: "show configuration protocols ospf"
+      register: ospf
         
    tasks:
         with_items: ospf
