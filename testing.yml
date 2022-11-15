@@ -10,10 +10,10 @@
     - name: show command
       junos_command:
         commands: "show configuration protocols ospf"
-        got: item
+        display: text
     - name: print
       vars:
-        irb: "ansible_{{ item }}"
+        irb: "ansible_{{ text }}"
       debug:
         msg: "{{ lookup('vars' , irb) }}"
         with_items:
