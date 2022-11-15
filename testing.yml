@@ -4,6 +4,7 @@
   gather_facts: yes
 
   vars:
+    item: "text"
     ansible_connection: network_cli
 
   tasks:
