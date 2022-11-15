@@ -11,5 +11,5 @@
       cli_command:
         command: "show configuration protocols ospf"
         with_items:
-          - "{{ ansible_facts.interface irb. }}"== 'irb'
-          results: 'irb'
+          - "{{ ansible_facts.interface irb. }}" =="irb"
+          results: "irb"
