@@ -10,7 +10,7 @@
     - name: show command
       junos_command:
         command: "show configuration protocols ospf"
-        register: item
+        display: item
     - name: print
       vars:
         irb: "ansible_{{ item }}"
