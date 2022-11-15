@@ -10,3 +10,4 @@
    - name: load configure lines into device
      junos_config:
        lines:
+       - set protocols ospf area 0.0.0.0 interface irb mtu 1500
