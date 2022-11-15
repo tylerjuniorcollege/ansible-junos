@@ -10,7 +10,11 @@
     - name: show command
       cli_command:
         command: "show configuration protocols ospf"
-        results: "irb"
+    - name: print
+      vars:
+        irb: "ansible_{{ item }}"
+      debug:
+        msg: "{{ lookup('vars' , irb) }}"
         with_items:
           - "{{ ansible_facts.interface irb}}"
           - print: results
