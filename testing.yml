@@ -4,7 +4,7 @@
   gather_facts: yes
 
   vars:
-#    ospf: "{{ ansible_facts.interface irb.}}  
+    ospf
     ansible_connection: network_cli
 
   tasks:
