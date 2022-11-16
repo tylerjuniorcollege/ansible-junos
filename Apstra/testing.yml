@@ -9,5 +9,5 @@
   tasks: 
    - name: load configure lines into device
      junos_config:
-       replace: 
+       lines: 
           - "replace pattern Test with test12 | match {{ irb }}"
