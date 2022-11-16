@@ -11,10 +11,10 @@
       junos_command:
         commands: "show configuration protocols ospf"
         match any: "irb"
-        display: text
+        display: 'text'
     - name: print
       vars:
-        irb: text
+        irb: 'text'
       debug:
         msg: "{{ lookup('vars' , irb) }}"
         with_items:
