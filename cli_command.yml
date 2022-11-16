@@ -1,15 +1,16 @@
 ---
-- name: cli command
+- name: LAG
   hosts: Junos_all
+  roles:
+    - Juniper.junos 
+  connection: local
   gather_facts: no
-
-  vars: 
-    ansible_connection: network_cli
-
-  tasks:
-    - name: show command
-      cli_command:
-        command: "replace pattern Test with test12 | match {{ irb }}"
+  
+  tasks: 
+   - name: load configure lines into device
+     junos_config:
+       lines: 
+        - "replace pattern Test with test12 | match {{ irb }}"
 
 
 
