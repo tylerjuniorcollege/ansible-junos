@@ -1,5 +1,5 @@
 ---
-- name: LAG
+- name: irb change
   hosts: Junos_all
   roles:
     - Juniper.junos 
@@ -9,4 +9,4 @@
   tasks: 
    - name: load configure lines into device
      junos_config:
-       lines:   
+       replace: "replace pattern Test with test12 | match {{ irb }}
