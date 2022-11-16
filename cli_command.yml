@@ -11,6 +11,7 @@
       cli_command:
         command: "edit interface {{ irb }}"
         promt: "replace pattern Test with test12"
+        answer: 
 
 
 
