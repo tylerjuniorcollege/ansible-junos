@@ -9,8 +9,8 @@
   tasks:
     - name: show command
       cli_command:
-        command: "edit interface {{ irb }}" 
-            - "replace pattern Test with test12"
+        command: "edit interface {{ irb }}"
+        new line: "replace pattern Test with test12"
 
 
 
