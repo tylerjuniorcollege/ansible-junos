@@ -9,7 +9,7 @@
   tasks:
     - name: show command
       cli_command:
-        command: "show configuration interfaces ae1"
+        command: "show configuration | match {{irb}}"
 
 
 
