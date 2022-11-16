@@ -10,8 +10,8 @@
     - name: show command
       cli_command:
         command: "edit interface {{ irb }}"
-        promt: yes
-        command: "replace pattern Test with test12"
+        promt: "replace pattern Test with test12"
+
 
 
 
