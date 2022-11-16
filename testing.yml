@@ -1,21 +1,12 @@
 ---
 - name: cli command
   hosts: Junos_all
-  gather_facts: yes
+  gather_facts: no
 
-  vars:
+  vars: 
     ansible_connection: network_cli
 
   tasks:
     - name: show command
-      junos_command:
-        commands: "show configuration protocols ospf"
-        display: 'text'
-#    - name: print
-#      vars:
-#        irb: 'text'
-#      debug:
-#        msg: "{{ lookup('vars' , irb) }}"
-#        with_items:
-#          - "{{ ansible_facts.interface irb}}"
-#          - print: results
+      cli_command:
+        command: "replace pattern Test with test12 | match {{ irb }}"
