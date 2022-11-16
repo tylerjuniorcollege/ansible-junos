@@ -10,7 +10,7 @@
     - name: show command
       cli_command:
         command: "edit interface {{ irb }}"
-        new line: "replace pattern Test with test12"
+        newline: "replace pattern Test with test12"
 
 
 
