@@ -9,7 +9,8 @@
   tasks:
     - name: show command
       cli_command:
-        command: "show configuration | match {{irb}}"
+        command: "edit interface {{ irb }}, replace pattern Test with test12"
+             
 
 
 
