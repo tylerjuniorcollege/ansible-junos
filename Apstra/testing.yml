@@ -1,0 +1,12 @@
+---
+- name: LAG
+  hosts: Junos_all
+  roles:
+    - Juniper.junos 
+  connection: local
+  gather_facts: no
+  
+  tasks: 
+   - name: load configure lines into device
+     junos_config:
+       lines:   
