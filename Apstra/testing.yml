@@ -3,7 +3,7 @@
   hosts: Junos_all
   connection: network_cli
   gather_facts: no
-  _ansible_no_log: None
+  _ansible_no_log: No
   
   
   tasks: 
