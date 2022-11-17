@@ -1,8 +1,6 @@
 ---
 - name: irb change
   hosts: Junos_all
-  roles:
-    - Juniper.junos 
   connection: local
   gather_facts: no
   
