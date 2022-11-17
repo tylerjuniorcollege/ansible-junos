@@ -10,7 +10,8 @@
     - name: show command
       cli_command:
         command: 
-            - "set interfaces {{ irb }} family inet address {{ IP }}"
+            - "delete interfaces {{ irb }} family inet address {{ old }}"
+            - "set interfaces {{ irb }} family inet address {{ IP }}
         sendonly: yes
 
 
