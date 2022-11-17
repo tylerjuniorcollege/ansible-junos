@@ -18,3 +18,4 @@
      junos_config:
        lines:
         - set interfaces {{ irb }} family inet address {{ IP }}
+       update: replace
