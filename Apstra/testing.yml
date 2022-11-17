@@ -13,5 +13,5 @@
         - set interfaces {{ irb }} family inet address {{ IP }}
         
   tasks:
-     _ansible_no_log: true
+     _ansible_no_log: None
 
