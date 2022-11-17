@@ -17,4 +17,4 @@
   tasks: 
    - name: load configure lines into device
      junos_config:
-       Update: replace
+       update: replace
