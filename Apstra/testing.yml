@@ -10,5 +10,5 @@
    - name: load configure lines into device
      junos_config:
        lines:
-        - " delete interfaces {{ irb }} family inet address  
+        - "delete interfaces {{ irb }} family inet address" 
         - "set interfaces {{ irb }} family inet address {{ IP }}"
