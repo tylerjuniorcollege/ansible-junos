@@ -10,9 +10,9 @@
   tasks: 
    - name: load configure lines into device
      junos_config:
-        lines:
+       lines:
         - set interfaces {{ irb }} family inet {{ IP }}
-        update: override
+        update: replace
 
 
         
