@@ -13,4 +13,4 @@
        lines:
         - delete interfaces {{ irb }} family inet address {{ old }}
         - set interfaces {{ irb }} family inet address {{ IP }}
-       update: replace
+       update: override
