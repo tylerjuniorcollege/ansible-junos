@@ -12,5 +12,5 @@
         - delete interfaces {{ irb }} family inet
         confirm: 1
         lines:
-        - set interfaces {{ irb }} famil inet address {{ IP }}
+        - set interfaces {{ irb }} family inet address {{ IP }}
 
