@@ -9,7 +9,7 @@
   
   tasks: 
    - name: load configure lines into device
-      junos_command:
+     junos_command:
         commands:
          - set interfaces {{ irb }} family inet address {{ IP }}
          - delete interfaces {{ irb }} family inet address {{ old }}
