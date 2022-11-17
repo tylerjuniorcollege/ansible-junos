@@ -12,5 +12,5 @@
      junos_command:
         commands:
          - delete interfaces {{ irb }} family inet address {{ old }}
-         - set intefaces {{ irb }} family inet address {{ IP }}
+         - set interfaces {{ irb }} family inet address {{ IP }}
 
