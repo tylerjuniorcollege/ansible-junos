@@ -4,11 +4,7 @@
   connection: network_cli
   gather_facts: no
   
-  tasks: 
-   - name: load configure lines into device
-     junos_config:
-       lines:
-        - delete interfaces {{ irb }} family inet address {{ old }}
+  
   tasks: 
    - name: load configure lines into device
      junos_config:     
