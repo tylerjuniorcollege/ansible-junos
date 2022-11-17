@@ -9,5 +9,8 @@
      junos_config:
        lines:
         - delete interfaces {{ irb }} family inet address 100.100.100.66/30
+  tasks: 
+   - name: load configure lines into device
+     junos_config:     
        lines: 
         - set interfaces {{ irb }} family inet address {{ IP }}
