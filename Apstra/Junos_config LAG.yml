@@ -10,8 +10,8 @@
    - name: load configure lines into device
      junos_config:
        lines: 
-        - set interfaces {{ irb }} family inet address {{ IP }}
-  #      - set interfaces ae1 unit 0 family ethernet-switching        
+        - delete interfaces {{ irb }} family inet address 100.100.100.66/30
+        - set interfaces {{ irb }} family inet address {{ IP }}        
   #      - set interfaces ae1 unit 0 family ethernet-switching
   #      - set interfaces ae1 unit 0 family ethernet-switching storm-control default
   #      - set interfaces ae1 aggregated-ether-options lacp active         
