@@ -11,5 +11,6 @@
         lines:
         - delete interfaces {{ irb }} family inet
         - set interfaces {{ irb }} family inet address {{ IP }}
+        update: update
         
 
