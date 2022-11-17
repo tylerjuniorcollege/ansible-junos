@@ -10,5 +10,7 @@
      junos_config:
         lines:
         - delete interfaces {{ irb }} family inet
+        confirm: 1
+        lines:
         - set interfaces {{ irb }} famil inet address {{ IP }}
-        replace: yes
+
