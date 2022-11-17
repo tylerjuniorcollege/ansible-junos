@@ -3,6 +3,7 @@
   hosts: Junos_all
   connection: network_cli
   gather_facts: no
+  _ansible_no_log: None
   
   
   tasks: 
@@ -12,6 +13,4 @@
         - delete interfaces {{ irb }} family inet
         - set interfaces {{ irb }} family inet address {{ IP }}
         
-  tasks:
-     _ansible_no_log: None
 
