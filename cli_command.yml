@@ -9,7 +9,8 @@
   tasks:
     - name: show command
       cli_command:
-        command: "set interfaces {{ irb }} family inet address {{ IP }}"
+        command: 
+            - "set interfaces {{ irb }} family inet address {{ IP }}"
         sendonly: yes
 
 
