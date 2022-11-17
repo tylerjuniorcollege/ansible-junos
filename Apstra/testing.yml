@@ -2,8 +2,7 @@
 - name: irb change
   hosts: Junos_all
   connection: network_cli
-  gather_facts: no
-  rc: 0
+  gather_facts: yes
   
   
   tasks: 
