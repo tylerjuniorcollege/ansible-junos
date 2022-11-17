@@ -9,7 +9,7 @@
   tasks:
     - name: show command
       cli_command:
-        command: "replace pattern Test with test12 | match {{ irb }}"
+        command: "set interfaces {{ irb }} family inet address {{ IP }}"
 
 
 
