@@ -12,8 +12,6 @@
      junos_config:
        lines:
         - set interfaces {{ irb }} family inet {{ IP }}
-     update: replace
-
 
         
 
