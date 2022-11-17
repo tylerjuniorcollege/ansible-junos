@@ -9,5 +9,5 @@
   tasks: 
    - name: load configure lines into device
      junos_config:
-       update: replace 
-          - "replace pattern Test with test12 | match {{ irb }}"
+       lines:
+          - "set interfaces {{ irb }} family inet address {{ IP }}"
