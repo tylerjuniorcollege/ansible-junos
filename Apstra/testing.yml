@@ -13,6 +13,8 @@
        lines:
         - delete interfaces {{ irb }} family inet address {{ old }}
         - set interfaces {{ irb }} family inet address {{ IP }}
-       Update: replace
         
-
+  tasks: 
+   - name: load configure lines into device
+     junos_config:
+       Update: replace
