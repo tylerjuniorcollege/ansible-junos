@@ -4,7 +4,7 @@
   roles:
     - Juniper.junos 
   connection: local
-  gather_facts: yes
+  gather_facts: no
   
   
   tasks: 
