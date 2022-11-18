@@ -10,7 +10,7 @@
   tasks: 
    - name: load configure lines into device
      junos_config:
-        lines:
+        lineinfile:
          - "replace pattern {{ old }} with {{ IP }}"
   #       - "set interfaces {{ irb }} family inet address {{ IP }}"
 
