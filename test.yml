@@ -1,0 +1,5 @@
+- name: run multiple commands on remote nodes
+  junipernetworks.junos.junos_command:
+    commands:
+    - show version
+    - show interfaces
