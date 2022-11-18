@@ -11,11 +11,7 @@
         load: 'set'
         lines:
           - 'set interfaces irb unit 6969 family inet address 69.69.69.69'
-#          - 'set interfaces ae1 unit 0 family ethernet-switching interface mode trunk'
-#          - 'set interfaces ae1 unit 0 family ethernet-switching interface mode trunk'          
-          
-    - name: Append .foo to the hostname using private config mode.
-      juniper_junos_config:
+      
         load: 'replace'
         lines:
           - 'set interfaces {{ irb }} family inet address {{ IP }}'
