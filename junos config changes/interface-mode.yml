@@ -9,4 +9,4 @@
     - name: Set VLAN access and trunking
       junipernetworks.junos.junos_config:
         lines:
-          - set interfaces ge-0/0/6.0 family ethernet-switching interface-mode access
+          - delete interface {{ irb }} family inet address {{ old }}
