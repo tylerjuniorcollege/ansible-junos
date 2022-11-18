@@ -5,7 +5,7 @@
   gather_facts: no
   
   tasks:
-    - name: Set VLAN access and trunking
+   - name: Set VLAN access and trunking
       junipernetworks.junos.junos_config:
         lines:
           - delete interface {{ irb }} family inet address {{ old }}
