@@ -10,7 +10,7 @@
    - name: load configure lines into device
      junos_config:
        lines:        
-        - set interfaces ae1 unit 0 family ethernet-switching
+       - set interfaces ae1 unit 0 family ethernet-switching
   #      - set interfaces ae1 unit 0 family ethernet-switching storm-control default
   #      - set interfaces ae1 aggregated-ether-options lacp active         
   #      - set interfaces ae1 mtu 9100
