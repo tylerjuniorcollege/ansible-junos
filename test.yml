@@ -1,5 +1,16 @@
-- name: run multiple commands on remote nodes
-  junipernetworks.junos.junos_command:
-    commands:
-    - show version
-    - show interfaces
+---
+- name: irb change
+  hosts: Junos_all
+  roles:
+    - junipernetworks.junos
+  connection: local
+  gather_facts: no
+  
+  
+  tasks: 
+  
+  - name: run multiple commands on remote nodes
+    junipernetworks.junos.junos_command:
+      commands:
+      - show version
+      - show interfaces
