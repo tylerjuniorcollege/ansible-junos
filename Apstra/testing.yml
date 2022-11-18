@@ -1,16 +1,17 @@
 ---
 - name: irb change
   hosts: Junos_all
-#  roles:
-#    - Juniper.junos 
+  roles:
+    - Juniper.junos 
   connection: local
   gather_facts: no
   
   
   tasks: 
    - name: load configure lines into device
-     junos_command:
-        commands:
+     junos_config:
+        lines:
+        list:
          - "delete interfaces {{ irb }} family inet address {{ old }}"
          - "set interfaces {{ irb }} family inet address {{ IP }}"
 
