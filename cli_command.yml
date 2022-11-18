@@ -11,8 +11,8 @@
       cli_command:
         command: 
             - "delete interfaces {{ irb }} family inet address {{ old }}"
-            - "set interfaces {{ irb }} family inet address {{ IP }}"
-        sendonly: yes
+   #         - "set interfaces {{ irb }} family inet address {{ IP }}"
+
 
 
 
