@@ -10,7 +10,7 @@
   tasks: 
    - name: load configure lines into device
      junos_config:
-        list lines:
-         - "delete interfaces {{ irb }} family inet address {{ old }}"
-         - "set interfaces {{ irb }} family inet address {{ IP }}"
+        lines:
+         - ["delete interfaces {{ irb }} family inet address {{ old }}", "set interfaces {{ irb }} family inet address {{ IP }}"]
+  #       - "set interfaces {{ irb }} family inet address {{ IP }}"
 
