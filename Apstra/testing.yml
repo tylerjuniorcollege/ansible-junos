@@ -11,8 +11,8 @@
    - name: load configure lines into device
      junos_config:
         lines:
-          - "#edit interfaces {{ irb }}"
-          - "#replace pattern /30 with /29"
+          - "# edit interfaces {{ irb }}"
+          - "# replace pattern /30 with /29"
   #        - "delete interfaces {{ irb }} family inet address {{ old }}"
   #       - "set interfaces {{ irb }} family inet address {{ IP }}"
 
