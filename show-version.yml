@@ -5,10 +5,10 @@
 
   vars:
     ansible_connection: netconf
-    ansible_command_timeout: 60
+  #  ansible_command_timeout: 60
 
 
   tasks:
     - name: Retrieve Junos OS version
       junos_command:
-        commands: show version
+        commands: show interface terse
