@@ -1,16 +1,27 @@
 ---
 - name: irb change
   hosts: Junos_all
-  roles:
-    - Juniper.junos 
   connection: local
   gather_facts: no
-  
-  
-  tasks: 
-   - name: load configure lines into device
-     junos_config:
+  roles:
+    - Juniper.junos
+  tasks:
+    - name: Append .foo to the hostname using private config mode.
+      juniper_junos_config:
+        load: 'set'
         lines:
-         - "delete interfaces {{ irb }} family inet address {{ old }}"
-  #       - "set interfaces {{ irb }} family inet address {{ IP }}"
-
+          - 'set interfaces irb unit 6969 family inet address 69.69.69.69'
+#          - 'set interfaces ae1 unit 0 family ethernet-switching interface mode trunk'
+#          - 'set interfaces ae1 unit 0 family ethernet-switching interface mode trunk'          
+          
+    - name: Append .foo to the hostname using private config mode.
+      juniper_junos_config:
+        load: 'replace'
+        lines:
+          - 'set interfaces {{ irb }} family inet address {{ IP }}'
+          - 'delete interfaces {{ irb }} family inet address {{ old }}'          
+         
+      register: response
+    - name: Print the config changes.
+      debug:
+        var: response.diff_lines
