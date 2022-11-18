@@ -6,6 +6,6 @@
   
   tasks:
    - name: Set VLAN access and trunking
-      junipernetworks.junos.junos_config:
+     junipernetworks.junos.junos_config:
         lines:
           - delete interface {{ irb }} family inet address {{ old }}
