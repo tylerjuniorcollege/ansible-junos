@@ -1,16 +1,25 @@
 ---
-- name: irb change
+- name: Examples of juniper_junos_command
   hosts: Junos_all
-  roles:
-    - junipernetworks.junos
   connection: local
   gather_facts: no
-  
-  
-  tasks: 
-  
-  - name: run multiple commands on remote nodes
-    junipernetworks.junos.junos_command:
-      commands:
-      - show version
-      - show interfaces
+  roles:
+    - Juniper.junos
+
+  tasks:
+    - name: Execute single "show version" command.
+      juniper_junos_command:
+        commands: "show version"
+      register: response
+
+    - name: Print the command output
+      debug:
+        var: response.stdout
+
+    - name: Execute three commands.
+      juniper_junos_command:
+        commands:
+          - "show version"
+          - "show system uptime"
+          - "show interface terse"
+      register: response
