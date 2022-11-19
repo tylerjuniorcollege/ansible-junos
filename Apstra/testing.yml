@@ -10,7 +10,7 @@
       juniper_junos_config:
         load: 'set'
         lines:
-          - 'set interfaces irb unit 4444 family inet address 69.69.69.69/29'
+          - 'set interfaces irb unit 4444 family inet address 120.100.69.69/29'
       
         load: 'replace'
         lines:
