@@ -11,6 +11,8 @@
       juniper_junos_config:
         load: 'replace'
         lines:
+          - 'set interfaces ae1 unit 0 family ethernet-switching interface mode trunk'
+          - 'set interfaces ae1 unit 0 family ethernet-switching vlan member all'           
           - 'set protocols ospf area 0.0.0.0 interface irb mtu 1500'        
           - 'set interfaces {{ irb }} family inet address {{ IP }}'
           - 'delete interfaces {{ irb }} family inet address {{ old }}'          
