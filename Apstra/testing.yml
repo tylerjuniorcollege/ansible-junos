@@ -5,8 +5,7 @@
   gather_facts: no
   roles:
     - Juniper.junos
-    
-    
+      
   tasks:
     - name: Append .foo to the hostname using private config mode.
       juniper_junos_config:
