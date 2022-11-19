@@ -11,7 +11,7 @@
       juniper_junos_config:
         load: 'replace'
         lines:
-          - 'set interfaces ge-0/0/10 mtu 1500'        
+          - 'set protocols ospf area 0.0.0.0 interface irb mtu 1500'        
           - 'set interfaces {{ irb }} family inet address {{ IP }}'
           - 'delete interfaces {{ irb }} family inet address {{ old }}'          
       register: response
