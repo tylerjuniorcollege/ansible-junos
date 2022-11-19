@@ -10,5 +10,5 @@
    - name: load configure lines into device
      junos_config:
        lines:
-       - set interfaces ae1 unit 0 family ethernet-switching interface mode trunk
-       - set interfaces ae1 unit 0 family ethernet-switching vlan member all       
+        - set interfaces ae1 unit 0 family ethernet-switching interface mode trunk
+        - set interfaces ae1 unit 0 family ethernet-switching vlan member all       
