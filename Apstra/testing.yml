@@ -5,15 +5,14 @@
   gather_facts: no
   roles:
     - Juniper.junos
+    
+    
   tasks:
     - name: Append .foo to the hostname using private config mode.
       juniper_junos_config:
-        load: 'set'
-        lines:
-          - 'set interfaces ge-0/0/10 mtu 1500'
-          
         load: 'replace'
         lines:
+          - 'set interfaces ge-0/0/10 mtu 1500'        
           - 'set interfaces {{ irb }} family inet address {{ IP }}'
           - 'delete interfaces {{ irb }} family inet address {{ old }}'          
       register: response
