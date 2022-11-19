@@ -10,7 +10,7 @@
     - name: show command
       cli_command:
         command:
-            - "set interfaces ae1 unit 0 family ethernet-switching interface mode trunk"        
+            - set interfaces ae1 unit 0 family ethernet-switching interface mode trunk       
             - "set interfaces ae1 unit 0 family ethernet-switching vlan members all"
 
 
