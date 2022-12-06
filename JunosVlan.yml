@@ -10,6 +10,6 @@
         
     - name: configure VLAN ID and name
       junos_vlan:
-        name: metasys
-        vlan_id: 140
+        name: Johnson_Controls
+        vlan_id: 142
         
