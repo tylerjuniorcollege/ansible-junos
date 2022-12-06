@@ -1,18 +1,13 @@
 ---
-- name: Replace Pattern
+- name: cli command
   hosts: Junos_all
-  connection: local
   gather_facts: no
-  roles:
-    - Juniper.junos
+
+  vars: 
+    ansible_connection: network_cli
+
   tasks:
-    - name: Append .foo to the hostname using private config mode.
-      juniper_junos_config:
-        load: 'replace'
-        lines:
-          - 'replace pattern 192.168.8.5 with 100.100.1.85'
-         
-      register: response
-    - name: Print the config changes.
-      debug:
-        var: response.diff_lines
+    - name: show command
+      cli_command:
+        command:
+            - replace pattern 192.168.8.5 with 100.10.100.80
