@@ -1,0 +1,18 @@
+---
+- name: Replace Pattern
+  hosts: Junos_all
+  connection: local
+  gather_facts: no
+  roles:
+    - Juniper.junos
+  tasks:
+    - name: Append .foo to the hostname using private config mode.
+      juniper_junos_config:
+        load: 'replace'
+        lines:
+          - 'replace pattern 192.168.8.5 with 100.100.1.85'
+         
+      register: response
+    - name: Print the config changes.
+      debug:
+        var: response.diff_lines
