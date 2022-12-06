@@ -1,13 +1,19 @@
 ---
-- name: cli command
+- name: irb change
   hosts: Junos_all
+  connection: local
   gather_facts: no
-
-  vars: 
-    ansible_connection: network_cli
-
+  roles:
+    - Juniper.junos
+      
   tasks:
-    - name: show command
-      cli_command:
-        command:
-            - 'replace pattern 192.168.8.5 with 100.10.100.80'
+    - name: Append .foo to the hostname using private config mode.
+      juniper_junos_config:
+        load: 'replace'
+        lines:        
+          - 'delete protocols pim rp static address 192.168.8.5'        
+          - 'set protocols pim rp static address 100.100.80.5'         
+      register: response
+    - name: Print the config changes.
+      debug:
+        var: response.diff_lines
