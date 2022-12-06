@@ -14,8 +14,4 @@
           - 'delete protocols pim rp static address {{ static1 }}'
           - 'delete protocols pim rp static address {{ static2 }}'           
           - 'set protocols pim rp static address {{ new1 }}' 
-          - 'set protocols pim rp static address {{ new2 }}'           
-      register: response
-    - name: Print the config changes.
-      debug:
-        var: response.diff_lines
+          - 'set protocols pim rp static address {{ new2 }}' 
