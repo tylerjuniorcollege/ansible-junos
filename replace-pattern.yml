@@ -11,8 +11,10 @@
       juniper_junos_config:
         load: 'replace'
         lines:        
-          - 'delete protocols pim rp static address 192.168.8.5'        
-          - 'set protocols pim rp static address 100.100.80.5'         
+          - 'delete protocols pim rp static address {{ static1 }}'
+          - 'delete protocols pim rp static address {{ static2 }}'           
+          - 'set protocols pim rp static address {{ new1 }}' 
+          - 'set protocols pim rp static address {{ new2 }}'           
       register: response
     - name: Print the config changes.
       debug:
