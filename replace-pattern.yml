@@ -10,4 +10,4 @@
     - name: show command
       cli_command:
         command:
-            - "replace pattern 192.168.8.5 with 100.10.100.80"
+            - 'replace pattern 192.168.8.5 with 100.10.100.80'
