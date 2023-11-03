@@ -7,11 +7,10 @@
     ansible_connection: network_cli
 
   tasks:
-    - name: show command
+    - name: set command
       cli_command:
         command:
-            - set interfaces ae1 unit 0 family ethernet-switching interface mode trunk       
-            - set interfaces ae1 unit 0 family ethernet-switching vlan members all
+            - set interfaces interface-range XIRRUS-WAP unit 0 family ethernet-switching vlan members Johnson_Controls
 
 
 
