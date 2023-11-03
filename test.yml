@@ -1,25 +1,13 @@
 ---
-- name: Examples of juniper_junos_command
+- name: TEST
   hosts: Junos_all
+  roles:
+    - Juniper.junos 
   connection: local
   gather_facts: no
-  roles:
-    - Juniper.junos
-
-  tasks:
-    - name: Execute single "show version" command.
-      juniper_junos_command:
-        commands: "show version"
-      register: response
-
-    - name: Print the command output
-      debug:
-        var: response.stdout
-
-    - name: Execute three commands.
-      juniper_junos_command:
-        commands:
-          - "show version"
-          - "show system uptime"
-          - "show interface terse"
-      register: response
+  
+  tasks: 
+   - name: Set commands
+     junos_config:
+       lines:        
+       - set interfaces interface-range XIRRUS-WAP unit 0 family ethernet-switching vlan members Johnson_Controls
