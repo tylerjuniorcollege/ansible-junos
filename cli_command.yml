@@ -1,4 +1,4 @@
----
+l---
 - name: cli command
   hosts: Junos_all
   gather_facts: no
@@ -10,7 +10,7 @@
     - name: set command
       cli_command:
         command:
-            -  show version
+            -  replace pattern XIRRUS with MIST
 
 
 
