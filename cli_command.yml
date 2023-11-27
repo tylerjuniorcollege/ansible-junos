@@ -11,7 +11,7 @@
       cli_command:
         command:
          #   - 'set interfaces interface-range XIRRUS-WAP unit 0 family ethernet-switching vlan members Johnson_Controls'
-            -  show interface terse
+            -  show version
 
 
 
