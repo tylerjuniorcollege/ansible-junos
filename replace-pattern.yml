@@ -11,7 +11,4 @@
       juniper_junos_config:
         load: 'replace'
         lines:        
-          - 'delete protocols pim rp static address {{ static1 }}'
-          - 'delete protocols pim rp static address {{ static2 }}'           
-          - 'set protocols pim rp static address {{ new1 }}' 
-          - 'set protocols pim rp static address {{ new2 }}' 
+          - 'replace pattern XIRRUS with MIST'
